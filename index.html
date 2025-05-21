@@ -235,7 +235,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">2</div>
+    <div class="sidebar-state-number">3</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -243,7 +243,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">4</div>
+    <div class="sidebar-state-number">7</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -316,7 +316,7 @@
     <div class="widget-wrap" data-aos="fade-up">
       <h3 class="widget-title">标签云</h3>
       <div class="widget tagcloud">
-        <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E9%9F%B3%E5%93%8D/" style="font-size: 10px;">音响</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">音频技术</a>
+        <a href="/tags/RTOS/" style="font-size: 10px;">RTOS</a> <a href="/tags/RT-Thread/" style="font-size: 10px;">RT_Thread</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">实时操作系统</a> <a href="/tags/%E9%9F%B3%E5%93%8D/" style="font-size: 10px;">音响</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">音频技术</a>
       </div>
     </div>
   </div>
@@ -342,6 +342,10 @@
       <div class="widget">
         <ul>
           
+          
+            <li>
+              <a href="/2025/05/21/RT-Thread/">RT_Thread</a>
+            </li>
           
             <li>
               <a href="/2025/05/20/hexo/">git命令(用于hexo clean之后的处理)</a>
@@ -463,10 +467,43 @@ USB 话筒
       <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/05/20/hexo/" aria-label="git命令(用于hexo clean之后的处理)"></a>
+      <a class="post-link" href="/2025/05/21/RT-Thread/" aria-label="RT_Thread"></a>
     
     
     <div class="post-cover-right">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505212030199.png" data-sizes="auto" alt="RT_Thread" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-21</span>
+        <span><span class="icon-pencil"></span>1.2k 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">RT_Thread</h2>
+      <article class="post-article">
+        
+          时钟管理时钟节拍产生与获取时钟节拍依赖于硬件中的定时器。你可以把定时器看作是⼀个不停计时的装置，它每隔⼀段时间就会提醒系统“滴答”⼀次。每当定时器中断发⽣时，RT-Thread 会调⽤ rt_tick_increase()函数，系统时间增加 1 个节拍。就像家中的闹钟响⼀次，时间就过去了⼀分钟⼀样。
+
+其中rt_tick_increase()函数中有rt_tick类似于HAL库中的uwTick，可以直接调用 获取系统时间
+
+定时器管理硬件定时器 vs 软件定时器
+硬件定时器：就像厨房⾥的倒计时器，它是由硬件直接提供的。硬件定时器精度⾮常⾼，可以达到纳秒级，适合⼀些对时间要求⾮常严格的任务，⽐如
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/20/hexo/" aria-label="git命令(用于hexo clean之后的处理)"></a>
+    
+    
+    <div class="post-cover-left">
       
         <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505202237592.jpg" data-sizes="auto" alt="git命令(用于hexo clean之后的处理)" class="lazyload">
       
@@ -522,10 +559,10 @@ USB 话筒
     
       <div>
         <span class="icon-brush"></span>
-        1.1k
+        2.3k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        00:04
+        00:08
       </div>
     
     
@@ -561,7 +598,7 @@ USB 话筒
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">2</div>
+    <div class="sidebar-state-number">3</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -569,7 +606,7 @@ USB 话筒
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">4</div>
+    <div class="sidebar-state-number">7</div>
   </div>
 </div>
 <div class="sidebar-social">
