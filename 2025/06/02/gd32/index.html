@@ -44,8 +44,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021615783.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021629990.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021818291.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021828146.png">
 <meta property="article:published_time" content="2025-06-02T08:00:53.000Z">
-<meta property="article:modified_time" content="2025-06-02T08:36:37.053Z">
+<meta property="article:modified_time" content="2025-06-02T14:32:18.534Z">
 <meta property="article:author" content="Mextra">
 <meta property="article:tag" content="嵌入式基础">
 <meta property="article:tag" content="GD32学习">
@@ -232,7 +234,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE%E6%A0%8F"><span class="toc-number">1.</span> <span class="toc-text">时钟配置栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">模式设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%80%9F%E6%97%B6%E9%92%9FHSE"><span class="toc-number">1.1.1.</span> <span class="toc-text">高速时钟HSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8E%E9%80%9F%E6%97%B6%E9%92%9FLSE"><span class="toc-number">1.1.2.</span> <span class="toc-text">低速时钟LSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-Clock-Output"><span class="toc-number">1.1.3.</span> <span class="toc-text">Master Clock Output</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Audio-Clock-Input-I2S-CKIN-%EF%BC%9A"><span class="toc-number">1.1.4.</span> <span class="toc-text">**Audio Clock Input (I2S_CKIN)**：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">参数设置</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE%E6%A0%8F"><span class="toc-number">1.</span> <span class="toc-text">时钟配置栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">模式设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%80%9F%E6%97%B6%E9%92%9FHSE"><span class="toc-number">1.1.1.</span> <span class="toc-text">高速时钟HSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8E%E9%80%9F%E6%97%B6%E9%92%9FLSE"><span class="toc-number">1.1.2.</span> <span class="toc-text">低速时钟LSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-Clock-Output"><span class="toc-number">1.1.3.</span> <span class="toc-text">Master Clock Output</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Audio-Clock-Input-I2S-CKIN-%EF%BC%9A"><span class="toc-number">1.1.4.</span> <span class="toc-text">**Audio Clock Input (I2S_CKIN)**：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">参数设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%BD%95%E5%A4%84%E9%80%89%E6%8B%A9%E4%BA%86HSI%E4%BB%A5%E5%8F%8AHSE"><span class="toc-number">1.3.</span> <span class="toc-text">在何处选择了HSI以及HSE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SYS%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3%E9%80%89%E6%8B%A9"><span class="toc-number">2.</span> <span class="toc-text">SYS调试接口选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial-Wire-SW-DP"><span class="toc-number">2.1.</span> <span class="toc-text">Serial Wire (SW-DP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JTAG-JTAG-DP"><span class="toc-number">2.2.</span> <span class="toc-text">JTAG(JTAG-DP)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">3.</span> <span class="toc-text">LED</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">驱动代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6PWM%E5%91%BC%E5%90%B8%E7%81%AF"><span class="toc-number">3.2.</span> <span class="toc-text">软件PWM呼吸灯</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -382,6 +384,47 @@
 <li><p><code>Power Over Drive</code>：电源过驱，禁用。这通常用于在需要更高性能时<span style="color:#33FFFF;">临时提高微控制器的电压</span>，以支持更高的时钟频率。</p>
 </li>
 </ul>
+<h3 id="在何处选择了HSI以及HSE"><a href="#在何处选择了HSI以及HSE" class="headerlink" title="在何处选择了HSI以及HSE"></a>在何处选择了HSI以及HSE</h3><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021818291.png" alt="image-20250602181824740"></p>
+<ul>
+<li><p>第一个框一定一定要看硬件上的晶振是多少频率，<span style="color:#00FFFF;">一定要严格按照硬件资源给的 （不要无脑用默认的）</span></p>
+<blockquote>
+<p>否则可能会出现串口数据接收乱码</p>
+</blockquote>
+</li>
+<li><p>第二个框选择了用&#96;相位锁定环（PLL） 调整外部高速时钟（HSE）还是内部高速时钟（HSI）</p>
+</li>
+<li><p>第三个框框则直接选择是否选择 经过PLL调整后的时钟，也可以选择不经过PLL的原生外部高速时钟（HSE），以及内部高速时钟（HSI）。</p>
+</li>
+</ul>
+<h2 id="SYS调试接口选择"><a href="#SYS调试接口选择" class="headerlink" title="SYS调试接口选择"></a>SYS调试接口选择</h2><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021828146.png" alt="image-20250602182759796"></p>
+<h3 id="Serial-Wire-SW-DP"><a href="#Serial-Wire-SW-DP" class="headerlink" title="Serial Wire (SW-DP)"></a>Serial Wire (SW-DP)</h3><ul>
+<li><p>串口烧录 仅需要两个引脚</p>
+<ul>
+<li><code>SWCLK</code>：主机到从机的时钟信号</li>
+<li><code>SWDIO</code>：双向数据信号</li>
+</ul>
+</li>
+<li><p>这种模式下，ST-Link工作最稳定，占用引脚少，是日常开发的首选。</p>
+</li>
+</ul>
+<h3 id="JTAG-JTAG-DP"><a href="#JTAG-JTAG-DP" class="headerlink" title="JTAG(JTAG-DP)"></a>JTAG(JTAG-DP)</h3><ul>
+<li>J-Link烧录 需要4或5个引脚：<ul>
+<li><strong>TCK：</strong>测试时钟</li>
+<li><strong>TMS：</strong>测试模式选择</li>
+<li><strong>TDI：</strong>测试数据输入</li>
+<li><strong>TDO：</strong>测试数据输出</li>
+<li><strong>TRST：</strong>测试复位（可选，5pin模式才有）</li>
+</ul>
+</li>
+<li>JTAG适合复杂的调试场景，尤其是在使用J-Link调试器时。</li>
+</ul>
+<h2 id="LED"><a href="#LED" class="headerlink" title="LED"></a>LED</h2><h3 id="驱动代码"><a href="#驱动代码" class="headerlink" title="驱动代码"></a>驱动代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;led_app.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">uint8_t</span> ucLed[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Led_disp</span><span class="params">(<span class="type">uint8_t</span> *ucLed)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint8_t</span> temp = <span class="number">0x00</span>, i;</span><br><span class="line">	<span class="type">static</span> <span class="type">uint8_t</span> temp_old = <span class="number">0xff</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ucLed[i])</span><br><span class="line">			temp |= (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (temp != temp_old)</span><br><span class="line">	&#123;</span><br><span class="line">		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, (temp &amp; <span class="number">0x01</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, (temp &amp; <span class="number">0x02</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, (temp &amp; <span class="number">0x04</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, (temp &amp; <span class="number">0x08</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED5_GPIO_Port, LED5_Pin, (temp &amp; <span class="number">0x10</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED6_GPIO_Port, LED6_Pin, (temp &amp; <span class="number">0x20</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		temp_old = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">led_task</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	Led_disp(ucLed);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="软件PWM呼吸灯"><a href="#软件PWM呼吸灯" class="headerlink" title="软件PWM呼吸灯"></a>软件PWM呼吸灯</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">led_task</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">uint32_t</span> breath_counter = <span class="number">0</span>;			<span class="comment">// 呼吸效果内部计时器，模拟时间流逝</span></span><br><span class="line">	<span class="type">static</span> <span class="type">uint8_t</span> pwm_counter = <span class="number">0</span>;				<span class="comment">// PWM内部计时器，用于生成PWM波形</span></span><br><span class="line">	<span class="type">static</span> <span class="type">uint8_t</span> brightness = <span class="number">0</span>;				<span class="comment">// 当前的亮度值</span></span><br><span class="line">	<span class="type">static</span> <span class="type">const</span> <span class="type">uint16_t</span> breath_period = <span class="number">2000</span>; <span class="comment">// 呼吸效果周期，单位ms</span></span><br><span class="line">	<span class="type">static</span> <span class="type">const</span> <span class="type">uint16_t</span> pwm_max = <span class="number">10</span>;			<span class="comment">// PWM最大计数值</span></span><br><span class="line"></span><br><span class="line">	breath_counter = (++breath_counter) % breath_period;</span><br><span class="line">        <span class="comment">//(2.0f * 3.14159f * breath_counter / breath_period) 将结果映射为0到2π</span></span><br><span class="line">        <span class="comment">//sin(2.0f * 3.14159f * breath_counter / breath_period) 将结果映射为-1到1</span></span><br><span class="line">        <span class="comment">//sin(2.0f * 3.14159f * breath_counter / breath_period) + 1.0f 将结果映射为0到2</span></span><br><span class="line">        <span class="comment">//(sin(2.0f * 3.14159f * breath_counter / breath_period) + 1.0f) * pwm_max / 2.0f 将实际亮度计算出来 通过(uint8_t)强制类型转换</span></span><br><span class="line">	brightness = (<span class="type">uint8_t</span>)((<span class="built_in">sin</span>(<span class="number">2.0f</span> * <span class="number">3.14159f</span> * breath_counter / breath_period) + <span class="number">1.0f</span>) * pwm_max / <span class="number">2.0f</span>);</span><br><span class="line">	pwm_counter = (++pwm_counter) % pwm_max;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">uint8_t</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)</span><br><span class="line">		ucLed[i] = (pwm_counter &lt; brightness) ? <span class="number">1</span> : <span class="number">0</span>; <span class="comment">//将所有LED置为呼吸灯效果</span></span><br><span class="line">	Led_disp(ucLed);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果是要实时调光，则直接赋值<code>brightness</code>即可 （即<span style="color:#FF3333;">不需要</span><code>breath_counter</code>和<code>breath_period</code>）</p>
+</blockquote>
 
       
     </div>
@@ -543,10 +586,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        11.3k
+        11.9k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        00:40
+        00:43
       </div>
     
     
@@ -579,7 +622,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE%E6%A0%8F"><span class="toc-number">1.</span> <span class="toc-text">时钟配置栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">模式设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%80%9F%E6%97%B6%E9%92%9FHSE"><span class="toc-number">1.1.1.</span> <span class="toc-text">高速时钟HSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8E%E9%80%9F%E6%97%B6%E9%92%9FLSE"><span class="toc-number">1.1.2.</span> <span class="toc-text">低速时钟LSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-Clock-Output"><span class="toc-number">1.1.3.</span> <span class="toc-text">Master Clock Output</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Audio-Clock-Input-I2S-CKIN-%EF%BC%9A"><span class="toc-number">1.1.4.</span> <span class="toc-text">**Audio Clock Input (I2S_CKIN)**：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">参数设置</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE%E6%A0%8F"><span class="toc-number">1.</span> <span class="toc-text">时钟配置栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">模式设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%80%9F%E6%97%B6%E9%92%9FHSE"><span class="toc-number">1.1.1.</span> <span class="toc-text">高速时钟HSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8E%E9%80%9F%E6%97%B6%E9%92%9FLSE"><span class="toc-number">1.1.2.</span> <span class="toc-text">低速时钟LSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-Clock-Output"><span class="toc-number">1.1.3.</span> <span class="toc-text">Master Clock Output</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Audio-Clock-Input-I2S-CKIN-%EF%BC%9A"><span class="toc-number">1.1.4.</span> <span class="toc-text">**Audio Clock Input (I2S_CKIN)**：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">参数设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%BD%95%E5%A4%84%E9%80%89%E6%8B%A9%E4%BA%86HSI%E4%BB%A5%E5%8F%8AHSE"><span class="toc-number">1.3.</span> <span class="toc-text">在何处选择了HSI以及HSE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SYS%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3%E9%80%89%E6%8B%A9"><span class="toc-number">2.</span> <span class="toc-text">SYS调试接口选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial-Wire-SW-DP"><span class="toc-number">2.1.</span> <span class="toc-text">Serial Wire (SW-DP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JTAG-JTAG-DP"><span class="toc-number">2.2.</span> <span class="toc-text">JTAG(JTAG-DP)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">3.</span> <span class="toc-text">LED</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">驱动代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6PWM%E5%91%BC%E5%90%B8%E7%81%AF"><span class="toc-number">3.2.</span> <span class="toc-text">软件PWM呼吸灯</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -912,7 +955,7 @@
           description: "",
           stripContent: "时钟配置栏模式设置 高速时钟HSE Disable：不启用外部时钟（默认使用内部时钟） 内部时钟（内部RC（电阻-电容）振荡器）提供了此便捷性 但精度不如外部时钟（外部低速晶振或陶瓷振荡器）  BYPASS Clock Source：旁路模式，允许直接从外部导入时钟信号，而不使用外部晶体。这种模式适用于需要从外部系统或其他设备接收时钟信号的情况。  Crystal/Ceramic Resonator：将外部低速晶振或陶瓷谐振器作为时钟源，一般则是板载上的外部晶振   低速时钟LSE 参数同上 通",
           date: "Mon Jun 02 2025 16:00:53 GMT+0800",
-          updated: "Mon Jun 02 2025 16:36:37 GMT+0800",
+          updated: "Mon Jun 02 2025 22:32:18 GMT+0800",
           cover: "https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021603366.jpg",
         };
       </script>
