@@ -1,0 +1,1458 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+    
+      data-theme-mode="true"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://mextra.netlify.app';</script>
+  
+  <title>
+    week14 |
+    
+    Mextraのblog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="本周学习目标 秘塔写作猫 功能定位：文本校对、文章润色、AI辅助创作  目前有四种用法：  用作一个有AI辅助的在线编辑器  在效率模式下使用其夸张的文本改写功能（不仅包含续写，缩写，还能改写，实现降重）   在审阅模式下，用来校对错别字或标点负号，以及新闻、自媒体上审核可能出现的政治性错误（如：行政区划分错误等等）   以前三种用法为基础，配合AI写作功能来解决头脑闭塞问题（文章续写思路缺失？，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week14">
+<meta property="og:url" content="https://mextra.netlify.app/2025/05/30/week14/index.html">
+<meta property="og:site_name" content="Mextraのblog">
+<meta property="og:description" content="本周学习目标 秘塔写作猫 功能定位：文本校对、文章润色、AI辅助创作  目前有四种用法：  用作一个有AI辅助的在线编辑器  在效率模式下使用其夸张的文本改写功能（不仅包含续写，缩写，还能改写，实现降重）   在审阅模式下，用来校对错别字或标点负号，以及新闻、自媒体上审核可能出现的政治性错误（如：行政区划分错误等等）   以前三种用法为基础，配合AI写作功能来解决头脑闭塞问题（文章续写思路缺失？，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505301344953.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505301358108.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505301358957.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505301534453.png">
+<meta property="article:published_time" content="2025-05-30T05:43:19.000Z">
+<meta property="article:modified_time" content="2025-05-30T07:42:28.116Z">
+<meta property="article:author" content="Mextra">
+<meta property="article:tag" content="113实验室">
+<meta property="article:tag" content="学习周报">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505301344953.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Mextraのblog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" integrity="sha384-4NN3fZ5AokFyHuoihl7A9qWaCt+HsAtOaUsXwJGRb4&#x2F;SMBtFr2vcNSHR5E8dg0Wk" crossorigin="anonymous">
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU&#x2F;voDBY5XE2lVh" crossorigin="anonymous">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">正在加载中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索"></a>
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    
+      
+        <picture>
+          
+        </picture>
+        
+          <img  fetchpriority="high" src="/images/header.jpg" alt="week14">
+        
+      
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">week14</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="sidebar-left"  >
+          <aside id="sidebar">
+  
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">本周学习目标</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%98%E5%A1%94%E5%86%99%E4%BD%9C%E7%8C%AB"><span class="toc-number">1.1.</span> <span class="toc-text">秘塔写作猫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E8%AF%8D%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">提示词设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%981%EF%BC%9A%E5%88%91%E4%BA%8B%E7%8A%AF%E7%BD%AA%E5%AB%8C%E7%96%91%E4%BA%BA%E5%9C%A8%E6%A3%80%E5%AF%9F%E5%AE%A1%E6%9F%A5%E8%B5%B7%E8%AF%89%E3%80%81%E6%B3%95%E9%99%A2%E5%AE%A1%E5%88%A4%E6%9C%9F%E9%97%B4%E7%9A%84%E4%BC%9A%E8%A7%81%E6%9D%83"><span class="toc-number">1.2.1.</span> <span class="toc-text">问题1：刑事犯罪嫌疑人在检察审查起诉、法院审判期间的会见权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%982%EF%BC%9A%E5%9C%9F%E5%9C%B0%E5%BE%81%E6%94%B6%E5%85%AC%E5%91%8A%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%AE%9E%E6%96%BD%E6%97%B6%E9%97%B4%E5%8F%8A%E6%B3%95%E5%BE%8B%E4%BE%9D%E6%8D%AE"><span class="toc-number">1.2.2.</span> <span class="toc-text">问题2：土地征收公告程序的实施时间及法律依据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%983%EF%BC%9A%E4%BA%8B%E6%95%85%E8%B0%83%E6%9F%A5%E7%BB%84%E4%B8%AD%E7%9B%91%E5%AF%9F%E6%9C%BA%E5%85%B3%E3%80%81%E4%BA%BA%E6%B0%91%E6%A3%80%E5%AF%9F%E9%99%A2%E7%9A%84%E5%8F%82%E4%B8%8E%E6%9D%A1%E4%BB%B6%E5%8F%8A%E6%B3%95%E8%A7%84%E9%80%82%E7%94%A8%E6%80%A7"><span class="toc-number">1.2.3.</span> <span class="toc-text">问题3：事故调查组中监察机关、人民检察院的参与条件及法规适用性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%984%EF%BC%9A%E7%BB%8F%E8%90%A5%E6%80%A7%E7%94%A8%E5%9C%B0%E4%B8%8E%E5%85%AC%E7%9B%8A%E6%80%A7%E7%94%A8%E5%9C%B0%E7%9A%84%E5%8C%BA%E5%88%86%E6%A0%87%E5%87%86%E5%8F%8A%E7%B1%BB%E5%88%AB"><span class="toc-number">1.2.4.</span> <span class="toc-text">问题4：经营性用地与公益性用地的区分标准及类别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%985%EF%BC%9A%E8%BF%9D%E8%A7%84%E5%BB%BA%E7%AD%91%E6%B2%A1%E6%94%B6%E5%90%8E%E5%8A%9E%E7%90%86%E4%BA%A7%E6%9D%83%E7%99%BB%E8%AE%B0%E7%9A%84%E8%A1%A5%E7%BC%B4%E8%B4%B9%E7%94%A8%E4%BE%9D%E6%8D%AE%EF%BC%88%E5%B9%BF%E4%B8%9C%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">问题5：违规建筑没收后办理产权登记的补缴费用依据（广东）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%986%EF%BC%9A%E8%BF%9D%E8%A7%84%E5%BB%BA%E7%AD%91%E6%B2%A1%E6%94%B6%E5%90%8E%E8%83%BD%E5%90%A6%E5%8A%9E%E7%90%86%E6%88%BF%E4%BA%A7%E8%AF%81%E5%8F%8A%E6%B5%81%E7%A8%8B%EF%BC%88%E5%B9%BF%E4%B8%9C%EF%BC%89"><span class="toc-number">1.2.6.</span> <span class="toc-text">问题6：违规建筑没收后能否办理房产证及流程（广东）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%987%EF%BC%9A%E5%85%AC%E8%B7%AF%E6%8E%A7%E5%88%B6%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%9A%84%E8%A1%A5%E5%81%BF%E8%A6%81%E6%B1%82"><span class="toc-number">1.2.7.</span> <span class="toc-text">问题7：公路控制区房屋的补偿要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%988%EF%BC%9A%E7%9F%BF%E4%BA%A7%E5%BC%80%E9%87%87%E6%9D%83%E6%89%93%E5%8C%85%E8%BD%AC%E8%AE%A9%E7%9A%84%E7%A8%8E%E6%94%B6%E6%94%BF%E7%AD%96%E5%8F%8A%E4%B8%8A%E5%B8%82%E5%85%AC%E5%8F%B8%E4%BC%98%E6%83%A0"><span class="toc-number">1.2.8.</span> <span class="toc-text">问题8：矿产开采权打包转让的税收政策及上市公司优惠</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%989%EF%BC%9A%E6%B0%91%E5%8A%9E%E5%AD%A6%E6%A0%A1%E8%B6%85%E8%8C%83%E5%9B%B4%E5%8A%9E%E5%AD%A6%E7%9A%84%E5%A4%84%E7%BD%9A%E8%A7%84%E5%AE%9A"><span class="toc-number">1.2.9.</span> <span class="toc-text">问题9：民办学校超范围办学的处罚规定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%9810%EF%BC%9A%E4%B8%8A%E5%B8%82%E5%85%AC%E5%8F%B8%E6%AC%A0%E7%A8%8E%E6%9C%9F%E9%97%B4%E7%9A%84%E5%88%86%E7%BA%A2%E9%99%90%E5%88%B6%E5%8F%8A%E6%B3%95%E5%BE%8B%E8%B4%A3%E4%BB%BB"><span class="toc-number">1.2.10.</span> <span class="toc-text">问题10：上市公司欠税期间的分红限制及法律责任</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">生成工作总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8E%92%E5%BA%A7%E4%BD%8D%EF%BC%8C%E7%94%9F%E6%88%90excel%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">自动排座位，生成excel文件</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-week14" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-05-30T05:43:19.000Z" itemprop="datePublished">2025-05-30</time>
+    <time style="display: none;" id="post-update-time">2025-05-30</time>
+  </span>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="本周学习目标"><a href="#本周学习目标" class="headerlink" title="本周学习目标"></a>本周学习目标</h1><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505301344953.png" alt="image-20250530134446272"></p>
+<h2 id="秘塔写作猫"><a href="#秘塔写作猫" class="headerlink" title="秘塔写作猫"></a>秘塔写作猫</h2><ul>
+<li><p>功能定位：文本校对、文章润色、AI辅助创作</p>
+</li>
+<li><p>目前有四种用法：</p>
+<ol>
+<li><p>用作一个有<code>AI辅助</code>的在线编辑器</p>
+</li>
+<li><p>在<code>效率</code>模式下使用其夸张的文本改写功能（不仅包含续写，缩写，还能改写，实现降重）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505301358108.png" alt="image-20250530135837630"></p>
+</li>
+<li><p>在<code>审阅</code>模式下，用来校对错别字或标点负号，以及新闻、自媒体上审核可能出现的政治性错误（如：行政区划分错误等等）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505301358957.png" alt="image-20250530135804568"></p>
+</li>
+<li><p>以前三种用法为基础，配合AI写作功能来解决头脑闭塞问题（<code>文章续写思路缺失？</code>，<code>论文灵感</code>，<code>工作报告</code>，<code>产品介绍</code>，<code>广告文案</code>）</p>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>具体表现：没有思路 不想动笔 有了思路 不想动笔等等</p>
+</blockquote>
+<ul>
+<li>与其他AI体区别 秘塔猫属于主题生成型 （输入标题或主题——生成摘要——列举多条大纲——续写成文）</li>
+</ul>
+<h2 id="提示词设计"><a href="#提示词设计" class="headerlink" title="提示词设计"></a>提示词设计</h2><h3 id="问题1：刑事犯罪嫌疑人在检察审查起诉、法院审判期间的会见权"><a href="#问题1：刑事犯罪嫌疑人在检察审查起诉、法院审判期间的会见权" class="headerlink" title="问题1：刑事犯罪嫌疑人在检察审查起诉、法院审判期间的会见权"></a><strong>问题1：刑事犯罪嫌疑人在检察审查起诉、法院审判期间的会见权</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>中国政府及相关部门官方网站</strong> 发布的 <strong>现行有效</strong> 法规政策，回答：<br><code>刑事犯罪嫌疑人在人民检察院审查起诉阶段和人民法院审判阶段，哪些主体有权会见？法律依据是什么？</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <code>.gov.cn</code> 域名的官方网站发布的 <strong>法律、司法解释或部门规章</strong>；</li>
+<li>直接引用原文规定，标注信息来源（具体法律名称+条款）；</li>
+<li>提供 <strong>全国人大、最高检或最高法官网的直达链接</strong>；</li>
+<li>非官方信息（如学术观点）需标注 <code>【非官方说明】</code>；</li>
+<li>注明文件时效性及有效性。</li>
+</ol>
+<hr>
+<h3 id="问题2：土地征收公告程序的实施时间及法律依据"><a href="#问题2：土地征收公告程序的实施时间及法律依据" class="headerlink" title="问题2：土地征收公告程序的实施时间及法律依据"></a><strong>问题2：土地征收公告程序的实施时间及法律依据</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>中国政府及相关部门官方网站</strong> 发布的 <strong>土地管理法律法规</strong>，回答：<br><code>土地征收公告程序最早于哪一年在国家级法律法规中明确要求？具体出自哪部法律/条例的哪一条？</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <strong>自然资源部或国务院官网</strong>（<code>.gov.cn</code>）发布的 <strong>法律&#x2F;行政法规原文</strong>；</li>
+<li>引用条款内容并标注文件名称+条款号；</li>
+<li>提供 <strong>《土地管理法》或国务院条例的官网直达链接</strong>；</li>
+<li>非官方信息（如地方实践）需单独标注；</li>
+<li>注明该条款的修订&#x2F;废止状态（如适用）。</li>
+</ol>
+<hr>
+<h3 id="问题3：事故调查组中监察机关、人民检察院的参与条件及法规适用性"><a href="#问题3：事故调查组中监察机关、人民检察院的参与条件及法规适用性" class="headerlink" title="问题3：事故调查组中监察机关、人民检察院的参与条件及法规适用性"></a><strong>问题3：事故调查组中监察机关、人民检察院的参与条件及法规适用性</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>中国政府及相关部门官方网站</strong> 发布的 <strong>现行有效</strong> 文件，回答：<br><code>《生产安全事故报告和调查处理条例》第二十二条中，监察机关、人民检察院参与事故调查组的具体条件是什么？司法体制改革后检察院职权变化是否影响该条款适用？</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <strong>应急管理部、国务院或最高检官网</strong>（<code>.gov.cn</code>）发布的 <strong>官方解释&#x2F;补充规定</strong>；</li>
+<li>直接引用参与条件的明文规定，标注文件名称+条款；</li>
+<li>提供 <strong>条例原文及配套解释文件的官网直达链接</strong>；</li>
+<li>检察院职权调整依据需引用 <strong>中央深改委或全国人大文件</strong>；</li>
+<li>区分标注官方信息与非官方分析。</li>
+</ol>
+<hr>
+<h3 id="问题4：经营性用地与公益性用地的区分标准及类别"><a href="#问题4：经营性用地与公益性用地的区分标准及类别" class="headerlink" title="问题4：经营性用地与公益性用地的区分标准及类别"></a><strong>问题4：经营性用地与公益性用地的区分标准及类别</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>中国政府及相关部门官方网站</strong> 发布的 <strong>土地分类国家标准</strong>，回答：<br><code>现行法规中经营性用地与公益性用地的明确定义、区分标准及具体类别有哪些？</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <strong>自然资源部官网</strong>（<code>.gov.cn</code>）发布的 <strong>《土地利用现状分类》（GB&#x2F;T 21010）或其他国家标准文件</strong>；</li>
+<li>直接引用用地类别定义及分类表；</li>
+<li>提供 <strong>国家标准全文公开系统或自然资源部文件的直达链接</strong>；</li>
+<li>非官方分类（如地方实践）需标注 <code>【非官方说明】</code>。</li>
+</ol>
+<hr>
+<h3 id="问题5：违规建筑没收后办理产权登记的补缴费用依据（广东）"><a href="#问题5：违规建筑没收后办理产权登记的补缴费用依据（广东）" class="headerlink" title="问题5：违规建筑没收后办理产权登记的补缴费用依据（广东）"></a><strong>问题5：违规建筑没收后办理产权登记的补缴费用依据（广东）</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>广东省政府部门官方网站</strong> 发布的 <strong>现行有效</strong> 法规政策，回答：<br><code>《广东省城乡规划条例》第八十四条中，违规加高建筑没收违法收入后办理产权登记，需补缴哪些费用？具体政策依据（文件名称+条款）是什么？</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <strong>广东省住建厅、自然资源厅或省政府官网</strong>（<code>.gd.gov.cn</code>）发布的 <strong>配套文件&#x2F;操作细则</strong>；</li>
+<li>引用补缴费用的明文规定及计算标准；</li>
+<li>提供 <strong>政策原文的官网直达链接</strong>；</li>
+<li>注明文件发布日期及有效性。</li>
+</ol>
+<hr>
+<h3 id="问题6：违规建筑没收后能否办理房产证及流程（广东）"><a href="#问题6：违规建筑没收后能否办理房产证及流程（广东）" class="headerlink" title="问题6：违规建筑没收后能否办理房产证及流程（广东）"></a><strong>问题6：违规建筑没收后能否办理房产证及流程（广东）</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>广东省政府部门官方网站</strong> 发布的 <strong>现行有效</strong> 法规政策，回答：<br><code>依据《广东省城乡规划条例》第八十四条，违规加高建筑没收违法收入后，是否可办理房产证？具体办理流程及条件是什么？</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <strong>广东省自然资源厅、住建厅或不动产登记中心官网</strong>（<code>.gd.gov.cn</code>）发布的 <strong>登记规范&#x2F;实施细则</strong>；</li>
+<li>引用办理条件、流程的明文规定；</li>
+<li>提供 <strong>《不动产登记暂行条例》广东实施细则或相关文件的直达链接</strong>；</li>
+<li>非官方操作案例需单独标注。</li>
+</ol>
+<hr>
+<h3 id="问题7：公路控制区房屋的补偿要求"><a href="#问题7：公路控制区房屋的补偿要求" class="headerlink" title="问题7：公路控制区房屋的补偿要求"></a><strong>问题7：公路控制区房屋的补偿要求</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>中国政府及相关部门官方网站</strong> 发布的 <strong>现行有效</strong> 法规政策，回答：<br><code>不在征地红线范围内但位于公路建筑控制区内的房屋，是否必须补偿？国家级法律依据（文件名称+条款）是什么？</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <strong>交通运输部或国务院官网</strong>（<code>.gov.cn</code>）发布的 <strong>《公路法》《土地管理法》及配套法规</strong>；</li>
+<li>直接引用补偿范围的明文规定；</li>
+<li>提供 <strong>法律原文及司法解释的官网直达链接</strong>；</li>
+<li>注明条款时效性及地方执行差异（如有）。</li>
+</ol>
+<hr>
+<h3 id="问题8：矿产开采权打包转让的税收政策及上市公司优惠"><a href="#问题8：矿产开采权打包转让的税收政策及上市公司优惠" class="headerlink" title="问题8：矿产开采权打包转让的税收政策及上市公司优惠"></a><strong>问题8：矿产开采权打包转让的税收政策及上市公司优惠</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>中国政府及相关部门官方网站</strong> 发布的 <strong>现行有效</strong> 税收法规，回答：<br><code>企业将矿产开采权等资产包转让给另一法人公司，转让方需缴纳哪些税种？哪些可免税？上市公司作为受让方有何优惠？请标注文件名称+具体条款。</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <strong>财政部、税务总局官网</strong>（<code>.chinatax.gov.cn</code>）发布的 <strong>税收法规&#x2F;优惠政策</strong>；</li>
+<li>分税种引用免税&#x2F;优惠条件（如增值税、契税、企业所得税）；</li>
+<li>提供 <strong>《资源税法》《企业所得税法》及配套文件的直达链接</strong>；</li>
+<li>上市公司优惠需引用 <strong>证监会或财税部门联合文件</strong>。</li>
+</ol>
+<hr>
+<h3 id="问题9：民办学校超范围办学的处罚规定"><a href="#问题9：民办学校超范围办学的处罚规定" class="headerlink" title="问题9：民办学校超范围办学的处罚规定"></a><strong>问题9：民办学校超范围办学的处罚规定</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>中国政府及相关部门官方网站</strong> 发布的 <strong>现行有效</strong> 法规政策，回答：<br><code>民办学校超出办学许可证地址范围办学，对相关责任人的处罚措施是什么？具体依据（文件名称+条款）？</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <strong>教育部或省级教育厅官网</strong>（<code>.moe.gov.cn</code>&#x2F;<code>.edu.cn</code>）发布的 <strong>《民办教育促进法实施条例》及地方细则</strong>；</li>
+<li>直接引用处罚类型（罚款、吊销许可等）及责任人条款；</li>
+<li>提供 <strong>法规原文的官网直达链接</strong>；</li>
+<li>注明地方差异（如广东需补充《广东省民办学校规范达标计划和品牌提升计划》）。</li>
+</ol>
+<hr>
+<h3 id="问题10：上市公司欠税期间的分红限制及法律责任"><a href="#问题10：上市公司欠税期间的分红限制及法律责任" class="headerlink" title="问题10：上市公司欠税期间的分红限制及法律责任"></a><strong>问题10：上市公司欠税期间的分红限制及法律责任</strong></h3><p><strong>提示词：</strong><br>请根据 <strong>中国政府及相关部门官方网站</strong> 发布的 <strong>现行有效</strong> 法规政策，回答：<br><code>上市公司欠缴税款期间，股东能否分红？若分红是否需追回？是否涉嫌偷逃税罪？请标注法律依据（文件名称+条款）。</code><br><strong>要求：</strong></p>
+<ol>
+<li>核心答案必须源自 <strong>税务总局、证监会或全国人大官网</strong>（<code>.gov.cn</code>）发布的 <strong>《税收征管法》《公司法》《刑法》</strong>；</li>
+<li>引用分红限制、追回程序及刑事责任认定条款；</li>
+<li>提供 <strong>法律原文及司法解释的直达链接</strong>；</li>
+<li>区分税务处罚（行政责任）与刑事犯罪界限。</li>
+</ol>
+<h2 id="生成工作总结"><a href="#生成工作总结" class="headerlink" title="生成工作总结"></a>生成工作总结</h2><p><a href="/download/Deepseek工作总结表.docx" download>Deepseek工作总结表</a></p>
+<h2 id="自动排座位，生成excel文件"><a href="#自动排座位，生成excel文件" class="headerlink" title="自动排座位，生成excel文件"></a>自动排座位，生成excel文件</h2><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505301534453.png" alt="image-20250530153434596"></p>
+<p><a href="/download/Deepseek参会人员座位表.xlsx" download>Deepseek参会人员座位表</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong><span class="icon-user icon"></span>本文作者：</strong>Mextra @ Mextraのblog</p>
+    <p><strong><span class="icon-link icon"></span>本文链接：</strong><a href="https://mextra.netlify.app/2025/05/30/week14/">https://mextra.netlify.app/2025/05/30/week14/</a></p>
+    
+    
+    
+    <p><strong><span class="icon-copyright icon"></span>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <div class="share-wrapper">
+  
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F05%2F30%2Fweek14%2F&amp;appkey=&amp;title=week14&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="week14">
+      <div class="share-icon icon icon-weibo">
+        
+      </div>
+    </a>
+  
+    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=week14&amp;desc=week14&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="week14">
+      <div class="share-icon icon icon-qq">
+        
+      </div>
+    </a>
+  
+    <a href="javascript:;"  title="week14">
+      <div class="share-icon icon icon-weixin">
+        
+          <div id="share-weixin">
+            <div class="share-weixin-dom">
+              <div class="share-weixin-content">
+                <img id="share-weixin-banner"> 
+                <div id="share-weixin-title"></div>
+                <div id="share-weixin-desc"></div>
+              </div>
+              <div class="share-weixin-qrcode">
+                <div class="share-weixin-info">
+                  <div id="share-weixin-author"></div>
+                  <div id="share-weixin-theme">Powered By hexo-theme-reimu</div>
+                </div>
+                <img id="share-weixin-qr" >
+              </div>
+            </div>
+            <div class="share-weixin-canvas"></div>
+          </div>
+        
+      </div>
+    </a>
+  
+</div>
+      
+      
+        <a data-aos="zoom-in" href="/2025/05/30/week14/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2025/05/30/week14/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/113%E5%AE%9E%E9%AA%8C%E5%AE%A4/" rel="tag">113实验室</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E5%91%A8%E6%8A%A5/" rel="tag">学习周报</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021603366.jpg" data-sizes="auto" alt="西门子嵌入式学习" class="lazyload">
+        
+        <a href="/2025/06/02/gd32/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            西门子嵌入式学习
+          
+        </h3>
+      </div>
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505282044781.jpg" data-sizes="auto" alt="TI" class="lazyload">
+      
+      <a href="/2025/05/28/TI/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          TI
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+      
+      
+        
+      
+      <h2 class="comment-title">说些什么吧！</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            
+            <div class="selector-item" data-selector="valine">
+              <span>valine</span>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+      
+        <div class="comment valine-comment" data-aos="fade-up"
+          id="valine-comment">
+        </div>
+      
+    </div>
+  </section>
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2024-2025
+      
+      <span class="footer-info-sep rotate"></span>
+      Mextra
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        11.3k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        00:40
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">本周学习目标</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%98%E5%A1%94%E5%86%99%E4%BD%9C%E7%8C%AB"><span class="toc-number">1.1.</span> <span class="toc-text">秘塔写作猫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E8%AF%8D%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">提示词设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%981%EF%BC%9A%E5%88%91%E4%BA%8B%E7%8A%AF%E7%BD%AA%E5%AB%8C%E7%96%91%E4%BA%BA%E5%9C%A8%E6%A3%80%E5%AF%9F%E5%AE%A1%E6%9F%A5%E8%B5%B7%E8%AF%89%E3%80%81%E6%B3%95%E9%99%A2%E5%AE%A1%E5%88%A4%E6%9C%9F%E9%97%B4%E7%9A%84%E4%BC%9A%E8%A7%81%E6%9D%83"><span class="toc-number">1.2.1.</span> <span class="toc-text">问题1：刑事犯罪嫌疑人在检察审查起诉、法院审判期间的会见权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%982%EF%BC%9A%E5%9C%9F%E5%9C%B0%E5%BE%81%E6%94%B6%E5%85%AC%E5%91%8A%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%AE%9E%E6%96%BD%E6%97%B6%E9%97%B4%E5%8F%8A%E6%B3%95%E5%BE%8B%E4%BE%9D%E6%8D%AE"><span class="toc-number">1.2.2.</span> <span class="toc-text">问题2：土地征收公告程序的实施时间及法律依据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%983%EF%BC%9A%E4%BA%8B%E6%95%85%E8%B0%83%E6%9F%A5%E7%BB%84%E4%B8%AD%E7%9B%91%E5%AF%9F%E6%9C%BA%E5%85%B3%E3%80%81%E4%BA%BA%E6%B0%91%E6%A3%80%E5%AF%9F%E9%99%A2%E7%9A%84%E5%8F%82%E4%B8%8E%E6%9D%A1%E4%BB%B6%E5%8F%8A%E6%B3%95%E8%A7%84%E9%80%82%E7%94%A8%E6%80%A7"><span class="toc-number">1.2.3.</span> <span class="toc-text">问题3：事故调查组中监察机关、人民检察院的参与条件及法规适用性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%984%EF%BC%9A%E7%BB%8F%E8%90%A5%E6%80%A7%E7%94%A8%E5%9C%B0%E4%B8%8E%E5%85%AC%E7%9B%8A%E6%80%A7%E7%94%A8%E5%9C%B0%E7%9A%84%E5%8C%BA%E5%88%86%E6%A0%87%E5%87%86%E5%8F%8A%E7%B1%BB%E5%88%AB"><span class="toc-number">1.2.4.</span> <span class="toc-text">问题4：经营性用地与公益性用地的区分标准及类别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%985%EF%BC%9A%E8%BF%9D%E8%A7%84%E5%BB%BA%E7%AD%91%E6%B2%A1%E6%94%B6%E5%90%8E%E5%8A%9E%E7%90%86%E4%BA%A7%E6%9D%83%E7%99%BB%E8%AE%B0%E7%9A%84%E8%A1%A5%E7%BC%B4%E8%B4%B9%E7%94%A8%E4%BE%9D%E6%8D%AE%EF%BC%88%E5%B9%BF%E4%B8%9C%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">问题5：违规建筑没收后办理产权登记的补缴费用依据（广东）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%986%EF%BC%9A%E8%BF%9D%E8%A7%84%E5%BB%BA%E7%AD%91%E6%B2%A1%E6%94%B6%E5%90%8E%E8%83%BD%E5%90%A6%E5%8A%9E%E7%90%86%E6%88%BF%E4%BA%A7%E8%AF%81%E5%8F%8A%E6%B5%81%E7%A8%8B%EF%BC%88%E5%B9%BF%E4%B8%9C%EF%BC%89"><span class="toc-number">1.2.6.</span> <span class="toc-text">问题6：违规建筑没收后能否办理房产证及流程（广东）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%987%EF%BC%9A%E5%85%AC%E8%B7%AF%E6%8E%A7%E5%88%B6%E5%8C%BA%E6%88%BF%E5%B1%8B%E7%9A%84%E8%A1%A5%E5%81%BF%E8%A6%81%E6%B1%82"><span class="toc-number">1.2.7.</span> <span class="toc-text">问题7：公路控制区房屋的补偿要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%988%EF%BC%9A%E7%9F%BF%E4%BA%A7%E5%BC%80%E9%87%87%E6%9D%83%E6%89%93%E5%8C%85%E8%BD%AC%E8%AE%A9%E7%9A%84%E7%A8%8E%E6%94%B6%E6%94%BF%E7%AD%96%E5%8F%8A%E4%B8%8A%E5%B8%82%E5%85%AC%E5%8F%B8%E4%BC%98%E6%83%A0"><span class="toc-number">1.2.8.</span> <span class="toc-text">问题8：矿产开采权打包转让的税收政策及上市公司优惠</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%989%EF%BC%9A%E6%B0%91%E5%8A%9E%E5%AD%A6%E6%A0%A1%E8%B6%85%E8%8C%83%E5%9B%B4%E5%8A%9E%E5%AD%A6%E7%9A%84%E5%A4%84%E7%BD%9A%E8%A7%84%E5%AE%9A"><span class="toc-number">1.2.9.</span> <span class="toc-text">问题9：民办学校超范围办学的处罚规定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%9810%EF%BC%9A%E4%B8%8A%E5%B8%82%E5%85%AC%E5%8F%B8%E6%AC%A0%E7%A8%8E%E6%9C%9F%E9%97%B4%E7%9A%84%E5%88%86%E7%BA%A2%E9%99%90%E5%88%B6%E5%8F%8A%E6%B3%95%E5%BE%8B%E8%B4%A3%E4%BB%BB"><span class="toc-number">1.2.10.</span> <span class="toc-text">问题10：上市公司欠税期间的分红限制及法律责任</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">生成工作总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8E%92%E5%BA%A7%E4%BD%8D%EF%BC%8C%E7%94%9F%E6%88%90excel%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">自动排座位，生成excel文件</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">12</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              if (script.integrity) {
+                scriptElement.integrity = script.integrity;
+              }
+              if (script.crossOrigin) {
+                scriptElement.crossOrigin = script.crossOrigin;
+              }
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    if (window.Pjax) {
+      Pjax.prototype.getElements = function() {
+        const i18nLanguages = window.REIMU_CONFIG.i18n_languages;
+        const baseUrl = window.REIMU_CONFIG.base;
+        let basePathname = new URL(baseUrl).pathname;
+        if (!basePathname.endsWith('/')) {
+          basePathname += '/';  
+        }
+        const currentUrl = window.location.href;
+        const currentPathname = new URL(currentUrl).pathname.replace(basePathname, '');
+        const aLinks = document.querySelectorAll('a[href]');
+        const pjaxLinks = [];
+        for(let i = 0; i < aLinks.length; i++) {
+          const aLink = aLinks[i];
+          const aLinkHref = aLink.getAttribute('href');
+          const isExternal = aLink.getAttribute('target') === '_blank' || aLink.getAttribute('rel')?.includes('noopener');
+          if (isExternal || aLinkHref.startsWith('mailto:') || aLinkHref.startsWith('tel:') || aLinkHref.startsWith('javascript:') || aLinkHref.startsWith("data:") || aLinkHref.startsWith("vbscript:")) {
+            continue;
+          }
+          if (!i18nLanguages) {
+            // 多语言功能未打开
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const absoluteUrl = new URL(aLinkHref, currentUrl).href;
+          const absolutePathname = new URL(absoluteUrl).pathname.replace(basePathname, '');
+
+          if (!absolutePathname || !currentPathname) {
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const currentLangIndex = i18nLanguages.findIndex(lang => currentPathname.startsWith(lang));
+          if (currentLangIndex > -1) {
+            // 当前属于多语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === currentLangIndex) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          } else {
+            // 当前属于默认语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === -1) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          }
+        }
+        return pjaxLinks;
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header>img",
+        "#header>picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#main",
+        "#content",
+        ".sidebar-widget",
+        ".sidebar-wrapper",
+        '#mobile-nav',
+        '#lazy-script',
+        '#i18n-nav'
+      ],
+      switches: {
+        "#content": function(oldEl, newEl) {
+          // for sidebar change
+          oldEl.className = newEl.className;
+          this.onSwitch();
+        },
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#main": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Mextra",
+          title: "week14",
+          url: "https://mextra.netlify.app/2025/05/30/week14/",
+          excerpt: "",
+          description: "",
+          stripContent: "本周学习目标 秘塔写作猫 功能定位：文本校对、文章润色、AI辅助创作  目前有四种用法：  用作一个有AI辅助的在线编辑器  在效率模式下使用其夸张的文本改写功能（不仅包含续写，缩写，还能改写，实现降重）   在审阅模式下，用来校对错别字或标点负号，以及新闻、自媒体上审核可能出现的政治性错误（如：行政区划分错误等等）   以前三种用法为基础，配合AI写作功能来解决头脑闭塞问题（文章续写思路缺失？，论文灵感，工作报告，产品介绍，广告文案）      具体表现：没有思路 不想动笔 有了思路 不想动笔",
+          date: "Fri May 30 2025 13:43:19 GMT+0800",
+          updated: "Fri May 30 2025 15:42:28 GMT+0800",
+          cover: "/images/header.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+          
+<script src="https://npm.webcache.cn/html-to-image@1.11.11/dist/html-to-image.js" integrity="sha384-UbfRVKN3&#x2F;elS1r7JcK2FhmPP+KlJ4CvYwbyYD7tH+uTkbT9bNJr9eJeQ0FoFbAgz" crossorigin="anonymous" defer data-pjax></script>
+
+          
+<script src="https://npm.webcache.cn/qrcode@1.4.4/build/qrcode.min.js" integrity="sha384-0RsG1yo&#x2F;crf&#x2F;1Qc14sho26SXXOTngNCjgJw7fuvXBt9W&#x2F;OChF&#x2F;Ijx+aUuBDqQwEk" crossorigin="anonymous" defer data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {
+    valine: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.valine-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js',
+          'sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn'
+        );
+        script.onload = () => {
+          var GUEST_INFO = ['nick', 'mail', 'link'];
+          var guest_info = 'nick,mail,link'.split(',').filter((item) => {
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var recordIP = JSON.parse('true');
+          var highlight = JSON.parse('true');
+          var visitor = JSON.parse('false');
+          var serverURLs = undefined;
+
+          if (window.Valine) {
+            new Valine({
+              el: '.valine-comment',
+              appId: "1clce93uV6y9tH8Xw9f9vWU9-gzGzoHsz",
+              appKey: "vKOcI0kksA3iKZd16M4hYyr1",
+              placeholder: "说些什么吧！",
+              pageSize: '10',
+              avatar: 'mp',
+              lang: document.documentElement.lang || 'en',
+              recordIP: recordIP,
+              highlight: highlight,
+              visitor: visitor,
+              requiredFields: guest_info,
+              path: window.location.pathname,
+              serverURLs
+            });
+          }
+        };
+        document.head.appendChild(script);
+      }
+    },
+    waline: {
+      enable: false,
+      load: async () => {
+        const container = document.querySelector('.waline-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        let walineInit;
+        const walineCdn = 'https://npm.webcache.cn/@waline/client@2.15.8/dist/waline.mjs';
+        const walineIntegrity = 'sha384-9sbqJjrfGjbkI6/PI4nU/MvBfEmkkPC4YK9I4zBeMIf1CVCZdCMH/KinBEAZII/5';
+
+        const module = await safeImport(walineCdn, walineIntegrity);
+        walineInit = module.init;
+
+        window.walineInstance = walineInit({
+          el: '.waline-comment',
+          serverURL: '',
+          lang: document.documentElement.lang || 'en',
+          locale: {},
+          emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus","https://unpkg.com/@waline/emojis@1.2.0/bilibili","https://unpkg.com/@waline/emojis@1.2.0/qq","https://unpkg.com/@waline/emojis@1.2.0/tieba","https://unpkg.com/@waline/emojis@1.2.0/tw-emoji"],
+          meta: ["nick","mail","link"],
+          requiredMeta: ["nick","mail"],
+          wordLimit: JSON.parse('0'),
+          comment: true,
+          pageSize: JSON.parse('10'),
+          dark: 'html[data-theme="dark"]',
+          pageview: JSON.parse('true'),
+        });
+      }
+    },
+    twikoo: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.twikoo-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/twikoo@1.6.16/dist/twikoo.all.min.js',
+          'sha384-lDHsr5aZmkMS0eKnsUu6e9RWP+dRmn7sgjRAKGOAoXfMyzbUK6Qi86zZK7R+KvRV'
+        );
+
+        script.onload = () => {
+          if (window.twikoo) {
+            twikoo.init({
+              envId: '',
+              el: '.tcomment',
+              region: '',
+              lang: document.documentElement.lang || 'en',
+            })
+          }
+        } 
+        document.head.appendChild(script);
+      }
+    },
+    gitalk: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.min.js',
+          'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU/lcEH5O8eVbSDhbPwsiVUTp/aGX/z/5EuMA'
+        );
+
+        script.onload = () => {
+          if (false) {
+            const md5Script = loadScript(
+              'https://npm.webcache.cn/blueimp-md5@2.19.0/js/md5.min.js',
+              'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr/gZlbkHkL6vTthxH'
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            initGitalk();
+          }
+        }
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          var gitalkId = location.pathname;
+          var gitalk = new Gitalk({
+            clientID: '',
+            clientSecret: '',
+            repo: '',
+            owner: '',
+            admin: null,
+            id: gitalkId,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          })
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },
+    giscus: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.giscus-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        // 删除可能已存在的 giscus 脚本和 iframe
+        const existingScript = container.querySelector('script[src*="giscus.app/client.js"]');
+        if (existingScript) existingScript.remove();
+        const existingFrame = document.querySelector('iframe.giscus-frame');
+        if (existingFrame) existingFrame.remove();
+
+        const giscusScript = document.createElement('script');
+        const domMode = document.documentElement.getAttribute("data-theme");
+        giscusScript.src = 'https://giscus.app/client.js';
+        giscusScript.setAttribute('data-repo', '');
+        giscusScript.setAttribute('data-repo-id', '');
+        giscusScript.setAttribute('data-category', ''); 
+        giscusScript.setAttribute('data-category-id', '');
+        giscusScript.setAttribute('data-mapping', '0');
+        giscusScript.setAttribute('data-strict', '0');
+        giscusScript.setAttribute('data-reactions-enabled', '1');
+        giscusScript.setAttribute('data-emit-metadata', '0');
+        giscusScript.setAttribute('data-input-position', 'bottom');
+        giscusScript.setAttribute('data-theme', domMode === 'dark' ? 'dark' : 'light');
+        giscusScript.setAttribute('data-lang', document.documentElement.lang || 'en');
+        giscusScript.setAttribute('crossorigin', 'anonymous');
+        giscusScript.async = true;
+        container.appendChild(giscusScript);
+        document.body.addEventListener('light-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'light' } } }, 'https://giscus.app');
+        });
+        document.body.addEventListener('dark-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'dark' } } }, 'https://giscus.app');
+        });
+      }
+    }
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    // 评论组件加载状态跟踪
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.8.4' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous"></script>
+
+  
+    <script>
+      var isMobile = window.matchMedia('(max-width: 959px)').matches;
+      if (isMobile) {
+      const aplayer = _$('#aplayer');
+        if (aplayer) {
+          const aside = aplayer.parentNode;
+          if (aside?.tagName === 'ASIDE') {
+            aplayer.removeAttribute('data-aos');
+            aside.removeChild(aplayer);
+            document.body.appendChild(aplayer);
+          }
+        }
+      }
+      const ap = new APlayer({
+        theme: "var(--color-link)",
+        container: document.getElementById('aplayer'),
+        audio: [{"name":"有些","artist":"颜人中","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VkV2dhN3gxWm05RGpDZW1TcmxIT2RzQnVab0hsck5fRGViZ1FQbzFvQXpsQUE.mp3","cover":"http://p1.music.126.net/8DkTnzi7jdjWGYl4qbwLCg==/109951164517295956.jpg?param=300x300","lrc":"/lrc/有些-颜人中.lrc"},{"name":"我只能离开","artist":"颜人中","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VUcHNxRlVUdHFkTWxjeFNGQzhNWEtvQjJwWTlBWUs0UjZPLTNkeE9wSDllcEE.mp3","cover":"http://p1.music.126.net/5GPFbTQU-kW57PGv_7LeBw==/109951164440649436.jpg?param=300x300","lrc":"/lrc/我只能离开-颜人中.lrc"},{"name":"慢慢","artist":"颜人中","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VXbUl6S1pNcEZCRG9SUXdxWG0zb0gwQmgwdXQ5M0xoUlZHYnhrYjVTVmtVZlE.mp3","cover":"http://p2.music.126.net/sQlE0bUPIfET6_43FfQ5jg==/109951170728882395.jpg?param=300x300","lrc":"/lrc/慢慢-颜人中.lrc"},{"name":"借口","artist":"周杰伦","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VVN2EyM2FqYUZkT2tFUFBjWnRPVE93QkNwT19vNktOUWthTmMzUG9nUzFmY0E.mp3","cover":"http://p1.music.126.net/-VzjKnXpZE5H5EZW_l1rfQ==/109951169361374990.jpg?param=300x300","lrc":"/lrc/借口-周杰伦.lrc"},{"name":"等你下课(with 杨瑞代)","artist":"周杰伦","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VUNWRsOVpQSFgxRmc0TUoxaWpZVVlRQkNUQzQ5X2NObnk0NEIydGhYOE91Zmc.mp3","cover":"http://p1.music.126.net/CSjhWIv08-c2-M9PY1tLHQ==/109951170980089869.jpg?param=300x300","lrc":"/lrc/等你下课(with 杨瑞代)-周杰伦.lrc"},{"name":"倒带(Live)","artist":"周杰伦","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VTV3EzQ3drcllsRmlOb19rb29yYmU4Qk01N1M2ZnVpQU8wYWkxRTVkN0dvWkE.mp3","cover":"http://p2.music.126.net/GozpywzxhU48JkwZF9lQfw==/109951169744436482.jpg?param=300x300","lrc":"/lrc/倒带(Live)-周杰伦.lrc"},{"name":"枫","artist":"周杰伦","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VYZ29EekRTb2dCTG5US1VlMXNpQzhFQnpMd3RhMVRTYjVtaHBTUkE3ZDlMTXc.mp3","cover":"http://p2.music.126.net/bH6DqSta6Wgv7I9YbLKYvA==/109951170172609734.jpg?param=300x300","lrc":"/lrc/枫-周杰伦.lrc"},{"name":"空白格","artist":"蔡健雅","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VaMHJBTThWNThaQXAyRkxCY2ZkZklRQjBLZGloamdaVEFlYzdKVHo3cWZxR3c.mp3","cover":"http://p2.music.126.net/AryQmM2GgfCk4C9XfwV5uQ==/109951168271384367.jpg?param=300x300","lrc":"/lrc/空白格-蔡健雅.lrc"},{"name":"绊","artist":"miu-clips","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VWWVppcTNfZ1JWRWcwTkhrZS1pU1kwQkN3Z0lxU0xBMmE4U2J4OVMyUGlpX0E.mp3","cover":"http://p1.music.126.net/qXN-ehvhohaHMMutBQUMpA==/109951169237165975.jpg?param=300x300","lrc":"/lrc/絆-miu-clips.lrc"},{"name":"世界が終るまでは… (直到世界尽头) (《灌篮高手》TV动画第２５-４９集片尾曲)","artist":"WANDS","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VTd3h6bThxNE1wRG03UXZhUVlFYVp3QjZrTGhDR0JqVkV1Mjh0UmZtNndrMXc.mp3","cover":"http://p1.music.126.net/S1O3LeBlIBpml-s-9DR1pw==/109951169528524037.jpg?param=300x300","lrc":"/lrc/世界が終るまでは…-WANDS.lrc"},{"name":"君が好きだと叫びたい","artist":"BAAD (バード)","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VmQzE4bXIwazRsQmhGMjhZYkEwaWNJQmFSYVNjOW9hVjZqY1Nqc3lsX2didmc.mp3","cover":"http://p1.music.126.net/Kvub9zAFd6PphTTx1jiiyg==/109951169566730545.jpg?param=300x300","lrc":"/lrc/君が好きだと叫びたい-Baad.lrc"},{"name":"Cry For Me","artist":"不冷","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VUTTVMTGhYdlF0TXZYeWs2NnRrQVZRQjlqUjV3QnZ5Z0hicU5KTEoyWWt1T0E.mp3","cover":"http://p1.music.126.net/eVPMvxjP8m7BoLF5px6uMA==/109951170980533007.jpg?param=300x300","lrc":"/lrc/Cry.lrc"},{"name":"スパークル(movie ver.)","artist":"RADWIMPS","url":"https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvYy8zMWJiMzVhMTUwZmUwZmUzL0VSSGppNGVtTVBkT3Yta1A3cjl3bEJJQlJ4bHdQSWNaN1d1UkpWUUJzcWlxZXc_ZT14UUk3c0w.mp3","cover":"http://p2.music.126.net/sSxbRt9RpC6s_MaewyDJfA==/18597139672292692.jpg?param=300x300","lrc":"/lrc/スパークル (movie ver.) - RADWIMPS.lrc"}] || [],
+        fixed: isMobile ? true : (false || false),
+        autoplay: true || false,
+        loop: 'all' || 'all',
+        order: 'random' || 'list',
+        preload: 'auto' || 'auto',
+        volume: 0.7 || 0.7,
+        mutex: true || true,
+        listFolded: false || false,
+        lrcType: 3 || 0,
+      });
+    </script>
+  
+
+
+
+
+
+    
+  </body>
+  </html>
+
