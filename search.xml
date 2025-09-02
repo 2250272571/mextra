@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>关于const的进一步思考</title>
+      <link href="/2025/09/02/const/"/>
+      <url>/2025/09/02/const/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容 </p><p>但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误 </p></blockquote><p>分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错误</p><p><code>解决措施</code>：通过malloc来申请内存，然后使用strcpy或者sprintf来存放在新申请的内存中</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">get_building_map_remain</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *<span class="built_in">map</span> = get_building_map();</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">map</span> == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">size_t</span> len = <span class="built_in">strlen</span>(<span class="built_in">map</span>);</span><br><span class="line">    <span class="keyword">if</span> (len &lt;= <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 返回空字符串</span></span><br><span class="line">        <span class="type">char</span> *result = <span class="built_in">malloc</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (result)</span><br><span class="line">        &#123;</span><br><span class="line">            result[<span class="number">0</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分配新内存并复制跳过前3字节的内容</span></span><br><span class="line">    <span class="type">char</span> *result = <span class="built_in">malloc</span>(len - <span class="number">3</span> + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">strcpy</span>(result, <span class="built_in">map</span> + <span class="number">3</span>);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 嵌入式基础 </tag>
+            
+            <tag> 对于const的思考 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>电赛</title>
       <link href="/2025/06/08/%E7%94%B5%E8%B5%9B/"/>
       <url>/2025/06/08/%E7%94%B5%E8%B5%9B/</url>
