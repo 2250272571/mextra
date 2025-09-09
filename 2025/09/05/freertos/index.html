@@ -1,0 +1,1552 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+    
+      data-theme-mode="true"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://mextra.netlify.app';</script>
+  
+  <title>
+    freertos |
+    
+    Mextraのblog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="FreeRTOS基础堆和栈堆：一块空闲的内存 可以使用malloc申请内存 使用完后用free释放内存  堆也可以理解为就是定义了一个堆大小的数组 然后定义一个长度 每次动态改变长度来申请空间（链表） 在FreeRTOSConfig.h中就有定义堆大小的宏configTOTAL_HEAP_SIZE 他被引用到 heap.c中的 static uint8_t ucHeap[configTOTAL_H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="freertos">
+<meta property="og:url" content="https://mextra.netlify.app/2025/09/05/freertos/index.html">
+<meta property="og:site_name" content="Mextraのblog">
+<meta property="og:description" content="FreeRTOS基础堆和栈堆：一块空闲的内存 可以使用malloc申请内存 使用完后用free释放内存  堆也可以理解为就是定义了一个堆大小的数组 然后定义一个长度 每次动态改变长度来申请空间（链表） 在FreeRTOSConfig.h中就有定义堆大小的宏configTOTAL_HEAP_SIZE 他被引用到 heap.c中的 static uint8_t ucHeap[configTOTAL_H">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/FreeRTOS/chapter-6/image1.png">
+<meta property="article:published_time" content="2025-09-05T07:48:39.000Z">
+<meta property="article:modified_time" content="2025-09-07T07:12:27.620Z">
+<meta property="article:author" content="Mextra">
+<meta property="article:tag" content="RTOS">
+<meta property="article:tag" content="实时操作系统">
+<meta property="article:tag" content="FreeRTOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/FreeRTOS/chapter-6/image1.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Mextraのblog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" integrity="sha384-4NN3fZ5AokFyHuoihl7A9qWaCt+HsAtOaUsXwJGRb4&#x2F;SMBtFr2vcNSHR5E8dg0Wk" crossorigin="anonymous">
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU&#x2F;voDBY5XE2lVh" crossorigin="anonymous">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">正在加载中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索"></a>
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img  fetchpriority="high" src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509071511987.png" alt="freertos">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">freertos</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="sidebar-left"  >
+          <aside id="sidebar">
+  
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">FreeRTOS基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E5%92%8C%E6%A0%88"><span class="toc-number">1.1.</span> <span class="toc-text">堆和栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E6%BA%90%E7%A0%81%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">FreeRTOS源码概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">核心文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3"><span class="toc-number">1.2.3.</span> <span class="toc-text">头文件相关</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">头文件目录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">头文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8B%AC%E5%B1%9E%E4%BA%8EFreeRTOS%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83"><span class="toc-number">1.2.4.</span> <span class="toc-text">独属于FreeRTOS的数据类型和编程规范</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">变量名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">函数名</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8F%E7%9A%84%E5%90%8D"><span class="toc-number">1.3.</span> <span class="toc-text">宏的名</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">10</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-freertos" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-09-05T07:48:39.000Z" itemprop="datePublished">2025-09-05</time>
+    <time style="display: none;" id="post-update-time">2025-09-07</time>
+  </span>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="FreeRTOS基础"><a href="#FreeRTOS基础" class="headerlink" title="FreeRTOS基础"></a>FreeRTOS基础</h2><h3 id="堆和栈"><a href="#堆和栈" class="headerlink" title="堆和栈"></a>堆和栈</h3><p>堆：一块空闲的内存 可以使用<code>malloc</code>申请内存 使用完后用<code>free</code>释放内存</p>
+<blockquote>
+<p>堆也可以理解为就是定义了一个堆大小的数组 然后定义一个长度 每次动态改变长度来申请空间（链表）</p>
+<p>在<code>FreeRTOSConfig.h</code>中就有定义堆大小的宏<code>configTOTAL_HEAP_SIZE</code> 他被引用到 <code>heap.c</code>中的 <code>static uint8_t ucHeap[configTOTAL_HEAP_SIZE];</code></p>
+</blockquote>
+<p>栈：一块内存空间，CPU的SP寄存器指向它，它可以用于函数调用、局部变量、<code>多任务系统里保存现场</code></p>
+<blockquote>
+<p>栈是<code>FreeRTOS</code>中非常重要的概念，每个任务都有自己的栈</p>
+</blockquote>
+<h3 id="FreeRTOS源码概述"><a href="#FreeRTOS源码概述" class="headerlink" title="FreeRTOS源码概述"></a>FreeRTOS源码概述</h3><h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p><img src="https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/FreeRTOS/chapter-6/image1.png" alt="img"></p>
+<blockquote>
+<p>主要涉及3个目录：</p>
+<ul>
+<li><code>ra\aws\FreeRTOS\FreeRTOS\Source</code>：存放的是FreeRTOS的核心文件</li>
+<li><code>ra_gen</code>：从main.c可以看到创建任务的函数调用过程</li>
+<li><code>src</code>：使用RASC创建任务时，在src目录下生成任务的入口函数</li>
+</ul>
+</blockquote>
+<h4 id="核心文件"><a href="#核心文件" class="headerlink" title="核心文件"></a>核心文件</h4><blockquote>
+<p>FreeRTOS的最核心文件只有2个：</p>
+<ul>
+<li><code>FreeRTOS/Source/tasks.c</code></li>
+<li><code>FreeRTOS/Source/list.c</code></li>
+</ul>
+</blockquote>
+<p>其他文件的作用也一起列表如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong><code>FreeRTOS/Source/</code>下的文件</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tasks.c</code></td>
+<td>必需，任务操作</td>
+</tr>
+<tr>
+<td><code>list.c</code></td>
+<td>必须，列表</td>
+</tr>
+<tr>
+<td><code>queue.c</code></td>
+<td>基本必需，提供队列操作、信号量(semaphore)操作</td>
+</tr>
+<tr>
+<td><code>timer.c</code></td>
+<td>可选，software timer</td>
+</tr>
+<tr>
+<td><code>event_groups.c</code></td>
+<td>可选，提供event group功能</td>
+</tr>
+</tbody></table>
+<h4 id="头文件相关"><a href="#头文件相关" class="headerlink" title="头文件相关"></a>头文件相关</h4><h5 id="头文件目录"><a href="#头文件目录" class="headerlink" title="头文件目录"></a>头文件目录</h5><blockquote>
+<p>FreeRTOS需要3个头文件目录：</p>
+<ul>
+<li>FreeRTOS本身的头文件：<code>ra\aws\FreeRTOS\FreeRTOS\Source\include</code></li>
+<li>移植时用到的头文件：<code>ra\fsp\src\rm_freertos_port\portmacro.h</code></li>
+<li>含有配置文件<code>FreeRTOSConfig.h</code>的目录：<code>ra_cfg\aws</code></li>
+</ul>
+</blockquote>
+<h5 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h5><p>列表如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>头文件</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>FreeRTOSConfig.h</code></td>
+<td>FreeRTOS的配置文件，比如选择调度算法：<code>configUSE_PREEMPTION</code> 每个工程都必定含有<code>FreeRTOSConfig.h</code></td>
+</tr>
+<tr>
+<td><code>FreeRTOS.h</code></td>
+<td>使用FreeRTOS API函数时，<span style="font-weight:bold;">必须</span>包含此文件。 在<code>FreeRTOS.h</code>之后，再去包含其他头文件，比如： <code>task.h</code>、<code>queue.h</code>、<code>semphr.h</code>、<code>event_group.h</code></td>
+</tr>
+</tbody></table>
+<h4 id="独属于FreeRTOS的数据类型和编程规范"><a href="#独属于FreeRTOS的数据类型和编程规范" class="headerlink" title="独属于FreeRTOS的数据类型和编程规范"></a>独属于FreeRTOS的数据类型和编程规范</h4><h5 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h5><p>每个移植的版本都含有自己的 <strong><code>portmacro.h</code></strong> 头文件，里面定义了2个数据类型：</p>
+<ol>
+<li><code>TickType_t</code>：<ul>
+<li>时钟计数单位 （可以是uint16_t 也可以是uint32_t）<br>当<code>FreeRTOSConfig.h</code>中定义<code>configUSE_16_BIT_TICKS时 TickType_t</code>则为uint16_t</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>对于32位架构，建议把TickType_t配置为uint32_t</p>
+</blockquote>
+<ol start="2">
+<li><code>BaseType_t</code>:这是该架构最高效的数据类型(取决于CPU是多少位的架构)<ul>
+<li><code>BaseType_t</code>通常用作简单的返回值的类型，还有逻辑值，比如 <strong>pdTRUE&#x2F;pdFALSE</strong></li>
+</ul>
+</li>
+</ol>
+<h5 id="变量名"><a href="#变量名" class="headerlink" title="变量名"></a>变量名</h5><p>变量名的前缀 对应其类型 如：<code>pcName</code> (代表着他是一个指向char类型的指针p)</p>
+<table>
+<thead>
+<tr>
+<th><strong>变量名前缀</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>c</td>
+<td>char</td>
+</tr>
+<tr>
+<td>s</td>
+<td>int16_t，short</td>
+</tr>
+<tr>
+<td>l</td>
+<td>int32_t，long</td>
+</tr>
+<tr>
+<td>x</td>
+<td>BaseType_t， 其他非标准的类型：结构体、task handle、queue handle等</td>
+</tr>
+<tr>
+<td>u</td>
+<td>unsigned</td>
+</tr>
+<tr>
+<td>p</td>
+<td>指针</td>
+</tr>
+<tr>
+<td>uc</td>
+<td>uint8_t，unsigned char</td>
+</tr>
+<tr>
+<td>pc</td>
+<td>char指针</td>
+</tr>
+</tbody></table>
+<h5 id="函数名"><a href="#函数名" class="headerlink" title="函数名"></a>函数名</h5><p>函数名的前缀有2部分：返回值类型、在哪个文件定义。</p>
+<table>
+<thead>
+<tr>
+<th><strong>函数名前缀</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v<span style="font-weight:bold;">Task</span>PrioritySet</td>
+<td>返回值类型：void 在<code>task.c</code>中定义</td>
+</tr>
+<tr>
+<td>x<span style="font-weight:bold;">Queue</span>Receive</td>
+<td>返回值类型：BaseType_t 在<code>queue.c</code>中定义</td>
+</tr>
+<tr>
+<td>pv<span style="font-weight:bold;">Timer</span>GetTimerID</td>
+<td>返回值类型：pointer to void 在<code>tmer.c</code>中定义</td>
+</tr>
+</tbody></table>
+<h3 id="宏的名"><a href="#宏的名" class="headerlink" title="宏的名"></a>宏的名</h3><p>宏的名字是大小，可以添加小写的前缀。前缀是用来表示：宏在<span style="font-weight:bold;">哪个文件</span>中定义。</p>
+<table>
+<thead>
+<tr>
+<th><strong>宏的前缀</strong></th>
+<th><strong>含义：在哪个文件里定义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>port (比如<span style="font-weight:bold;">port</span>MAX_DELAY)</td>
+<td><code>portable.h</code>或<code>portmacro.h</code></td>
+</tr>
+<tr>
+<td>task (比如<span style="font-weight:bold;">task</span>ENTER_CRITICAL())</td>
+<td><code>task.h</code></td>
+</tr>
+<tr>
+<td>pd (比如<span style="font-weight:bold;">pd</span>TRUE)</td>
+<td><code>projdefs.h</code></td>
+</tr>
+<tr>
+<td>config (比如<span style="font-weight:bold;">config</span>USE_PREEMPTION)</td>
+<td><code>FreeRTOSConfig.h</code></td>
+</tr>
+<tr>
+<td>err (比如<span style="font-weight:bold;">err</span>QUEUE_FULL)</td>
+<td><code>projdefs.h</code></td>
+</tr>
+</tbody></table>
+<p>通用的宏定义如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>宏</strong></th>
+<th><strong>值</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pdTRUE</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>pdFALSE</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>pdPASS</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>pdFAIL</code></td>
+<td>0</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong><span class="icon-user icon"></span>本文作者：</strong>Mextra @ Mextraのblog</p>
+    <p><strong><span class="icon-link icon"></span>本文链接：</strong><a href="https://mextra.netlify.app/2025/09/05/freertos/">https://mextra.netlify.app/2025/09/05/freertos/</a></p>
+    
+    
+    
+    <p><strong><span class="icon-copyright icon"></span>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <div class="share-wrapper">
+  
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F09%2F05%2Ffreertos%2F&amp;appkey=&amp;title=freertos&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="freertos">
+      <div class="share-icon icon icon-weibo">
+        
+      </div>
+    </a>
+  
+    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=freertos&amp;desc=freertos&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="freertos">
+      <div class="share-icon icon icon-qq">
+        
+      </div>
+    </a>
+  
+    <a href="javascript:;"  title="freertos">
+      <div class="share-icon icon icon-weixin">
+        
+          <div id="share-weixin">
+            <div class="share-weixin-dom">
+              <div class="share-weixin-content">
+                <img id="share-weixin-banner"> 
+                <div id="share-weixin-title"></div>
+                <div id="share-weixin-desc"></div>
+              </div>
+              <div class="share-weixin-qrcode">
+                <div class="share-weixin-info">
+                  <div id="share-weixin-author"></div>
+                  <div id="share-weixin-theme">Powered By hexo-theme-reimu</div>
+                </div>
+                <img id="share-weixin-qr" >
+              </div>
+            </div>
+            <div class="share-weixin-canvas"></div>
+          </div>
+        
+      </div>
+    </a>
+  
+</div>
+      
+      
+        <a data-aos="zoom-in" href="/2025/09/05/freertos/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2025/09/05/freertos/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/FreeRTOS/" rel="tag">FreeRTOS</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/RTOS/" rel="tag">RTOS</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">实时操作系统</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509071514562.png" data-sizes="auto" alt="LVGL学习之旅（基于正点原子STM32F407探索者）" class="lazyload">
+        
+        <a href="/2025/09/07/LVGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            LVGL学习之旅（基于正点原子STM32F407探索者）
+          
+        </h3>
+      </div>
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="https://d-sketon.top/img/backimg/bg1.jpg" data-sizes="auto" alt="关于const的进一步思考" class="lazyload">
+        
+      
+      <a href="/2025/09/02/const/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          关于const的进一步思考
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+      
+      
+        
+      
+      <h2 class="comment-title">说些什么吧！</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            
+            <div class="selector-item" data-selector="valine">
+              <span>valine</span>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+      
+        <div class="comment valine-comment" data-aos="fade-up"
+          id="valine-comment">
+        </div>
+      
+    </div>
+  </section>
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2024-2025
+      
+      <span class="footer-info-sep rotate"></span>
+      Mextra
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        15.3k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        00:58
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeRTOS%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">FreeRTOS基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E5%92%8C%E6%A0%88"><span class="toc-number">1.1.</span> <span class="toc-text">堆和栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FreeRTOS%E6%BA%90%E7%A0%81%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">FreeRTOS源码概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">核心文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3"><span class="toc-number">1.2.3.</span> <span class="toc-text">头文件相关</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">头文件目录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">头文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8B%AC%E5%B1%9E%E4%BA%8EFreeRTOS%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83"><span class="toc-number">1.2.4.</span> <span class="toc-text">独属于FreeRTOS的数据类型和编程规范</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">变量名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">函数名</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8F%E7%9A%84%E5%90%8D"><span class="toc-number">1.3.</span> <span class="toc-text">宏的名</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">10</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              if (script.integrity) {
+                scriptElement.integrity = script.integrity;
+              }
+              if (script.crossOrigin) {
+                scriptElement.crossOrigin = script.crossOrigin;
+              }
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    if (window.Pjax) {
+      Pjax.prototype.getElements = function() {
+        const i18nLanguages = window.REIMU_CONFIG.i18n_languages;
+        const baseUrl = window.REIMU_CONFIG.base;
+        let basePathname = new URL(baseUrl).pathname;
+        if (!basePathname.endsWith('/')) {
+          basePathname += '/';  
+        }
+        const currentUrl = window.location.href;
+        const currentPathname = new URL(currentUrl).pathname.replace(basePathname, '');
+        const aLinks = document.querySelectorAll('a[href]');
+        const pjaxLinks = [];
+        for(let i = 0; i < aLinks.length; i++) {
+          const aLink = aLinks[i];
+          const aLinkHref = aLink.getAttribute('href');
+          const isExternal = aLink.getAttribute('target') === '_blank' || aLink.getAttribute('rel')?.includes('noopener');
+          if (isExternal || aLinkHref.startsWith('mailto:') || aLinkHref.startsWith('tel:') || aLinkHref.startsWith('javascript:') || aLinkHref.startsWith("data:") || aLinkHref.startsWith("vbscript:")) {
+            continue;
+          }
+          if (!i18nLanguages) {
+            // 多语言功能未打开
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const absoluteUrl = new URL(aLinkHref, currentUrl).href;
+          const absolutePathname = new URL(absoluteUrl).pathname.replace(basePathname, '');
+
+          if (!absolutePathname || !currentPathname) {
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const currentLangIndex = i18nLanguages.findIndex(lang => currentPathname.startsWith(lang));
+          if (currentLangIndex > -1) {
+            // 当前属于多语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === currentLangIndex) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          } else {
+            // 当前属于默认语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === -1) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          }
+        }
+        return pjaxLinks;
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header>img",
+        "#header>picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#main",
+        "#content",
+        ".sidebar-widget",
+        ".sidebar-wrapper",
+        '#mobile-nav',
+        '#lazy-script',
+        '#i18n-nav'
+      ],
+      switches: {
+        "#content": function(oldEl, newEl) {
+          // for sidebar change
+          oldEl.className = newEl.className;
+          this.onSwitch();
+        },
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#main": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Mextra",
+          title: "freertos",
+          url: "https://mextra.netlify.app/2025/09/05/freertos/",
+          excerpt: "",
+          description: "",
+          stripContent: "FreeRTOS基础堆和栈堆：一块空闲的内存 可以使用malloc申请内存 使用完后用free释放内存  堆也可以理解为就是定义了一个堆大小的数组 然后定义一个长度 每次动态改变长度来申请空间（链表） 在FreeRTOSConfig.h中就有定义堆大小的宏configTOTAL_HEAP_SIZE 他被引用到 heap.c中的 static uint8_t ucHeap[configTOTAL_HEAP_SIZE];  栈：一块内存空间，CPU的SP寄存器指向它，它可以用于函数调用、局部变量、多",
+          date: "Fri Sep 05 2025 15:48:39 GMT+0800",
+          updated: "Sun Sep 07 2025 15:12:27 GMT+0800",
+          cover: "https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509071511987.png",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+          
+<script src="https://npm.webcache.cn/html-to-image@1.11.11/dist/html-to-image.js" integrity="sha384-UbfRVKN3&#x2F;elS1r7JcK2FhmPP+KlJ4CvYwbyYD7tH+uTkbT9bNJr9eJeQ0FoFbAgz" crossorigin="anonymous" defer data-pjax></script>
+
+          
+<script src="https://npm.webcache.cn/qrcode@1.4.4/build/qrcode.min.js" integrity="sha384-0RsG1yo&#x2F;crf&#x2F;1Qc14sho26SXXOTngNCjgJw7fuvXBt9W&#x2F;OChF&#x2F;Ijx+aUuBDqQwEk" crossorigin="anonymous" defer data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {
+    valine: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.valine-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js',
+          'sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn'
+        );
+        script.onload = () => {
+          var GUEST_INFO = ['nick', 'mail', 'link'];
+          var guest_info = 'nick,mail,link'.split(',').filter((item) => {
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var recordIP = JSON.parse('true');
+          var highlight = JSON.parse('true');
+          var visitor = JSON.parse('false');
+          var serverURLs = undefined;
+
+          if (window.Valine) {
+            new Valine({
+              el: '.valine-comment',
+              appId: "1clce93uV6y9tH8Xw9f9vWU9-gzGzoHsz",
+              appKey: "vKOcI0kksA3iKZd16M4hYyr1",
+              placeholder: "说些什么吧！",
+              pageSize: '10',
+              avatar: 'mp',
+              lang: document.documentElement.lang || 'en',
+              recordIP: recordIP,
+              highlight: highlight,
+              visitor: visitor,
+              requiredFields: guest_info,
+              path: window.location.pathname,
+              serverURLs
+            });
+          }
+        };
+        document.head.appendChild(script);
+      }
+    },
+    waline: {
+      enable: false,
+      load: async () => {
+        const container = document.querySelector('.waline-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        let walineInit;
+        const walineCdn = 'https://npm.webcache.cn/@waline/client@2.15.8/dist/waline.mjs';
+        const walineIntegrity = 'sha384-9sbqJjrfGjbkI6/PI4nU/MvBfEmkkPC4YK9I4zBeMIf1CVCZdCMH/KinBEAZII/5';
+
+        const module = await safeImport(walineCdn, walineIntegrity);
+        walineInit = module.init;
+
+        window.walineInstance = walineInit({
+          el: '.waline-comment',
+          serverURL: '',
+          lang: document.documentElement.lang || 'en',
+          locale: {},
+          emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus","https://unpkg.com/@waline/emojis@1.2.0/bilibili","https://unpkg.com/@waline/emojis@1.2.0/qq","https://unpkg.com/@waline/emojis@1.2.0/tieba","https://unpkg.com/@waline/emojis@1.2.0/tw-emoji"],
+          meta: ["nick","mail","link"],
+          requiredMeta: ["nick","mail"],
+          wordLimit: JSON.parse('0'),
+          comment: true,
+          pageSize: JSON.parse('10'),
+          dark: 'html[data-theme="dark"]',
+          pageview: JSON.parse('true'),
+        });
+      }
+    },
+    twikoo: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.twikoo-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/twikoo@1.6.16/dist/twikoo.all.min.js',
+          'sha384-lDHsr5aZmkMS0eKnsUu6e9RWP+dRmn7sgjRAKGOAoXfMyzbUK6Qi86zZK7R+KvRV'
+        );
+
+        script.onload = () => {
+          if (window.twikoo) {
+            twikoo.init({
+              envId: '',
+              el: '.tcomment',
+              region: '',
+              lang: document.documentElement.lang || 'en',
+            })
+          }
+        } 
+        document.head.appendChild(script);
+      }
+    },
+    gitalk: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.min.js',
+          'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU/lcEH5O8eVbSDhbPwsiVUTp/aGX/z/5EuMA'
+        );
+
+        script.onload = () => {
+          if (false) {
+            const md5Script = loadScript(
+              'https://npm.webcache.cn/blueimp-md5@2.19.0/js/md5.min.js',
+              'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr/gZlbkHkL6vTthxH'
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            initGitalk();
+          }
+        }
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          var gitalkId = location.pathname;
+          var gitalk = new Gitalk({
+            clientID: '',
+            clientSecret: '',
+            repo: '',
+            owner: '',
+            admin: null,
+            id: gitalkId,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          })
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },
+    giscus: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.giscus-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        // 删除可能已存在的 giscus 脚本和 iframe
+        const existingScript = container.querySelector('script[src*="giscus.app/client.js"]');
+        if (existingScript) existingScript.remove();
+        const existingFrame = document.querySelector('iframe.giscus-frame');
+        if (existingFrame) existingFrame.remove();
+
+        const giscusScript = document.createElement('script');
+        const domMode = document.documentElement.getAttribute("data-theme");
+        giscusScript.src = 'https://giscus.app/client.js';
+        giscusScript.setAttribute('data-repo', '');
+        giscusScript.setAttribute('data-repo-id', '');
+        giscusScript.setAttribute('data-category', ''); 
+        giscusScript.setAttribute('data-category-id', '');
+        giscusScript.setAttribute('data-mapping', '0');
+        giscusScript.setAttribute('data-strict', '0');
+        giscusScript.setAttribute('data-reactions-enabled', '1');
+        giscusScript.setAttribute('data-emit-metadata', '0');
+        giscusScript.setAttribute('data-input-position', 'bottom');
+        giscusScript.setAttribute('data-theme', domMode === 'dark' ? 'dark' : 'light');
+        giscusScript.setAttribute('data-lang', document.documentElement.lang || 'en');
+        giscusScript.setAttribute('crossorigin', 'anonymous');
+        giscusScript.async = true;
+        container.appendChild(giscusScript);
+        document.body.addEventListener('light-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'light' } } }, 'https://giscus.app');
+        });
+        document.body.addEventListener('dark-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'dark' } } }, 'https://giscus.app');
+        });
+      }
+    }
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    // 评论组件加载状态跟踪
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.8.4' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous"></script>
+
+  
+    <script>
+      var isMobile = window.matchMedia('(max-width: 959px)').matches;
+      if (isMobile) {
+      const aplayer = _$('#aplayer');
+        if (aplayer) {
+          const aside = aplayer.parentNode;
+          if (aside?.tagName === 'ASIDE') {
+            aplayer.removeAttribute('data-aos');
+            aside.removeChild(aplayer);
+            document.body.appendChild(aplayer);
+          }
+        }
+      }
+      const ap = new APlayer({
+        theme: "var(--color-link)",
+        container: document.getElementById('aplayer'),
+        audio: [{"name":"有些","artist":"颜人中","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VkV2dhN3gxWm05RGpDZW1TcmxIT2RzQnVab0hsck5fRGViZ1FQbzFvQXpsQUE.mp3","cover":"http://p1.music.126.net/8DkTnzi7jdjWGYl4qbwLCg==/109951164517295956.jpg?param=300x300","lrc":"/lrc/有些-颜人中.lrc"},{"name":"我只能离开","artist":"颜人中","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VUcHNxRlVUdHFkTWxjeFNGQzhNWEtvQjJwWTlBWUs0UjZPLTNkeE9wSDllcEE.mp3","cover":"http://p1.music.126.net/5GPFbTQU-kW57PGv_7LeBw==/109951164440649436.jpg?param=300x300","lrc":"/lrc/我只能离开-颜人中.lrc"},{"name":"慢慢","artist":"颜人中","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VXbUl6S1pNcEZCRG9SUXdxWG0zb0gwQmgwdXQ5M0xoUlZHYnhrYjVTVmtVZlE.mp3","cover":"http://p2.music.126.net/sQlE0bUPIfET6_43FfQ5jg==/109951170728882395.jpg?param=300x300","lrc":"/lrc/慢慢-颜人中.lrc"},{"name":"借口","artist":"周杰伦","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VVN2EyM2FqYUZkT2tFUFBjWnRPVE93QkNwT19vNktOUWthTmMzUG9nUzFmY0E.mp3","cover":"http://p1.music.126.net/-VzjKnXpZE5H5EZW_l1rfQ==/109951169361374990.jpg?param=300x300","lrc":"/lrc/借口-周杰伦.lrc"},{"name":"等你下课(with 杨瑞代)","artist":"周杰伦","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VUNWRsOVpQSFgxRmc0TUoxaWpZVVlRQkNUQzQ5X2NObnk0NEIydGhYOE91Zmc.mp3","cover":"http://p1.music.126.net/CSjhWIv08-c2-M9PY1tLHQ==/109951170980089869.jpg?param=300x300","lrc":"/lrc/等你下课(with 杨瑞代)-周杰伦.lrc"},{"name":"倒带(Live)","artist":"周杰伦","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VTV3EzQ3drcllsRmlOb19rb29yYmU4Qk01N1M2ZnVpQU8wYWkxRTVkN0dvWkE.mp3","cover":"http://p2.music.126.net/GozpywzxhU48JkwZF9lQfw==/109951169744436482.jpg?param=300x300","lrc":"/lrc/倒带(Live)-周杰伦.lrc"},{"name":"枫","artist":"周杰伦","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VYZ29EekRTb2dCTG5US1VlMXNpQzhFQnpMd3RhMVRTYjVtaHBTUkE3ZDlMTXc.mp3","cover":"http://p2.music.126.net/bH6DqSta6Wgv7I9YbLKYvA==/109951170172609734.jpg?param=300x300","lrc":"/lrc/枫-周杰伦.lrc"},{"name":"空白格","artist":"蔡健雅","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VaMHJBTThWNThaQXAyRkxCY2ZkZklRQjBLZGloamdaVEFlYzdKVHo3cWZxR3c.mp3","cover":"http://p2.music.126.net/AryQmM2GgfCk4C9XfwV5uQ==/109951168271384367.jpg?param=300x300","lrc":"/lrc/空白格-蔡健雅.lrc"},{"name":"绊","artist":"miu-clips","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VWWVppcTNfZ1JWRWcwTkhrZS1pU1kwQkN3Z0lxU0xBMmE4U2J4OVMyUGlpX0E.mp3","cover":"http://p1.music.126.net/qXN-ehvhohaHMMutBQUMpA==/109951169237165975.jpg?param=300x300","lrc":"/lrc/絆-miu-clips.lrc"},{"name":"世界が終るまでは… (直到世界尽头) (《灌篮高手》TV动画第２５-４９集片尾曲)","artist":"WANDS","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VTd3h6bThxNE1wRG03UXZhUVlFYVp3QjZrTGhDR0JqVkV1Mjh0UmZtNndrMXc.mp3","cover":"http://p1.music.126.net/S1O3LeBlIBpml-s-9DR1pw==/109951169528524037.jpg?param=300x300","lrc":"/lrc/世界が終るまでは…-WANDS.lrc"},{"name":"君が好きだと叫びたい","artist":"BAAD (バード)","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VmQzE4bXIwazRsQmhGMjhZYkEwaWNJQmFSYVNjOW9hVjZqY1Nqc3lsX2didmc.mp3","cover":"http://p1.music.126.net/Kvub9zAFd6PphTTx1jiiyg==/109951169566730545.jpg?param=300x300","lrc":"/lrc/君が好きだと叫びたい-Baad.lrc"},{"name":"Cry For Me","artist":"不冷","url":"https://dlink.host/musics/aHR0cHM6Ly9vbmVkcnYtbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvc3Rvcl9vbmVkcnZfb25taWNyb3NvZnRfY29tL0VUTTVMTGhYdlF0TXZYeWs2NnRrQVZRQjlqUjV3QnZ5Z0hicU5KTEoyWWt1T0E.mp3","cover":"http://p1.music.126.net/eVPMvxjP8m7BoLF5px6uMA==/109951170980533007.jpg?param=300x300","lrc":"/lrc/Cry.lrc"},{"name":"スパークル(movie ver.)","artist":"RADWIMPS","url":"https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvYy8zMWJiMzVhMTUwZmUwZmUzL0VSSGppNGVtTVBkT3Yta1A3cjl3bEJJQlJ4bHdQSWNaN1d1UkpWUUJzcWlxZXc_ZT14UUk3c0w.mp3","cover":"http://p2.music.126.net/sSxbRt9RpC6s_MaewyDJfA==/18597139672292692.jpg?param=300x300","lrc":"/lrc/スパークル (movie ver.) - RADWIMPS.lrc"}] || [],
+        fixed: isMobile ? true : (false || false),
+        autoplay: false || false,
+        loop: 'all' || 'all',
+        order: 'random' || 'list',
+        preload: 'auto' || 'auto',
+        volume: 0.7 || 0.7,
+        mutex: true || true,
+        listFolded: false || false,
+        lrcType: 3 || 0,
+      });
+    </script>
+  
+
+
+
+
+
+    
+  </body>
+  </html>
+
