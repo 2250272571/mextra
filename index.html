@@ -482,12 +482,287 @@
       <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
+      <a class="post-link" href="/2025/09/09/ESP32%E5%AD%A6%E4%B9%A0/" aria-label="ESP32学习"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509091106486.jpg" data-sizes="auto" alt="ESP32学习" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-09-09</span>
+        <span><span class="icon-pencil"></span>9.9k 字</span>
+        <span><span class="icon-clock"></span>41 分钟</span>
+      </div>
+      <h2 class="post-title">ESP32学习</h2>
+      <article class="post-article">
+        
+          ESP32环境搭建WSL2安装与配置推荐查阅官方文档说明：安装 WSL | Microsoft Learn
+手动下载安装包
+访问 WSL 的 GitHub Releases 页面 https://github.com/microsoft/WSL/releases
+
+查找并下载最新版本的 .msi 安装包（例如 wsl.2.1.5.0.x64.msi）
+
+
+
+配置控制面板
+
+
+有些Windows 11新系统会没有虚拟机平台这个选项 没有关系！！！！
+配置完后重新启动电脑
+
+管理员身份运行Windows PowerShell
+安装Ubuntu1wsl --install
+
+
+
+如有可选 则选择Uu
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/09/07/LVGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85/" aria-label="LVGL学习之旅（基于正点原子STM32F407探索者）"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509071514562.png" data-sizes="auto" alt="LVGL学习之旅（基于正点原子STM32F407探索者）" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-09-07</span>
+        <span><span class="icon-pencil"></span>1.6k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
+      </div>
+      <h2 class="post-title">LVGL学习之旅（基于正点原子STM32F407探索者）</h2>
+      <article class="post-article">
+        
+          LVGL 基础
+LVGL（Light and Versatile Graphics Library）轻量级通用型图形库，是一个免费的开源图形库，提供了创建嵌入式 GUI 所需的一切，具有易于使用的组件，美观的视觉效果和低内存占用等特点。支持触摸屏操作，移植简单方便，开发者一直在不断完善更新。
+特点：
+
+丰富且强大的模块化图形组件：按钮 (buttons)、图表 (charts)、列表 (lists)、滑动条 (sliders)、图片 (images) 等
+高级的图形引擎：动画、抗锯齿、透明度、平滑滚动、图层混合等效果
+不依赖特定的硬件平台，可以在任何显示屏上运行
+配置可裁剪（最低资源占用：64
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/09/02/const/" aria-label="关于const的进一步思考"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="https://d-sketon.top/img/backimg/bg1.jpg" data-sizes="auto" alt="关于const的进一步思考" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-09-02</span>
+        <span><span class="icon-pencil"></span>264 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">关于const的进一步思考</h2>
+      <article class="post-article">
+        
+          
+背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容 
+但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误 
+
+分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错误
+解决措施：通过malloc来申请内存，然后使用strcpy或者sprintf来存放在新申请的内存中
+123456789101112131415161718192021222324252627282930char *get_
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/06/08/%E7%94%B5%E8%B5%9B/" aria-label="电赛"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="https://fastly.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506081324376.png" data-sizes="auto" alt="电赛" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-06-08</span>
+        <span><span class="icon-pencil"></span>709 字</span>
+        <span><span class="icon-clock"></span>3 分钟</span>
+      </div>
+      <h2 class="post-title">电赛</h2>
+      <article class="post-article">
+        
+          PID
+
+其中 e 为误差
+P：正比  即控制摆动
+I：积分 积累误差，可用来消除稳定误差 （比如无人机中，向下吹的风刚好是1米，但p中最后上升也是1米 即形成一种稳态）
+D：微分 速度控制 可用来让系统快速停下来
+
+编码器CubeMX配置
+参数解析
+Encoder Mode
+
+
+Encoder Mode TI1 ：只保留A相，滤除B相数据
+
+Encoder Mode TI2 ：只保留B相，滤除A相数据
+
+Encoder Mode TI1 and TI2：A、B相都保留，数据波长会是第一、二模式的两倍
+
+一般用于高精度场合 如小车
+
+
+
+代码编写初始化12HAL_TIM_Encoder_Sta
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/28/TI/" aria-label="TI"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505282044781.jpg" data-sizes="auto" alt="TI" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-28</span>
+        <span><span class="icon-pencil"></span>1.2k 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">TI</h2>
+      <article class="post-article">
+        
+          初始化代码浮点单元（FPU）相关配置12ROM_FPUEnable(); / 使能浮点单元ROM_FPULazyStackingEnable(); / 启用浮点延迟堆栈模式，减少中断响应延迟    
+
+浮点单元（FPU）
+
+浮点单元是 Cortex-M4 芯片（如 Tiva-C）内的硬件模块，用于加速浮点运算（如浮点加法、乘法）。
+
+如果你的项目中使用了带小数的计算（如定点PID控制、FFT计算、浮点除法），硬件 FPU 的加速能力远远优于软件模拟。
+
+
+Lazy Stacking 模式
+
+启用延迟堆栈推入操作后，在中断期间，只有确实需要使用浮点硬件时，才会将浮点寄存器保存到堆栈，从而减少中断
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/21/RT-Thread/" aria-label="RT_Thread"></a>
+    
+    
+    <div class="post-cover-right">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505212030199.png" data-sizes="auto" alt="RT_Thread" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-21</span>
+        <span><span class="icon-pencil"></span>6.2k 字</span>
+        <span><span class="icon-clock"></span>24 分钟</span>
+      </div>
+      <h2 class="post-title">RT_Thread</h2>
+      <article class="post-article">
+        
+          时钟管理时钟节拍产生与获取时钟节拍依赖于硬件中的定时器。你可以把定时器看作是⼀个不停计时的装置，它每隔⼀段时间就会提醒系统“滴答”⼀次。每当定时器中断发⽣时，RT-Thread 会调⽤ rt_tick_increase()函数，系统时间增加 1 个节拍。就像家中的闹钟响⼀次，时间就过去了⼀分钟⼀样。
+
+其中rt_tick_increase()函数中有rt_tick类似于HAL库中的uwTick，可以直接调用 获取系统时间
+
+定时器管理硬件定时器 vs 软件定时器
+硬件定时器：就像厨房⾥的倒计时器，它是由硬件直接提供的。硬件定时器精度⾮常⾼，可以达到纳秒级，适合⼀些对时间要求⾮常严格的任务，⽐如
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/20/git/" aria-label="git命令(用于hexo clean之后的处理)"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505202237592.jpg" data-sizes="auto" alt="git命令(用于hexo clean之后的处理)" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-20</span>
+        <span><span class="icon-pencil"></span>306 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">git命令(用于hexo clean之后的处理)</h2>
+      <article class="post-article">
+        
+          连接远程仓库123git initgit remote add origin [dizhi]git checkout -b main                  
+
+推送代码123git add .git commit -m &amp;quot;&amp;quot;git push --force origin main 	#后续可以直接用git push
+
+如何建立一个多人写作的git仓库？1. 新建Git仓库
+在本地创建仓库：
+123mkdir my_projectcd my_projectgit init
+
+或者在GitHub&amp;#x2F;GitLab等平台创建仓库：如果你使用的是GitHub、Gi
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
       <a class="post-link" href="/2025/05/19/%E9%9F%B3%E5%93%8D%E5%AE%9E%E4%B9%A0/" aria-label="音响实习の学习笔记"></a>
     
     
-      <div class="post-sticky">置顶</div>
-    
-    <div class="post-cover-left">
+    <div class="post-cover-right">
       
         <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505202214529.png" data-sizes="auto" alt="音响实习の学习笔记" class="lazyload">
       
@@ -544,283 +819,6 @@ USB 话筒
 核心参数频率响应（麦克风对不同频率声音的灵敏度变化曲线）：
 理想范围：人声录制建议 80Hz-15kHz，乐器需更宽（如 20Hz-20kHz）。
 曲线特性：平直曲
-        
-      </article>
-    </div>
-  </div>
-</div>
-      
-    
-      <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/09/09/ESP32%E5%AD%A6%E4%B9%A0/" aria-label="ESP32学习"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509091106486.jpg" data-sizes="auto" alt="ESP32学习" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-09-09</span>
-        <span><span class="icon-pencil"></span>9.9k 字</span>
-        <span><span class="icon-clock"></span>41 分钟</span>
-      </div>
-      <h2 class="post-title">ESP32学习</h2>
-      <article class="post-article">
-        
-          ESP32环境搭建WSL2安装与配置推荐查阅官方文档说明：安装 WSL | Microsoft Learn
-手动下载安装包
-访问 WSL 的 GitHub Releases 页面 https://github.com/microsoft/WSL/releases
-
-查找并下载最新版本的 .msi 安装包（例如 wsl.2.1.5.0.x64.msi）
-
-
-
-配置控制面板
-
-
-有些Windows 11新系统会没有虚拟机平台这个选项 没有关系！！！！
-配置完后重新启动电脑
-
-管理员身份运行Windows PowerShell
-安装Ubuntu1wsl --install
-
-
-
-如有可选 则选择Uu
-        
-      </article>
-    </div>
-  </div>
-</div>
-      
-    
-      <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/09/07/LVGL%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85/" aria-label="LVGL学习之旅（基于正点原子STM32F407探索者）"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509071514562.png" data-sizes="auto" alt="LVGL学习之旅（基于正点原子STM32F407探索者）" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-09-07</span>
-        <span><span class="icon-pencil"></span>1.6k 字</span>
-        <span><span class="icon-clock"></span>7 分钟</span>
-      </div>
-      <h2 class="post-title">LVGL学习之旅（基于正点原子STM32F407探索者）</h2>
-      <article class="post-article">
-        
-          LVGL 基础
-LVGL（Light and Versatile Graphics Library）轻量级通用型图形库，是一个免费的开源图形库，提供了创建嵌入式 GUI 所需的一切，具有易于使用的组件，美观的视觉效果和低内存占用等特点。支持触摸屏操作，移植简单方便，开发者一直在不断完善更新。
-特点：
-
-丰富且强大的模块化图形组件：按钮 (buttons)、图表 (charts)、列表 (lists)、滑动条 (sliders)、图片 (images) 等
-高级的图形引擎：动画、抗锯齿、透明度、平滑滚动、图层混合等效果
-不依赖特定的硬件平台，可以在任何显示屏上运行
-配置可裁剪（最低资源占用：64
-        
-      </article>
-    </div>
-  </div>
-</div>
-      
-    
-      <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/09/02/const/" aria-label="关于const的进一步思考"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        
-        
-          <img data-src="https://d-sketon.top/img/backimg/bg1.jpg" data-sizes="auto" alt="关于const的进一步思考" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-09-02</span>
-        <span><span class="icon-pencil"></span>264 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">关于const的进一步思考</h2>
-      <article class="post-article">
-        
-          
-背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容 
-但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误 
-
-分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错误
-解决措施：通过malloc来申请内存，然后使用strcpy或者sprintf来存放在新申请的内存中
-123456789101112131415161718192021222324252627282930char *get_
-        
-      </article>
-    </div>
-  </div>
-</div>
-      
-    
-      <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/06/08/%E7%94%B5%E8%B5%9B/" aria-label="电赛"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="https://fastly.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506081324376.png" data-sizes="auto" alt="电赛" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-06-08</span>
-        <span><span class="icon-pencil"></span>709 字</span>
-        <span><span class="icon-clock"></span>3 分钟</span>
-      </div>
-      <h2 class="post-title">电赛</h2>
-      <article class="post-article">
-        
-          PID
-
-其中 e 为误差
-P：正比  即控制摆动
-I：积分 积累误差，可用来消除稳定误差 （比如无人机中，向下吹的风刚好是1米，但p中最后上升也是1米 即形成一种稳态）
-D：微分 速度控制 可用来让系统快速停下来
-
-编码器CubeMX配置
-参数解析
-Encoder Mode
-
-
-Encoder Mode TI1 ：只保留A相，滤除B相数据
-
-Encoder Mode TI2 ：只保留B相，滤除A相数据
-
-Encoder Mode TI1 and TI2：A、B相都保留，数据波长会是第一、二模式的两倍
-
-一般用于高精度场合 如小车
-
-
-
-代码编写初始化12HAL_TIM_Encoder_Sta
-        
-      </article>
-    </div>
-  </div>
-</div>
-      
-    
-      <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/05/28/TI/" aria-label="TI"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505282044781.jpg" data-sizes="auto" alt="TI" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-05-28</span>
-        <span><span class="icon-pencil"></span>1.2k 字</span>
-        <span><span class="icon-clock"></span>4 分钟</span>
-      </div>
-      <h2 class="post-title">TI</h2>
-      <article class="post-article">
-        
-          初始化代码浮点单元（FPU）相关配置12ROM_FPUEnable(); / 使能浮点单元ROM_FPULazyStackingEnable(); / 启用浮点延迟堆栈模式，减少中断响应延迟    
-
-浮点单元（FPU）
-
-浮点单元是 Cortex-M4 芯片（如 Tiva-C）内的硬件模块，用于加速浮点运算（如浮点加法、乘法）。
-
-如果你的项目中使用了带小数的计算（如定点PID控制、FFT计算、浮点除法），硬件 FPU 的加速能力远远优于软件模拟。
-
-
-Lazy Stacking 模式
-
-启用延迟堆栈推入操作后，在中断期间，只有确实需要使用浮点硬件时，才会将浮点寄存器保存到堆栈，从而减少中断
-        
-      </article>
-    </div>
-  </div>
-</div>
-      
-    
-      <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/05/21/RT-Thread/" aria-label="RT_Thread"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505212030199.png" data-sizes="auto" alt="RT_Thread" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-05-21</span>
-        <span><span class="icon-pencil"></span>6.2k 字</span>
-        <span><span class="icon-clock"></span>24 分钟</span>
-      </div>
-      <h2 class="post-title">RT_Thread</h2>
-      <article class="post-article">
-        
-          时钟管理时钟节拍产生与获取时钟节拍依赖于硬件中的定时器。你可以把定时器看作是⼀个不停计时的装置，它每隔⼀段时间就会提醒系统“滴答”⼀次。每当定时器中断发⽣时，RT-Thread 会调⽤ rt_tick_increase()函数，系统时间增加 1 个节拍。就像家中的闹钟响⼀次，时间就过去了⼀分钟⼀样。
-
-其中rt_tick_increase()函数中有rt_tick类似于HAL库中的uwTick，可以直接调用 获取系统时间
-
-定时器管理硬件定时器 vs 软件定时器
-硬件定时器：就像厨房⾥的倒计时器，它是由硬件直接提供的。硬件定时器精度⾮常⾼，可以达到纳秒级，适合⼀些对时间要求⾮常严格的任务，⽐如
-        
-      </article>
-    </div>
-  </div>
-</div>
-      
-    
-      <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/05/20/git/" aria-label="git命令(用于hexo clean之后的处理)"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505202237592.jpg" data-sizes="auto" alt="git命令(用于hexo clean之后的处理)" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-05-20</span>
-        <span><span class="icon-pencil"></span>306 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">git命令(用于hexo clean之后的处理)</h2>
-      <article class="post-article">
-        
-          连接远程仓库123git initgit remote add origin [dizhi]git checkout -b main                  
-
-推送代码123git add .git commit -m &amp;quot;&amp;quot;git push --force origin main 	#后续可以直接用git push
-
-如何建立一个多人写作的git仓库？1. 新建Git仓库
-在本地创建仓库：
-123mkdir my_projectcd my_projectgit init
-
-或者在GitHub&amp;#x2F;GitLab等平台创建仓库：如果你使用的是GitHub、Gi
         
       </article>
     </div>
