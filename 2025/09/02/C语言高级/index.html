@@ -17,7 +17,7 @@
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://mextra.netlify.app';</script>
   
   <title>
-    关于const的进一步思考 |
+    C语言高级 |
     
     Mextraのblog
   </title>
@@ -35,19 +35,19 @@
 
   
   
-    <meta name="description" content="背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容  但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误   分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错误 解决措施：通过mall">
+    <meta name="description" content="关于const的进一步思考 背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容  但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误   分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于const的进一步思考">
-<meta property="og:url" content="https://mextra.netlify.app/2025/09/02/const/index.html">
+<meta property="og:title" content="C语言高级">
+<meta property="og:url" content="https://mextra.netlify.app/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/index.html">
 <meta property="og:site_name" content="Mextraのblog">
-<meta property="og:description" content="背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容  但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误   分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错误 解决措施：通过mall">
+<meta property="og:description" content="关于const的进一步思考 背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容  但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误   分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509071511987.png">
 <meta property="article:published_time" content="2025-09-02T03:36:37.000Z">
-<meta property="article:modified_time" content="2025-09-17T04:27:19.241Z">
+<meta property="article:modified_time" content="2025-09-28T13:17:03.567Z">
 <meta property="article:author" content="Mextra">
 <meta property="article:tag" content="嵌入式基础">
-<meta property="article:tag" content="对于const的思考">
+<meta property="article:tag" content="C语言高级">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509071511987.png">
   
@@ -194,7 +194,7 @@
 <header id="header">
   
     <picture></picture>
-    <img  fetchpriority="high" src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509171225629.png" alt="关于const的进一步思考">
+    <img  fetchpriority="high" src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509171225629.png" alt="C语言高级">
   
   <div id="header-outer">
     <div id="header-title">
@@ -202,7 +202,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">关于const的进一步思考</h1>
+            <h1 data-aos="slide-up">C语言高级</h1>
           </a>
         
       
@@ -231,7 +231,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Econst%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="toc-number">1.</span> <span class="toc-text">关于const的进一步思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二维数组高级应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">函数封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE"><span class="toc-number">2.2.</span> <span class="toc-text">指针访问</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -331,13 +331,13 @@
   
 </aside>
 
-          <section id="main"><article id="post-const" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-C语言高级" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
   <span class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-09-02T03:36:37.000Z" itemprop="datePublished">2025-09-02</time>
-    <time style="display: none;" id="post-update-time">2025-09-17</time>
+    <time style="display: none;" id="post-update-time">2025-09-28</time>
   </span>
 </div>
 
@@ -350,7 +350,7 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <blockquote>
+        <h2 id="关于const的进一步思考"><a href="#关于const的进一步思考" class="headerlink" title="关于const的进一步思考"></a>关于const的进一步思考</h2><blockquote>
 <p>背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容 </p>
 <p>但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误 </p>
 </blockquote>
@@ -371,13 +371,23 @@
     </div>
   </div>
 
+<h2 id="二维数组高级应用"><a href="#二维数组高级应用" class="headerlink" title="二维数组高级应用"></a>二维数组高级应用</h2><blockquote>
+<p>背景：在进一步封装MP3_Test项目的时候，本身有个二维数组mp3Files用来存放MP3文件路径，在修饰为static保护变量时，遇到了不会返回的难题</p>
+<p>[]优先级高于*</p>
+</blockquote>
+<p><code>解决措施</code>：通过询问<code>AI</code>后，得出可以将其封装为<code>一个返回值为数组指针的函数</code>，然后定义一个数组指针来接收<code>原型为指针，但指向的是数组</code></p>
+<h3 id="函数封装"><a href="#函数封装" class="headerlink" title="函数封装"></a>函数封装</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">char</span> mp3Files[<span class="number">100</span>][<span class="number">64</span>]; <span class="comment">// 假设最多有100个MP3文件</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> (*get_mp3_files(<span class="type">void</span>)) [<span class="number">64</span>]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> mp3Files;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">task</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> (*files)[<span class="number">64</span>] = get_mp3_files();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span> ;i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;file[%d]:%s\r\n&quot;</span>,i,files[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="指针访问"><a href="#指针访问" class="headerlink" title="指针访问"></a>指针访问</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">char</span> mp3Files[<span class="number">100</span>][<span class="number">64</span>]; <span class="comment">// 假设最多有100个MP3文件</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">task</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*（1）指向数组的指针（按行访问） 即指针数组*/</span></span><br><span class="line">    <span class="type">char</span> (*p)[<span class="number">64</span>] = mp3Files;</span><br><span class="line">    <span class="comment">/*（2）指向数组的指针（逐个访问）*/</span></span><br><span class="line">    <span class="type">char</span> *p = &amp;mp3Files[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"> <span class="comment">//或	char *p = mp3Files[0];</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <footer class="article-footer">
       
         <blockquote class="article-copyright">
     <p><strong><span class="icon-user icon"></span>本文作者：</strong>Mextra @ Mextraのblog</p>
-    <p><strong><span class="icon-link icon"></span>本文链接：</strong><a href="https://mextra.netlify.app/2025/09/02/const/">https://mextra.netlify.app/2025/09/02/const/</a></p>
+    <p><strong><span class="icon-link icon"></span>本文链接：</strong><a href="https://mextra.netlify.app/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/">https://mextra.netlify.app/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/</a></p>
     
     
     
@@ -389,19 +399,19 @@
       
         <div class="share-wrapper">
   
-    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F09%2F02%2Fconst%2F&amp;appkey=&amp;title=%E5%85%B3%E4%BA%8Econst%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="关于const的进一步思考">
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F09%2F02%2FC%25E8%25AF%25AD%25E8%25A8%2580%25E9%25AB%2598%25E7%25BA%25A7%2F&amp;appkey=&amp;title=C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="C语言高级">
       <div class="share-icon icon icon-weibo">
         
       </div>
     </a>
   
-    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=%E5%85%B3%E4%BA%8Econst%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83&amp;desc=%E5%85%B3%E4%BA%8Econst%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="关于const的进一步思考">
+    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7&amp;desc=C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="C语言高级">
       <div class="share-icon icon icon-qq">
         
       </div>
     </a>
   
-    <a href="javascript:;"  title="关于const的进一步思考">
+    <a href="javascript:;"  title="C语言高级">
       <div class="share-icon icon icon-weixin">
         
           <div id="share-weixin">
@@ -428,8 +438,8 @@
 </div>
       
       
-        <a data-aos="zoom-in" href="/2025/09/02/const/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2025/09/02/const/" itemprop="commentCount"></span>
+        <a data-aos="zoom-in" href="/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/" itemprop="commentCount"></span>
           留言
         </a>
       
@@ -438,7 +448,7 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E5%AF%B9%E4%BA%8Econst%E7%9A%84%E6%80%9D%E8%80%83/" rel="tag">对于const的思考</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9F%BA%E7%A1%80/" rel="tag">嵌入式基础</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/" rel="tag">C语言高级</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9F%BA%E7%A1%80/" rel="tag">嵌入式基础</a></li></ul>
 
 
     </footer>
@@ -542,10 +552,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        39.5k
+        39.7k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:33
+        02:34
       </div>
     
     
@@ -578,7 +588,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Econst%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="toc-number">1.</span> <span class="toc-text">关于const的进一步思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二维数组高级应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">函数封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE"><span class="toc-number">2.2.</span> <span class="toc-text">指针访问</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -916,13 +926,13 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "Mextra",
-          title: "关于const的进一步思考",
-          url: "https://mextra.netlify.app/2025/09/02/const/",
+          title: "C语言高级",
+          url: "https://mextra.netlify.app/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/",
           excerpt: "",
           description: "",
-          stripContent: " 背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容  但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误   分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错误 解决措施：通过malloc来申请内存，然后使用strcpy或者sprintf来存放在新申请的内存中 12345678910",
+          stripContent: "关于const的进一步思考 背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容  但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误   分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错误 解决措施：通过malloc来申请内存，然后使用strcpy或者sprintf来存放在新申请的内存",
           date: "Tue Sep 02 2025 11:36:37 GMT+0800",
-          updated: "Wed Sep 17 2025 12:27:19 GMT+0800",
+          updated: "Sun Sep 28 2025 21:17:03 GMT+0800",
           cover: "https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509171225629.png",
         };
       </script>
