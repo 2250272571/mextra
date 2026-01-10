@@ -415,10 +415,49 @@
       <div class="post-wrapper">
   <div class="post-wrap-left" data-aos="fade-up">
     
-      <a class="post-link" href="/2025/05/21/RT-Thread/" aria-label="RT_Thread"></a>
+      <a class="post-link" href="/2025/05/28/TI/" aria-label="TI"></a>
     
     
     <div class="post-cover-left">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505282044781.jpg" data-sizes="auto" alt="TI" class="lazyload">
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-05-28</span>
+        <span><span class="icon-pencil"></span>1.2k 字</span>
+        <span><span class="icon-clock"></span>4 分钟</span>
+      </div>
+      <h2 class="post-title">TI</h2>
+      <article class="post-article">
+        
+          初始化代码浮点单元（FPU）相关配置12ROM_FPUEnable(); / 使能浮点单元ROM_FPULazyStackingEnable(); / 启用浮点延迟堆栈模式，减少中断响应延迟    
+
+浮点单元（FPU）
+
+浮点单元是 Cortex-M4 芯片（如 Tiva-C）内的硬件模块，用于加速浮点运算（如浮点加法、乘法）。
+
+如果你的项目中使用了带小数的计算（如定点PID控制、FFT计算、浮点除法），硬件 FPU 的加速能力远远优于软件模拟。
+
+
+Lazy Stacking 模式
+
+启用延迟堆栈推入操作后，在中断期间，只有确实需要使用浮点硬件时，才会将浮点寄存器保存到堆栈，从而减少中断
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-right" data-aos="fade-up">
+    
+      <a class="post-link" href="/2025/05/21/RT-Thread/" aria-label="RT_Thread"></a>
+    
+    
+    <div class="post-cover-right">
       
         <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505212030199.png" data-sizes="auto" alt="RT_Thread" class="lazyload">
       
@@ -438,42 +477,6 @@
 
 定时器管理硬件定时器 vs 软件定时器
 硬件定时器：就像厨房⾥的倒计时器，它是由硬件直接提供的。硬件定时器精度⾮常⾼，可以达到纳秒级，适合⼀些对时间要求⾮常严格的任务，⽐如
-        
-      </article>
-    </div>
-  </div>
-</div>
-      
-    
-      <div class="post-wrapper">
-  <div class="post-wrap-right" data-aos="fade-up">
-    
-      <a class="post-link" href="/2025/05/20/git/" aria-label="git命令(用于hexo clean之后的处理)"></a>
-    
-    
-    <div class="post-cover-right">
-      
-        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505202237592.jpg" data-sizes="auto" alt="git命令(用于hexo clean之后的处理)" class="lazyload">
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2025-05-20</span>
-        <span><span class="icon-pencil"></span>306 字</span>
-        <span><span class="icon-clock"></span>1 分钟</span>
-      </div>
-      <h2 class="post-title">git命令(用于hexo clean之后的处理)</h2>
-      <article class="post-article">
-        
-          连接远程仓库123git initgit remote add origin [dizhi]git checkout -b main                  
-
-推送代码123git add .git commit -m &amp;quot;&amp;quot;git push --force origin main 	#后续可以直接用git push
-
-如何建立一个多人写作的git仓库？1. 新建Git仓库
-在本地创建仓库：
-123mkdir my_projectcd my_projectgit init
-
-或者在GitHub&amp;#x2F;GitLab等平台创建仓库：如果你使用的是GitHub、Gi
         
       </article>
     </div>
