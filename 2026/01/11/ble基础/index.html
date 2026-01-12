@@ -35,22 +35,24 @@
 
   
   
-    <meta name="description" content="BLE基础">
+    <meta name="description" content="BLE基础蓝牙广播概念​	低功耗蓝牙（BLE）一共有40个信道，其中只有3个用于信道用于蓝牙广播（37、38、39），频段范围聪2402MHz到24980MHz（2MHz一个信道）  广播数据包（最大37字节）结构组成（即用户最大31字节可编辑）12 6字节	 + 		 31字节MAC地址			用户使用  用户使用数据格式这31字节又被分为若干个广播数据结构体（AD_Structure），该结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ble基础学习">
 <meta property="og:url" content="https://mextra.netlify.app/2026/01/11/ble%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Mextraのblog">
-<meta property="og:description" content="BLE基础">
+<meta property="og:description" content="BLE基础蓝牙广播概念​	低功耗蓝牙（BLE）一共有40个信道，其中只有3个用于信道用于蓝牙广播（37、38、39），频段范围聪2402MHz到24980MHz（2MHz一个信道）  广播数据包（最大37字节）结构组成（即用户最大31字节可编辑）12 6字节	 + 		 31字节MAC地址			用户使用  用户使用数据格式这31字节又被分为若干个广播数据结构体（AD_Structure），该结构">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/image-20260112225601847.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/image-20260111012740722.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/image-20260112232926846.png">
 <meta property="article:published_time" content="2026-01-10T17:20:35.000Z">
-<meta property="article:modified_time" content="2026-01-10T17:31:50.000Z">
+<meta property="article:modified_time" content="2026-01-12T15:55:50.000Z">
 <meta property="article:author" content="Mextra">
 <meta property="article:tag" content="嵌入式基础">
 <meta property="article:tag" content="蓝牙相关">
 <meta property="article:tag" content="BLE学习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/image-20260111012740722.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/image-20260112225601847.png">
   
   
     <link rel="alternate" href="/atom.xml" title="Mextraのblog" type="application/atom+xml">
@@ -232,7 +234,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#BLE%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">BLE基础</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#BLE%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">BLE基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E5%B9%BF%E6%92%AD"><span class="toc-number">1.1.</span> <span class="toc-text">蓝牙广播</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E6%95%B0%E6%8D%AE%E5%8C%85%EF%BC%88%E6%9C%80%E5%A4%A737%E5%AD%97%E8%8A%82%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">广播数据包（最大37字节）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E7%BB%84%E6%88%90%EF%BC%88%E5%8D%B3%E7%94%A8%E6%88%B7%E6%9C%80%E5%A4%A731%E5%AD%97%E8%8A%82%E5%8F%AF%E7%BC%96%E8%BE%91%EF%BC%89"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">结构组成（即用户最大31字节可编辑）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">用户使用数据格式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E5%93%8D%E5%BA%94%EF%BC%88%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%90%8C%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B9%BF%E6%92%AD%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">扫描响应（数据格式同用户自定义广播数据）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">广播类型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E7%8A%B6%E6%80%81%E5%88%87%E6%8D%A2"><span class="toc-number">1.3.</span> <span class="toc-text">蓝牙状态切换</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -245,7 +247,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">14</div>
+    <div class="sidebar-state-number">13</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -338,7 +340,7 @@
       <div class="article-date">
   <span class="article-date-link" data-aos="zoom-in">
     <time datetime="2026-01-10T17:20:35.000Z" itemprop="datePublished">2026-01-11</time>
-    <time style="display: none;" id="post-update-time">2026-01-11</time>
+    <time style="display: none;" id="post-update-time">2026-01-12</time>
   </span>
 </div>
 
@@ -352,7 +354,61 @@
       
       
         <hr>
-<h2 id="BLE基础"><a href="#BLE基础" class="headerlink" title="BLE基础"></a>BLE基础</h2><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/image-20260111012740722.png" alt="image-20260111012740722"></p>
+<h2 id="BLE基础"><a href="#BLE基础" class="headerlink" title="BLE基础"></a>BLE基础</h2><h3 id="蓝牙广播"><a href="#蓝牙广播" class="headerlink" title="蓝牙广播"></a>蓝牙广播</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>​	低功耗蓝牙（BLE）一共有<code>40</code>个信道，其中只有<code>3个用于信道用于蓝牙广播（37、38、39）</code>，频段范围聪2402MHz到24980MHz（2MHz一个信道）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/image-20260112225601847.png" alt="image-20260112225601847"></p>
+<h4 id="广播数据包（最大37字节）"><a href="#广播数据包（最大37字节）" class="headerlink" title="广播数据包（最大37字节）"></a>广播数据包（最大37字节）</h4><h5 id="结构组成（即用户最大31字节可编辑）"><a href="#结构组成（即用户最大31字节可编辑）" class="headerlink" title="结构组成（即用户最大31字节可编辑）"></a>结构组成（即用户最大31字节可编辑）</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">6</span>字节	 + 		 <span class="number">31</span>字节</span><br><span class="line">MAC地址			用户使用</span><br></pre></td></tr></table></figure>
+
+<h5 id="用户使用数据格式"><a href="#用户使用数据格式" class="headerlink" title="用户使用数据格式"></a>用户使用数据格式</h5><p><code>这31字节又被分为若干个广播数据结构体（AD_Structure），该结构体又有三个数据成员，分别是：</code></p>
+<ul>
+<li>长度（1个字节 其值 ＝ 1 + n（加上类型的1字节））</li>
+<li>数据类型（1个字节）</li>
+<li>数据（n个字节）（采用<code>utf-8</code>形式，所以可以显示中文，一个汉字3个字节）</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/image-20260111012740722.png" alt="image-20260111012740722"></p>
+<h3 id="扫描响应（数据格式同用户自定义广播数据）"><a href="#扫描响应（数据格式同用户自定义广播数据）" class="headerlink" title="扫描响应（数据格式同用户自定义广播数据）"></a>扫描响应（数据格式同用户自定义广播数据）</h3><h5 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h5><ul>
+<li><code>可作为广播数据的补充</code>（因为用户自定义广播数据最大31字节，但需收到扫描请求）</li>
+<li>非必需的数据且数据格式同用户自定义广播数据</li>
+<li>与广播数据包不同点：广播数据包是从机主动发送的，扫描响应需收到主机的扫描请求</li>
+</ul>
+<h5 id="广播类型"><a href="#广播类型" class="headerlink" title="广播类型"></a>广播类型</h5><table>
+<thead>
+<tr>
+<th>广播类型</th>
+<th>可被连接</th>
+<th>扫描响应</th>
+<th>实际用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可连接非定向</td>
+<td>√</td>
+<td>√</td>
+<td>最常用</td>
+</tr>
+<tr>
+<td>可连接定向</td>
+<td>指定设备</td>
+<td>×</td>
+<td>配对后快速连接</td>
+</tr>
+<tr>
+<td>不可连接非定向</td>
+<td>×</td>
+<td>×</td>
+<td>信标、传感器</td>
+</tr>
+<tr>
+<td>可扫描非定向</td>
+<td>×</td>
+<td>√</td>
+<td>第三个的可扫描版本</td>
+</tr>
+</tbody></table>
+<h3 id="蓝牙状态切换"><a href="#蓝牙状态切换" class="headerlink" title="蓝牙状态切换"></a>蓝牙状态切换</h3><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/image-20260112232926846.png" alt="image-20260112232926846"></p>
+<ul>
+<li>可以看到我们需要再各种态切换的时候做出一些动作</li>
+<li>比如：在断开蓝牙后 设备进入就绪态，此时就搜寻不到蓝牙了。得继续让设备进入广播态才能被搜寻到</li>
+</ul>
 
       
     </div>
@@ -514,10 +570,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        41.7k
+        40.7k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:43
+        02:36
       </div>
     
     
@@ -550,7 +606,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#BLE%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">BLE基础</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#BLE%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">BLE基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E5%B9%BF%E6%92%AD"><span class="toc-number">1.1.</span> <span class="toc-text">蓝牙广播</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E6%95%B0%E6%8D%AE%E5%8C%85%EF%BC%88%E6%9C%80%E5%A4%A737%E5%AD%97%E8%8A%82%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">广播数据包（最大37字节）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E7%BB%84%E6%88%90%EF%BC%88%E5%8D%B3%E7%94%A8%E6%88%B7%E6%9C%80%E5%A4%A731%E5%AD%97%E8%8A%82%E5%8F%AF%E7%BC%96%E8%BE%91%EF%BC%89"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">结构组成（即用户最大31字节可编辑）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">用户使用数据格式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E5%93%8D%E5%BA%94%EF%BC%88%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%90%8C%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B9%BF%E6%92%AD%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">扫描响应（数据格式同用户自定义广播数据）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">广播类型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E7%8A%B6%E6%80%81%E5%88%87%E6%8D%A2"><span class="toc-number">1.3.</span> <span class="toc-text">蓝牙状态切换</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -563,7 +619,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">14</div>
+    <div class="sidebar-state-number">13</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -892,9 +948,9 @@
           url: "https://mextra.netlify.app/2026/01/11/ble%E5%9F%BA%E7%A1%80/",
           excerpt: "",
           description: "",
-          stripContent: " BLE基础 ",
+          stripContent: " BLE基础蓝牙广播概念​ 低功耗蓝牙（BLE）一共有40个信道，其中只有3个用于信道用于蓝牙广播（37、38、39），频段范围聪2402MHz到24980MHz（2MHz一个信道）  广播数据包（最大37字节）结构组成（即用户最大31字节可编辑）12 6字节  +    31字节MAC地址   用户使用  用户使用数据格式这31字节又被分为若干个广播数据结构体（AD_Structure），该结构体又有三个数据成员，分别是：  长度（1个字节 其值 ＝ 1 + n（加上类型的1字节）） 数据类型",
           date: "Sun Jan 11 2026 01:20:35 GMT+0800",
-          updated: "Sun Jan 11 2026 01:31:50 GMT+0800",
+          updated: "Mon Jan 12 2026 23:55:50 GMT+0800",
           cover: "https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/ble.jpg",
         };
       </script>
