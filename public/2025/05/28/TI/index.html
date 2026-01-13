@@ -1,0 +1,1493 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+    
+      data-theme-mode="true"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://mextra.netlify.app';</script>
+  
+  <title>
+    TI |
+    
+    Mextraのblog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="初始化代码浮点单元（FPU）相关配置12ROM_FPUEnable(); &#x2F; 使能浮点单元ROM_FPULazyStackingEnable(); &#x2F; 启用浮点延迟堆栈模式，减少中断响应延迟      浮点单元（FPU）  浮点单元是 Cortex-M4 芯片（如 Tiva-C）内的硬件模块，用于加速浮点运算（如浮点加法、乘法）。  如果你的项目中使用了带小数的计算（如定点PID控制、FFT计算、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TI">
+<meta property="og:url" content="https://mextra.netlify.app/2025/05/28/TI/index.html">
+<meta property="og:site_name" content="Mextraのblog">
+<meta property="og:description" content="初始化代码浮点单元（FPU）相关配置12ROM_FPUEnable(); &#x2F; 使能浮点单元ROM_FPULazyStackingEnable(); &#x2F; 启用浮点延迟堆栈模式，减少中断响应延迟      浮点单元（FPU）  浮点单元是 Cortex-M4 芯片（如 Tiva-C）内的硬件模块，用于加速浮点运算（如浮点加法、乘法）。  如果你的项目中使用了带小数的计算（如定点PID控制、FFT计算、">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-28T12:40:37.000Z">
+<meta property="article:modified_time" content="2025-09-17T04:12:24.000Z">
+<meta property="article:author" content="Mextra">
+<meta property="article:tag" content="TI">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Mextraのblog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" integrity="sha384-4NN3fZ5AokFyHuoihl7A9qWaCt+HsAtOaUsXwJGRb4&#x2F;SMBtFr2vcNSHR5E8dg0Wk" crossorigin="anonymous">
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU&#x2F;voDBY5XE2lVh" crossorigin="anonymous">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">正在加载中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索"></a>
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img  fetchpriority="high" src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505282044781.jpg" alt="TI">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">TI</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="sidebar-left"  >
+          <aside id="sidebar">
+  
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">初始化代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E5%8D%95%E5%85%83%EF%BC%88FPU%EF%BC%89%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">浮点单元（FPU）相关配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BF%AE%E6%94%B9"><span class="toc-number">1.2.</span> <span class="toc-text">实际开发中怎么使用和修改</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8%E8%BF%98%E6%98%AF%E7%A6%81%E7%94%A8-FPU%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">?  启用还是禁用  FPU：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8%E5%BB%B6%E8%BF%9F%E5%A0%86%E6%A0%88%E7%9A%84%E6%9D%A1%E4%BB%B6%EF%BC%9A"><span class="toc-number">1.2.2.</span> <span class="toc-text">启用延迟堆栈的条件：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">时钟系统配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BF%AE%E6%94%B9-1"><span class="toc-number">2.1.</span> <span class="toc-text">实际开发中怎么使用和修改</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E5%88%86%E9%A2%91%E6%AF%94%E5%92%8C%E4%B8%BB%E9%A2%91%EF%BC%9A"><span class="toc-number">2.1.1.</span> <span class="toc-text">如何修改分频比和主频：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E7%A1%AC%E4%BB%B6%E4%BD%BF%E7%94%A8%E5%85%B6%E4%BB%96%E6%99%B6%E6%8C%AF"><span class="toc-number">2.1.2.</span> <span class="toc-text">如果硬件使用其他晶振</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E6%97%B6%E9%92%9F%E6%BA%90"><span class="toc-number">2.1.3.</span> <span class="toc-text">切换时钟源</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E8%AE%BE%EF%BC%88GPIO%EF%BC%89%E5%90%AF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">外设（GPIO）启用和配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GPIO-%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90"><span class="toc-number">3.0.1.</span> <span class="toc-text">GPIO 配置解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">串口代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEUART%E5%BC%95%E8%84%9A%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">配置UART引脚模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEUART0%E6%A8%A1%E5%9D%97"><span class="toc-number">3.1.2.</span> <span class="toc-text">配置UART0模块</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">13</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-TI" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-05-28T12:40:37.000Z" itemprop="datePublished">2025-05-28</time>
+    <time style="display: none;" id="post-update-time">2025-09-17</time>
+  </span>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MCU/" data-aos="zoom-in">MCU</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="初始化代码"><a href="#初始化代码" class="headerlink" title="初始化代码"></a>初始化代码</h2><h3 id="浮点单元（FPU）相关配置"><a href="#浮点单元（FPU）相关配置" class="headerlink" title="浮点单元（FPU）相关配置"></a>浮点单元（FPU）相关配置</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ROM_FPUEnable(); / 使能浮点单元</span><br><span class="line">ROM_FPULazyStackingEnable(); / 启用浮点延迟堆栈模式，减少中断响应延迟    </span><br></pre></td></tr></table></figure>
+
+<p><strong>浮点单元（FPU）</strong></p>
+<ul>
+<li><p>浮点单元是 Cortex-M4 芯片（如 Tiva-C）内的硬件模块，用于加速浮点运算（如浮点加法、乘法）。</p>
+</li>
+<li><p>如果你的项目中使用了<code>带小数</code>的计算（如定点PID控制、FFT计算、浮点除法），硬件 FPU 的加速能力远远优于软件模拟。</p>
+</li>
+</ul>
+<p><strong>Lazy Stacking 模式</strong></p>
+<ul>
+<li>启用延迟堆栈推入操作后，在中断期间，只有确实需要使用浮点硬件时，才会将浮点寄存器保存到堆栈，从而减少中断响应时间和堆栈占用空间。</li>
+</ul>
+<h3 id="实际开发中怎么使用和修改"><a href="#实际开发中怎么使用和修改" class="headerlink" title="实际开发中怎么使用和修改"></a><strong>实际开发中怎么使用和修改</strong></h3><h4 id="启用还是禁用-FPU："><a href="#启用还是禁用-FPU：" class="headerlink" title="?  启用还是禁用  FPU："></a>?  启用还是禁用  FPU：</h4><ul>
+<li>如果项目中<code>不涉及浮点运算</code>，可以省略这两个函数的调用以节省资源</li>
+</ul>
+<h4 id="启用延迟堆栈的条件："><a href="#启用延迟堆栈的条件：" class="headerlink" title="启用延迟堆栈的条件："></a>启用延迟堆栈的条件：</h4><ul>
+<li><p>如果中断中涉及浮点运算，建议<code>启用 Lazy Stacking</code> 优化性能。</p>
+</li>
+<li><p>但需要注意堆栈深度：<span style="text-decoration:line-through;">中断嵌套可能导致浮点堆栈溢出</span>，调试时<span style="color:#66FFFF;">增加栈尺寸</span>。</p>
+</li>
+</ul>
+<h2 id="时钟系统配置"><a href="#时钟系统配置" class="headerlink" title="时钟系统配置"></a>时钟系统配置</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROM_SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN); / 配置系统时钟</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><span style="color:#3399FF;">参数说明</span>：</li>
+</ul>
+<ol>
+<li><p><code>SYSCTL_SYSDIV_2_5</code>：</p>
+<ul>
+<li>设置系统分频比， 2.5 是分频因子。</li>
+<li>假设外部晶振频率为 16MHz，PLL 经过倍频后输出为 400MHz， 2.5 分频下得到时钟频率：400 ÷ 2.5 &#x3D; 80MHz 。</li>
+</ul>
+</li>
+<li><p><code>SYSCTL_USE_PLL</code>：</p>
+<ul>
+<li>指定使用 PLL（锁相环）作为系统时钟的倍频源。</li>
+</ul>
+</li>
+<li><p><code>SYSCTL_XTAL_16MHZ</code>：</p>
+<ul>
+<li>配置外部晶振的规格为 16MHz，这需要与硬件实际晶振频率相匹配。</li>
+</ul>
+</li>
+<li><p><code>SYSCTL_OSC_MAIN</code>：</p>
+<ul>
+<li>指定使用外部主振荡器作为系统的时钟输入源。</li>
+</ul>
+</li>
+</ol>
+<h3 id="实际开发中怎么使用和修改-1"><a href="#实际开发中怎么使用和修改-1" class="headerlink" title="实际开发中怎么使用和修改"></a>实际开发中怎么使用和修改</h3><h4 id="如何修改分频比和主频："><a href="#如何修改分频比和主频：" class="headerlink" title="如何修改分频比和主频："></a><strong>如何修改分频比和主频</strong>：</h4><ul>
+<li><p>如果需要更改 MCU 的主频（系统时钟频率），只需调整分频因子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROM_SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN);</span><br></pre></td></tr></table></figure>
+
+<p>示例中，分频比改为 4 ，主频变为 400 ÷ 4 &#x3D; 100MHz 。</p>
+</li>
+</ul>
+<h4 id="如果硬件使用其他晶振"><a href="#如果硬件使用其他晶振" class="headerlink" title="如果硬件使用其他晶振"></a>如果硬件使用其他晶振</h4><ul>
+<li><p>如果使用 8MHz 的晶振，应修改 <code>SYSCTL_XTAL_16MHZ</code> 为 <code>SYSCTL_XTAL_8MHZ</code> ：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROM_SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_XTAL_8MHZ | SYSCTL_OSC_MAIN);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="切换时钟源"><a href="#切换时钟源" class="headerlink" title="切换时钟源"></a>切换时钟源</h4><ul>
+<li><p>如果不使用外部晶振，可以切换为 <strong>内部振荡器</strong> (Precision Internal Oscillator, PIOSC)：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROM_SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_INT);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="外设（GPIO）启用和配置"><a href="#外设（GPIO）启用和配置" class="headerlink" title="外设（GPIO）启用和配置"></a>外设（GPIO）启用和配置</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF); / 启用 GPIOF 外设</span><br><span class="line">ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_5); / 配置 GPIOF <span class="number">5</span> 为推挽输出</span><br><span class="line">ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_6); / 配置 GPIOF <span class="number">6</span> 为推挽输出</span><br><span class="line">ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_4); / 配置 GPIOF <span class="number">4</span> 为推挽输出</span><br></pre></td></tr></table></figure>
+
+<h4 id="GPIO-配置解析"><a href="#GPIO-配置解析" class="headerlink" title="GPIO 配置解析"></a><strong>GPIO 配置解析</strong></h4><ol>
+<li><p><strong>使能时钟</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>使能<code>GPIOF</code>外设的时钟</li>
+<li>每个外设模块在使用前都必须先使能其时钟，否则无法访问寄存器</li>
+</ul>
+<ol start="2">
+<li><p><strong>配置推挽输出</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROM_GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_X);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>将<code>GPIOF</code>的某个引脚配置为<code>推挽输出</code></li>
+</ul>
+<ol start="3">
+<li><p><strong>配置输入模式</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROM_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_5);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>将<code>PF5</code>引脚配置为输入</li>
+</ul>
+<h3 id="串口代码"><a href="#串口代码" class="headerlink" title="串口代码"></a>串口代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA); / 启用 GPIOA 外设</span><br><span class="line">ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0); / 启用 UART0 外设</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置UART引脚模式"><a href="#配置UART引脚模式" class="headerlink" title="配置UART引脚模式"></a>配置UART引脚模式</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ROM_GPIOPinConfigure(GPIO_PA0_U0RX); / 配置 GPIOA 引脚 <span class="number">0</span> 为 UART0 RX</span><br><span class="line"><span class="title function_">ROM_GPIOPinConfigure</span><span class="params">(GPIO_PA1_U0TX)</span>; / 配置 GPIOA 引脚 <span class="number">1</span> 为 UART0 TX</span><br><span class="line"><span class="title function_">ROM_GPIOPinTypeUART</span><span class="params">(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1)</span>; / 配置 GPIO PA0 和 PA1 为UART 模式</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><span style="color:#3399FF;">参数说明</span>：</li>
+</ul>
+<ol>
+<li><p><code>ROM_GPIOPinConfigure(pinConfig)</code>：</p>
+<ul>
+<li>将某个 GPIO 引脚映射为对应外设的功能模式，例如 UART RX（接收）或 UART TX（发送）模式</li>
+<li><code>GPIO_PA0_U0RX</code>和 <code>GPIO_PA1_U0TX</code> 分别表示将 GPIOA 的 0 和 1 引脚映射到 UART0 的 RX 和 TX信号。</li>
+</ul>
+</li>
+<li><p><code>ROM_GPIOPinTypeUART()</code>：</p>
+<ul>
+<li>配置对应引脚为 UART 模式（主功能），指示这些引脚负责 UART 的输入和输出。</li>
+</ul>
+</li>
+<li><p><strong>引脚复用说明</strong>：</p>
+<ul>
+<li><p>某些 GPIO 引脚具备多种功能（如 UART、SPI、I2C 等），可以通过 <code>ROM_GPIOPinConfigure() </code>设置引脚的复用功能。</p>
+</li>
+<li><p>数据手册中会列出默认出厂配置（如 GPIOA0、GPIOA1 默认是普通 I&#x2F;O）以及复用编号</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="配置UART0模块"><a href="#配置UART0模块" class="headerlink" title="配置UART0模块"></a>配置UART0模块</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UARTStdioConfig(<span class="number">0</span>, <span class="number">115200</span>, <span class="number">16000000</span>); / 配置 UART0，设置波特率为 <span class="number">115200</span>，时钟频率为 <span class="number">16</span>MHz</span><br><span class="line"><span class="title function_">UARTClockSourceSet</span><span class="params">(UART0_BASE, UART_CLOCK_PIOSC)</span>; / 将 UART0 的时钟源设为内部精确振荡器PIOSC</span><br></pre></td></tr></table></figure>
+
+<p><code>UARTStdioConfig() 详解：</code></p>
+<ul>
+<li>用于配置 UART 模块的一些核心参数，例如 UART 通信模块的编号、默认的通信波特率、UART 时钟频率。</li>
+</ul>
+<ol>
+<li><span style="color:#3399FF;">参数说明</span>：</li>
+</ol>
+<ul>
+<li><code>0</code> ：指定 UART 模块编号， 0 对应 UART0。</li>
+<li><code>115200</code> ：波特率，表示每秒传输 115200 个比特。</li>
+<li><code>16000000</code> ：UART 输入时钟频率（以 Hz 为单位），这里指定为 16MHz。</li>
+</ul>
+<ol start="2">
+<li>作用：<ul>
+<li>根据设置的波特率和时钟频率， <code>UARTStdioConfig</code> 会自动计算并配置 UART 波特率控制寄存器，从而实现正确的通信速率。</li>
+</ul>
+</li>
+<li><strong>默认时钟源（</strong>PIOSC <strong>内部振荡器）</strong></li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC); / 使用 PIOSC（<span class="number">16</span> MHz）作为时钟源</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>PIOSC 是 Tiva-C 系统内置的精确振荡器，频率为 16 MHz。</li>
+<li>替代方案：你可以改用系统主时钟（如 PLL）作为 UART 的时钟源。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong><span class="icon-user icon"></span>本文作者：</strong>Mextra @ Mextraのblog</p>
+    <p><strong><span class="icon-link icon"></span>本文链接：</strong><a href="https://mextra.netlify.app/2025/05/28/TI/">https://mextra.netlify.app/2025/05/28/TI/</a></p>
+    
+    
+    
+    <p><strong><span class="icon-copyright icon"></span>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <div class="share-wrapper">
+  
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F05%2F28%2FTI%2F&amp;appkey=&amp;title=TI&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="TI">
+      <div class="share-icon icon icon-weibo">
+        
+      </div>
+    </a>
+  
+    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=TI&amp;desc=TI&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="TI">
+      <div class="share-icon icon icon-qq">
+        
+      </div>
+    </a>
+  
+    <a href="javascript:;"  title="TI">
+      <div class="share-icon icon icon-weixin">
+        
+          <div id="share-weixin">
+            <div class="share-weixin-dom">
+              <div class="share-weixin-content">
+                <img id="share-weixin-banner"> 
+                <div id="share-weixin-title"></div>
+                <div id="share-weixin-desc"></div>
+              </div>
+              <div class="share-weixin-qrcode">
+                <div class="share-weixin-info">
+                  <div id="share-weixin-author"></div>
+                  <div id="share-weixin-theme">Powered By hexo-theme-reimu</div>
+                </div>
+                <img id="share-weixin-qr" >
+              </div>
+            </div>
+            <div class="share-weixin-canvas"></div>
+          </div>
+        
+      </div>
+    </a>
+  
+</div>
+      
+      
+        <a data-aos="zoom-in" href="/2025/05/28/TI/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2025/05/28/TI/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/TI/" rel="tag">TI</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021603366.jpg" data-sizes="auto" alt="西门子嵌入式学习" class="lazyload">
+        
+        <a href="/2025/06/02/%E8%A5%BF%E9%97%A8%E5%AD%90/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            西门子嵌入式学习
+          
+        </h3>
+      </div>
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505212030199.png" data-sizes="auto" alt="RT_Thread" class="lazyload">
+      
+      <a href="/2025/05/21/RT-Thread/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          RT_Thread
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+      
+      
+        
+      
+      <h2 class="comment-title">说些什么吧！</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            
+            <div class="selector-item" data-selector="valine">
+              <span>valine</span>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+      
+        <div class="comment valine-comment" data-aos="fade-up"
+          id="valine-comment">
+        </div>
+      
+    </div>
+  </section>
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2024-2026
+      
+      <span class="footer-info-sep rotate"></span>
+      Mextra
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        41.4k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:42
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">初始化代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E5%8D%95%E5%85%83%EF%BC%88FPU%EF%BC%89%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">浮点单元（FPU）相关配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BF%AE%E6%94%B9"><span class="toc-number">1.2.</span> <span class="toc-text">实际开发中怎么使用和修改</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8%E8%BF%98%E6%98%AF%E7%A6%81%E7%94%A8-FPU%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">?  启用还是禁用  FPU：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8%E5%BB%B6%E8%BF%9F%E5%A0%86%E6%A0%88%E7%9A%84%E6%9D%A1%E4%BB%B6%EF%BC%9A"><span class="toc-number">1.2.2.</span> <span class="toc-text">启用延迟堆栈的条件：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">时钟系统配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BF%AE%E6%94%B9-1"><span class="toc-number">2.1.</span> <span class="toc-text">实际开发中怎么使用和修改</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E5%88%86%E9%A2%91%E6%AF%94%E5%92%8C%E4%B8%BB%E9%A2%91%EF%BC%9A"><span class="toc-number">2.1.1.</span> <span class="toc-text">如何修改分频比和主频：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E7%A1%AC%E4%BB%B6%E4%BD%BF%E7%94%A8%E5%85%B6%E4%BB%96%E6%99%B6%E6%8C%AF"><span class="toc-number">2.1.2.</span> <span class="toc-text">如果硬件使用其他晶振</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E6%97%B6%E9%92%9F%E6%BA%90"><span class="toc-number">2.1.3.</span> <span class="toc-text">切换时钟源</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E8%AE%BE%EF%BC%88GPIO%EF%BC%89%E5%90%AF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">外设（GPIO）启用和配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GPIO-%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90"><span class="toc-number">3.0.1.</span> <span class="toc-text">GPIO 配置解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">串口代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEUART%E5%BC%95%E8%84%9A%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">配置UART引脚模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEUART0%E6%A8%A1%E5%9D%97"><span class="toc-number">3.1.2.</span> <span class="toc-text">配置UART0模块</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">13</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              if (script.integrity) {
+                scriptElement.integrity = script.integrity;
+              }
+              if (script.crossOrigin) {
+                scriptElement.crossOrigin = script.crossOrigin;
+              }
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    if (window.Pjax) {
+      Pjax.prototype.getElements = function() {
+        const i18nLanguages = window.REIMU_CONFIG.i18n_languages;
+        const baseUrl = window.REIMU_CONFIG.base;
+        let basePathname = new URL(baseUrl).pathname;
+        if (!basePathname.endsWith('/')) {
+          basePathname += '/';  
+        }
+        const currentUrl = window.location.href;
+        const currentPathname = new URL(currentUrl).pathname.replace(basePathname, '');
+        const aLinks = document.querySelectorAll('a[href]');
+        const pjaxLinks = [];
+        for(let i = 0; i < aLinks.length; i++) {
+          const aLink = aLinks[i];
+          const aLinkHref = aLink.getAttribute('href');
+          const isExternal = aLink.getAttribute('target') === '_blank' || aLink.getAttribute('rel')?.includes('noopener');
+          if (isExternal || aLinkHref.startsWith('mailto:') || aLinkHref.startsWith('tel:') || aLinkHref.startsWith('javascript:') || aLinkHref.startsWith("data:") || aLinkHref.startsWith("vbscript:")) {
+            continue;
+          }
+          if (!i18nLanguages) {
+            // 多语言功能未打开
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const absoluteUrl = new URL(aLinkHref, currentUrl).href;
+          const absolutePathname = new URL(absoluteUrl).pathname.replace(basePathname, '');
+
+          if (!absolutePathname || !currentPathname) {
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const currentLangIndex = i18nLanguages.findIndex(lang => currentPathname.startsWith(lang));
+          if (currentLangIndex > -1) {
+            // 当前属于多语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === currentLangIndex) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          } else {
+            // 当前属于默认语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === -1) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          }
+        }
+        return pjaxLinks;
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header>img",
+        "#header>picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#main",
+        "#content",
+        ".sidebar-widget",
+        ".sidebar-wrapper",
+        '#mobile-nav',
+        '#lazy-script',
+        '#i18n-nav'
+      ],
+      switches: {
+        "#content": function(oldEl, newEl) {
+          // for sidebar change
+          oldEl.className = newEl.className;
+          this.onSwitch();
+        },
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#main": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js" integrity="sha384-aD7FsuQkS1ohgFKY41fJfeA+Wd&#x2F;QRNnrOd9Bs58K3FzKdJJv8yPnYU8Tnp5z1agS" crossorigin="anonymous"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Mextra",
+          title: "TI",
+          url: "https://mextra.netlify.app/2025/05/28/TI/",
+          excerpt: "",
+          description: "",
+          stripContent: "初始化代码浮点单元（FPU）相关配置12ROM_FPUEnable(); / 使能浮点单元ROM_FPULazyStackingEnable(); / 启用浮点延迟堆栈模式，减少中断响应延迟      浮点单元（FPU）  浮点单元是 Cortex-M4 芯片（如 Tiva-C）内的硬件模块，用于加速浮点运算（如浮点加法、乘法）。  如果你的项目中使用了带小数的计算（如定点PID控制、FFT计算、浮点除法），硬件 FPU 的加速能力远远优于软件模拟。   Lazy Stacking 模式  启用",
+          date: "Wed May 28 2025 20:40:37 GMT+0800",
+          updated: "Wed Sep 17 2025 12:12:24 GMT+0800",
+          cover: "https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505282044781.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+          
+<script src="https://npm.webcache.cn/html-to-image@1.11.11/dist/html-to-image.js" integrity="sha384-UbfRVKN3&#x2F;elS1r7JcK2FhmPP+KlJ4CvYwbyYD7tH+uTkbT9bNJr9eJeQ0FoFbAgz" crossorigin="anonymous" defer data-pjax></script>
+
+          
+<script src="https://npm.webcache.cn/qrcode@1.4.4/build/qrcode.min.js" integrity="sha384-0RsG1yo&#x2F;crf&#x2F;1Qc14sho26SXXOTngNCjgJw7fuvXBt9W&#x2F;OChF&#x2F;Ijx+aUuBDqQwEk" crossorigin="anonymous" defer data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {
+    valine: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.valine-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js',
+          'sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn'
+        );
+        script.onload = () => {
+          var GUEST_INFO = ['nick', 'mail', 'link'];
+          var guest_info = 'nick,mail,link'.split(',').filter((item) => {
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var recordIP = JSON.parse('true');
+          var highlight = JSON.parse('true');
+          var visitor = JSON.parse('false');
+          var serverURLs = undefined;
+
+          if (window.Valine) {
+            new Valine({
+              el: '.valine-comment',
+              appId: "1clce93uV6y9tH8Xw9f9vWU9-gzGzoHsz",
+              appKey: "vKOcI0kksA3iKZd16M4hYyr1",
+              placeholder: "说些什么吧！",
+              pageSize: '10',
+              avatar: 'mp',
+              lang: document.documentElement.lang || 'en',
+              recordIP: recordIP,
+              highlight: highlight,
+              visitor: visitor,
+              requiredFields: guest_info,
+              path: window.location.pathname,
+              serverURLs
+            });
+          }
+        };
+        document.head.appendChild(script);
+      }
+    },
+    waline: {
+      enable: false,
+      load: async () => {
+        const container = document.querySelector('.waline-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        let walineInit;
+        const walineCdn = 'https://npm.webcache.cn/@waline/client@2.15.8/dist/waline.mjs';
+        const walineIntegrity = 'sha384-9sbqJjrfGjbkI6/PI4nU/MvBfEmkkPC4YK9I4zBeMIf1CVCZdCMH/KinBEAZII/5';
+
+        const module = await safeImport(walineCdn, walineIntegrity);
+        walineInit = module.init;
+
+        window.walineInstance = walineInit({
+          el: '.waline-comment',
+          serverURL: '',
+          lang: document.documentElement.lang || 'en',
+          locale: {},
+          emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus","https://unpkg.com/@waline/emojis@1.2.0/bilibili","https://unpkg.com/@waline/emojis@1.2.0/qq","https://unpkg.com/@waline/emojis@1.2.0/tieba","https://unpkg.com/@waline/emojis@1.2.0/tw-emoji"],
+          meta: ["nick","mail","link"],
+          requiredMeta: ["nick","mail"],
+          wordLimit: JSON.parse('0'),
+          comment: true,
+          pageSize: JSON.parse('10'),
+          dark: 'html[data-theme="dark"]',
+          pageview: JSON.parse('true'),
+        });
+      }
+    },
+    twikoo: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.twikoo-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/twikoo@1.6.16/dist/twikoo.all.min.js',
+          'sha384-lDHsr5aZmkMS0eKnsUu6e9RWP+dRmn7sgjRAKGOAoXfMyzbUK6Qi86zZK7R+KvRV'
+        );
+
+        script.onload = () => {
+          if (window.twikoo) {
+            twikoo.init({
+              envId: '',
+              el: '.tcomment',
+              region: '',
+              lang: document.documentElement.lang || 'en',
+            })
+          }
+        } 
+        document.head.appendChild(script);
+      }
+    },
+    gitalk: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.min.js',
+          'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU/lcEH5O8eVbSDhbPwsiVUTp/aGX/z/5EuMA'
+        );
+
+        script.onload = () => {
+          if (false) {
+            const md5Script = loadScript(
+              'https://npm.webcache.cn/blueimp-md5@2.19.0/js/md5.min.js',
+              'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr/gZlbkHkL6vTthxH'
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            initGitalk();
+          }
+        }
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          var gitalkId = location.pathname;
+          var gitalk = new Gitalk({
+            clientID: '',
+            clientSecret: '',
+            repo: '',
+            owner: '',
+            admin: null,
+            id: gitalkId,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          })
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },
+    giscus: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.giscus-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        // 删除可能已存在的 giscus 脚本和 iframe
+        const existingScript = container.querySelector('script[src*="giscus.app/client.js"]');
+        if (existingScript) existingScript.remove();
+        const existingFrame = document.querySelector('iframe.giscus-frame');
+        if (existingFrame) existingFrame.remove();
+
+        const giscusScript = document.createElement('script');
+        const domMode = document.documentElement.getAttribute("data-theme");
+        giscusScript.src = 'https://giscus.app/client.js';
+        giscusScript.setAttribute('data-repo', '');
+        giscusScript.setAttribute('data-repo-id', '');
+        giscusScript.setAttribute('data-category', ''); 
+        giscusScript.setAttribute('data-category-id', '');
+        giscusScript.setAttribute('data-mapping', '0');
+        giscusScript.setAttribute('data-strict', '0');
+        giscusScript.setAttribute('data-reactions-enabled', '1');
+        giscusScript.setAttribute('data-emit-metadata', '0');
+        giscusScript.setAttribute('data-input-position', 'bottom');
+        giscusScript.setAttribute('data-theme', domMode === 'dark' ? 'dark' : 'light');
+        giscusScript.setAttribute('data-lang', document.documentElement.lang || 'en');
+        giscusScript.setAttribute('crossorigin', 'anonymous');
+        giscusScript.async = true;
+        container.appendChild(giscusScript);
+        document.body.addEventListener('light-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'light' } } }, 'https://giscus.app');
+        });
+        document.body.addEventListener('dark-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'dark' } } }, 'https://giscus.app');
+        });
+      }
+    }
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    // 评论组件加载状态跟踪
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.8.4' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous"></script>
+
+  
+    <script>
+      var isMobile = window.matchMedia('(max-width: 959px)').matches;
+      if (isMobile) {
+      const aplayer = _$('#aplayer');
+        if (aplayer) {
+          const aside = aplayer.parentNode;
+          if (aside?.tagName === 'ASIDE') {
+            aplayer.removeAttribute('data-aos');
+            aside.removeChild(aplayer);
+            document.body.appendChild(aplayer);
+          }
+        }
+      }
+      const ap = new APlayer({
+        theme: "var(--color-link)",
+        container: document.getElementById('aplayer'),
+        audio: [{"name":"有些","artist":"颜人中","url":"https://mextra.netlify.app/music/有些.mp3","cover":"/music_cover/有些.jpg","lrc":"/lrc/有些-颜人中.lrc"},{"name":"我只能离开","artist":"颜人中","url":"https://mextra.netlify.app/music/我只能离开.mp3","cover":"/music_cover/我只能离开.jpg","lrc":"/lrc/我只能离开-颜人中.lrc"},{"name":"慢慢","artist":"颜人中","url":"https://mextra.netlify.app/music/慢慢.mp3","cover":"/music_cover/慢慢.jpg","lrc":"/lrc/慢慢-颜人中.lrc"},{"name":"借口","artist":"周杰伦","url":"https://mextra.netlify.app/music/借口.mp3","cover":"/music_cover/借口.jpg","lrc":"/lrc/借口-周杰伦.lrc"},{"name":"等你下课(with 杨瑞代)","artist":"周杰伦","url":"https://mextra.netlify.app/music/等你下课.mp3","cover":"/music_cover/等你下课.jpg","lrc":"/lrc/等你下课(with 杨瑞代)-周杰伦.lrc"},{"name":"倒带(Live)","artist":"周杰伦","url":"https://mextra.netlify.app/music/倒带.mp3","cover":"/music_cover/倒带.jpg","lrc":"/lrc/倒带(Live)-周杰伦.lrc"},{"name":"枫","artist":"周杰伦","url":"https://mextra.netlify.app/music/枫.mp3","cover":"/music_cover/枫.png","lrc":"/lrc/枫-周杰伦.lrc"},{"name":"空白格","artist":"蔡健雅","url":"https://mextra.netlify.app/music/空白格.mp3","cover":"/music_cover/空白格.jpg","lrc":"/lrc/空白格-蔡健雅.lrc"},{"name":"绊","artist":"miu-clips","url":"https://mextra.netlify.app/music/绊.mp3","cover":"/music_cover/绊.jpg","lrc":"/lrc/絆-miu-clips.lrc"},{"name":"世界が終るまでは… (直到世界尽头) (《灌篮高手》TV动画第２５-４９集片尾曲)","artist":"WANDS","url":"https://mextra.netlify.app/music/直到世界尽头.mp3","cover":"/music_cover/直到世界尽头.jpg","lrc":"/lrc/世界が終るまでは…-WANDS.lrc"},{"name":"君が好きだと叫びたい","artist":"BAAD (バード)","url":"https://mextra.netlify.app/music/好想大声说爱你.mp3","cover":"/music_cover/好想大声说爱你.jpg","lrc":"/lrc/君が好きだと叫びたい-Baad.lrc"},{"name":"Cry For Me","artist":"不冷","url":"https://mextra.netlify.app/music/Cry.mp3","cover":"/music_cover/Cry.jpg","lrc":"/lrc/Cry.lrc"},{"name":"スパークル(movie ver.)","artist":"RADWIMPS","url":"https://mextra.netlify.app/music/火花.mp3","cover":"/music_cover/火花.jpg","lrc":"/lrc/スパークル (movie ver.) - RADWIMPS.lrc"},{"name":"千年泪","artist":"TK","url":"https://mextra.netlify.app/music/千年泪.mp3","cover":"/music_cover/千年泪.jpg","lrc":"/lrc/千年泪 - 曹雨航.lrc"},{"name":"几分之几 (You Complete Me)","artist":"卢广仲","url":"https://mextra.netlify.app/music/几分之几.mp3","cover":"/music_cover/几分之几.jpg","lrc":"/lrc/几分之几 (You Complete Me) - 卢广仲.lrc"},{"name":"匿名的好友","artist":"杨丞琳","url":"https://mextra.netlify.app/music/匿名的好友.mp3","cover":"/music_cover/匿名的好友.jpg","lrc":"/lrc/匿名的好友 - 杨丞琳.lrc"},{"name":"囍帖街","artist":"谢安琪","url":"https://mextra.netlify.app/music/囍帖街.mp3","cover":"/music_cover/囍帖街.jpg","lrc":"/lrc/喜帖街 - 谢安琪.lrc"},{"name":"借过","artist":"印子月","url":"https://mextra.netlify.app/music/借过.mp3","cover":"/music_cover/借过.jpg","lrc":"/lrc/借过.lrc"},{"name":"赛勒斯的爱","artist":"张敬轩","url":"https://mextra.netlify.app/music/赛勒斯的爱.mp3","cover":"/music_cover/赛勒斯的爱.jpg","lrc":"/lrc/赛勒斯的爱-张敬轩.lrc"}] || [],
+        fixed: isMobile ? true : (false || false),
+        autoplay: false || false,
+        loop: 'all' || 'all',
+        order: 'random' || 'list',
+        preload: 'auto' || 'auto',
+        volume: 0.7 || 0.7,
+        mutex: true || true,
+        listFolded: false || false,
+        lrcType: 3 || 0,
+      });
+    </script>
+  
+
+
+
+
+
+    
+  </body>
+  </html>
+
