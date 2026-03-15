@@ -428,20 +428,22 @@
     <div class="post-info">
       <div class="post-meta">
         <span><span class="icon-calendar"></span>2025-09-05</span>
-        <span><span class="icon-pencil"></span>15.3k 字</span>
-        <span><span class="icon-clock"></span>56 分钟</span>
+        <span><span class="icon-pencil"></span>16.8k 字</span>
+        <span><span class="icon-clock"></span>61 分钟</span>
       </div>
       <h2 class="post-title">freertos</h2>
       <article class="post-article">
         
-          FreeRTOS基础获取系统时间123456TickType_t currentTicks;while(1)&amp;#123;     currentTicks = xTaskGetTickCount();     printf(&amp;quot;[%lu]dev:%u,name:%s\r\n&amp;quot;, currentTicks, data-&amp;gt;dev, data-&amp;gt;data);&amp;#125;
+          FreeRTOS常考面试题1. FreeRTOS 的调度策略、内部原理核心策略：FreeRTOS 主要采用 抢占式调度（Preemptive），辅以 时间片轮转（Time Slicing）。
 
+抢占式调度：高优先级任务随时可以抢占低优先级任务的 CPU 使用权，无需等待低优先级任务运行结束。
 
+时间片轮转：当多个任务优先级相同时，每个任务分配一个固定的时间片（由 SysTick 中断决定，默认 1ms），时间片用完后触发切换，实现公平运行。
 
-堆和栈堆：一块空闲的内存 可以使用malloc申请内存 使用完后用free释放内存
+内部原理：
 
-堆也可以理解为就是定义了一个堆大小的数组 然后定义一个长度 每次动态改变长度来申请空间（链表）
-在FreeRT
+心跳时钟：依赖 SysTick 定时器产生系统心跳（Tick），默认 1000Hz。
+上下文切换：每次 Tick 中断或任务阻塞 &amp;#x2
         
       </article>
     </div>
@@ -823,10 +825,10 @@ Lazy Stacking 模式
     
       <div>
         <span class="icon-brush"></span>
-        41.4k
+        42.9k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:39
+        02:44
       </div>
     
     
