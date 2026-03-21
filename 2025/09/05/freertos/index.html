@@ -42,26 +42,26 @@
 <meta property="og:site_name" content="Mextraのblog">
 <meta property="og:description" content="FreeRTOS常考面试题1. FreeRTOS 的调度策略、内部原理核心策略：FreeRTOS 主要采用 抢占式调度（Preemptive），辅以 时间片轮转（Time Slicing）。  抢占式调度：高优先级任务随时可以抢占低优先级任务的 CPU 使用权，无需等待低优先级任务运行结束。  时间片轮转：当多个任务优先级相同时，每个任务分配一个固定的时间片（由 SysTick 中断决定，默认 1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/FreeRTOS/chapter-6/image1.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509142214793.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509151548547.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509151600535.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509151634028.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509151740912.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509152131801.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161022312.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161600972.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161809736.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161952531.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161952379.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321180521395.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509142214793.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509151548547.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509151600535.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509151634028.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509151740912.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509152131801.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161022312.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161600972.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161809736.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161952531.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161952379.png">
 <meta property="article:published_time" content="2025-09-05T07:48:39.000Z">
-<meta property="article:modified_time" content="2026-03-15T06:22:24.000Z">
+<meta property="article:modified_time" content="2026-03-21T10:07:30.000Z">
 <meta property="article:author" content="Mextra">
 <meta property="article:tag" content="RTOS">
 <meta property="article:tag" content="实时操作系统">
 <meta property="article:tag" content="FreeRTOS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/FreeRTOS/chapter-6/image1.png">
+<meta name="twitter:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321180521395.png">
   
   
     <link rel="alternate" href="/atom.xml" title="Mextraのblog" type="application/atom+xml">
@@ -206,7 +206,7 @@
 <header id="header">
   
     <picture></picture>
-    <img  fetchpriority="high" src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509071511987.png" alt="freertos">
+    <img  fetchpriority="high" src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509071511987.png" alt="freertos">
   
   <div id="header-outer">
     <div id="header-title">
@@ -349,7 +349,7 @@
       <div class="article-date">
   <span class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-09-05T07:48:39.000Z" itemprop="datePublished">2025-09-05</time>
-    <time style="display: none;" id="post-update-time">2026-03-15</time>
+    <time style="display: none;" id="post-update-time">2026-03-21</time>
   </span>
 </div>
 
@@ -478,7 +478,7 @@
 <blockquote>
 <p>栈是<code>FreeRTOS</code>中非常重要的概念，每个任务都有自己的栈</p>
 </blockquote>
-<h3 id="FreeRTOS源码概述"><a href="#FreeRTOS源码概述" class="headerlink" title="FreeRTOS源码概述"></a>FreeRTOS源码概述</h3><h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p><img src="https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/FreeRTOS/chapter-6/image1.png" alt="img"></p>
+<h3 id="FreeRTOS源码概述"><a href="#FreeRTOS源码概述" class="headerlink" title="FreeRTOS源码概述"></a>FreeRTOS源码概述</h3><h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321180521395.png" alt="image-20260321180521395"></p>
 <blockquote>
 <p>主要涉及3个目录：</p>
 <ul>
@@ -864,7 +864,7 @@
 <li><p>（n层调用 * 36） + 局部变量 + 64b</p>
 </li>
 <li><p>例如：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509142214793.png" alt="image-20250914221448446"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509142214793.png" alt="image-20250914221448446"></p>
 </li>
 </ul>
 </blockquote>
@@ -917,7 +917,7 @@
 </li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509151548547.png" alt="img"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509151548547.png" alt="img"></p>
 <h5 id="任务管理-1"><a href="#任务管理-1" class="headerlink" title="任务管理"></a>任务管理</h5><p>任务的切换通过链表操作进行切换 RTOS会创建3个链表 分别是就绪链表ReadyList、阻塞链表DelayTaskList、挂起链表</p>
 <ul>
 <li><p>先在优先级数组中按下标从大到小遍历，使用任务创建函数<span style="color:#33FFFF;">本质其实是在对应优先级数组中创建TCB结构体，并且会有一个全局指针——当前执行TCB结构体pxCurrentTCB</span>，这就说明了为什么同等优先级下，最后创建的任务先运行（因为指针最终指向了最后一个任务链表，启动调度器后，开始运行）</p>
@@ -931,7 +931,7 @@
 <p>Tick中断是什么？他又做些什么？</p>
 <ul>
 <li><p>Tick中断来源于</p>
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509151600535.png" alt="image-20250915160032344"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509151600535.png" alt="image-20250915160032344"></p>
 </li>
 <li><p>Tick中断做什么？</p>
 <ol>
@@ -953,7 +953,7 @@
 <p>注意每个任务都要使用while(1)进行死循环</p>
 <ul>
 <li>如果有一个任务没有则会触发任务退出错误中断<code>prvTaskExitError</code></li>
-<li><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509151634028.png" alt="image-20250915163446773"></li>
+<li><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509151634028.png" alt="image-20250915163446773"></li>
 </ul>
 </blockquote>
 <h3 id="同步与互斥"><a href="#同步与互斥" class="headerlink" title="同步与互斥"></a>同步与互斥</h3><h4 id="同步与互斥的概念"><a href="#同步与互斥的概念" class="headerlink" title="同步与互斥的概念"></a>同步与互斥的概念</h4><p>一句话理解同步与互斥：我等你用完厕所，我再用厕所。</p>
@@ -1061,7 +1061,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509151740912.png" alt="img"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509151740912.png" alt="img"></p>
 <blockquote>
 <p>为何要引用这些机制呢？</p>
 <ul>
@@ -1258,7 +1258,7 @@
 <h4 id="队列集"><a href="#队列集" class="headerlink" title="队列集"></a>队列集</h4><blockquote>
 <p>当多个队列需要上报到同一个处理任务时，队列集可以实现统合多个队列，再往上传递到同一个任务</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509152131801.png" alt="image-20250915213146479"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509152131801.png" alt="image-20250915213146479"></p>
 <h5 id="创建队列集"><a href="#创建队列集" class="headerlink" title="创建队列集"></a>创建队列集</h5><blockquote>
 <p>注意要使用队列集 需要先在<code>Core/inc/FreeRTOSConfig.h</code> 定义</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define configUSE_QUEUE_SETS 1</span></span><br></pre></td></tr></table></figure>
@@ -1366,7 +1366,7 @@
 <li>唤醒谁？谁优先级高就唤醒谁，如果大家优先级一样就唤醒等待时间最长的人</li>
 </ul>
 <p>二进制信号量跟计数型的唯一差别，就是计数值的最大值被限定为1。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161022312.png" alt="img"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161022312.png" alt="img"></p>
 <h5 id="信号量跟队列的对比"><a href="#信号量跟队列的对比" class="headerlink" title="信号量跟队列的对比"></a>信号量跟队列的对比</h5><p>差异列表如下：</p>
 <table>
 <thead>
@@ -1567,7 +1567,7 @@
 </blockquote>
 <h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;uart.h&quot;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> __<span class="title">FILE</span> <span class="title">FILE</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> SemaphoreHandle_t task_mutex = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">uint8_t</span> dev;</span><br><span class="line">    <span class="type">uint8_t</span> *data;</span><br><span class="line">&#125; <span class="type">uart_info_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">uart_info_t</span> task1_data = &#123;<span class="number">1</span>, <span class="string">&quot;task1&quot;</span>&#125;;</span><br><span class="line"><span class="type">uart_info_t</span> task2_data = &#123;<span class="number">2</span>, <span class="string">&quot;task2&quot;</span>&#125;;</span><br><span class="line"><span class="type">uart_info_t</span> task3_data = &#123;<span class="number">3</span>, <span class="string">&quot;task3&quot;</span>&#125;;</span><br><span class="line"><span class="type">int</span> <span class="title function_">fputc</span><span class="params">(<span class="type">int</span> ch, FILE *f)</span></span><br><span class="line">&#123;</span><br><span class="line">    HAL_UART_Transmit(&amp;huart1, (<span class="type">uint8_t</span> *)&amp;ch, <span class="number">1</span>, <span class="number">0xFFFF</span>);</span><br><span class="line">    <span class="keyword">return</span> ch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">task1</span><span class="params">(<span class="type">void</span> *param)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint8_t</span> cnt = <span class="number">0</span>;</span><br><span class="line">    xSemaphoreTake(task_mutex, portMAX_DELAY);</span><br><span class="line">    <span class="type">uart_info_t</span> *data = param;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;dev:%u,name:%s\r\n&quot;</span>, data-&gt;dev, data-&gt;data);</span><br><span class="line">        <span class="keyword">if</span> (++cnt == <span class="number">5</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            xSemaphoreGive(task_mutex);</span><br><span class="line">        &#125;</span><br><span class="line">        vTaskDelay(<span class="number">50</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">task2</span><span class="params">(<span class="type">void</span> *param)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint8_t</span> cnt = <span class="number">0</span>;</span><br><span class="line">    vTaskDelay(<span class="number">300</span>);<span class="comment">//先阻塞一段时间 确保任务1成功获取信号量且能够被切换为任务2</span></span><br><span class="line">    <span class="type">uart_info_t</span> *data = param;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;dev:%u,name:%s\r\n&quot;</span>, data-&gt;dev, data-&gt;data);</span><br><span class="line">        <span class="keyword">if</span> (++cnt == <span class="number">5</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            vTaskDelete(<span class="literal">NULL</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        HAL_Delay(<span class="number">50</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">task3</span><span class="params">(<span class="type">void</span> *param)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint8_t</span> cnt = <span class="number">0</span>;</span><br><span class="line">    vTaskDelay(<span class="number">500</span>);	<span class="comment">//先阻塞一段时间 确保任务1先成功获取信号量且能够被切换为任务2</span></span><br><span class="line">    xSemaphoreTake(task_mutex, portMAX_DELAY);</span><br><span class="line">    <span class="type">uart_info_t</span> *data = param;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;dev:%u,name:%s\r\n&quot;</span>, data-&gt;dev, data-&gt;data);</span><br><span class="line">        <span class="keyword">if</span> (++cnt == <span class="number">5</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            vTaskDelete(<span class="literal">NULL</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">uart_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    task_mutex = xSemaphoreCreateBinary();</span><br><span class="line">    xSemaphoreGive(task_mutex);</span><br><span class="line">    xTaskCreate(task1, <span class="string">&quot;task1&quot;</span>, <span class="number">128</span>, &amp;task1_data, osPriorityNormal, <span class="literal">NULL</span>);	<span class="comment">//低优先级任务</span></span><br><span class="line">    xTaskCreate(task2, <span class="string">&quot;task2&quot;</span>, <span class="number">128</span>, &amp;task2_data, osPriorityNormal1, <span class="literal">NULL</span>);	<span class="comment">//中等优先级任务</span></span><br><span class="line">    xTaskCreate(task3, <span class="string">&quot;task3&quot;</span>, <span class="number">128</span>, &amp;task3_data, osPriorityNormal2, <span class="literal">NULL</span>);	<span class="comment">//高优先级任务</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161600972.png" alt="image-20250916160014655"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161600972.png" alt="image-20250916160014655"></p>
 <h4 id="解决优先级反转"><a href="#解决优先级反转" class="headerlink" title="解决优先级反转"></a>解决优先级反转</h4><blockquote>
 <p>使用互斥量 （实现优先级继承），当最高优先级任务等待互斥量时，可以将低优先级任务继承最高优先级，使得最高优先级任务也可以先运行</p>
 <p>现象：任务1执行一小段时间被任务2抢占，当任务3时间到来，任务1继承任务3优先级，所以任务1运行释放后，任务1恢复原先优先级，任务3启动</p>
@@ -1583,7 +1583,7 @@
 <li>一个或多个任务、ISR都可以去写这些位；一个或多个任务、ISR都可以去读这些位</li>
 <li>可以等待某一位、某些位中的任意一个，也可以等待多位</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161809736.png" alt="img"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161809736.png" alt="img"></p>
 <p>事件组用一个整数来表示，其中的高8位留给内核使用，只能用其他的位来表示事件。那么这个整数是多少位的？</p>
 <ul>
 <li>如果configUSE_16_BIT_TICKS是1，那么这个整数就是16位的，低8位用来表示事件</li>
@@ -1785,9 +1785,9 @@
 <h3 id="任务通知"><a href="#任务通知" class="headerlink" title="任务通知"></a>任务通知</h3><p>所谓”任务通知”，你可以反过来读”通知任务”。</p>
 <p>我们使用队列、信号量、事件组等等方法时，并不知道对方是谁。使用任务通知时，可以明确指定：通知哪个任务。</p>
 <p>使用队列、信号量、事件组时，我们都要事先创建对应的结构体，双方通过中间的结构体通信：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161952531.png" alt="img"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161952531.png" alt="img"></p>
 <p>使用任务通知时，任务结构体TCB中就包含了内部对象，可以直接接收别人发过来的”通知”：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509161952379.png" alt="img"></p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509161952379.png" alt="img"></p>
 <h4 id="任务通知的特性"><a href="#任务通知的特性" class="headerlink" title="任务通知的特性"></a>任务通知的特性</h4><h5 id="优势及限制"><a href="#优势及限制" class="headerlink" title="优势及限制"></a>优势及限制</h5><p>任务通知的优势：</p>
 <ul>
 <li>效率更高：使用任务通知来发送事件、数据给某个任务时，效率更高。比队列、信号量、事件组都有大的优势。</li>
@@ -2126,7 +2126,7 @@
     
     <div class="article-nav-link-wrap article-nav-link-right">
       
-        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509171225629.png" data-sizes="auto" alt="C语言高级" class="lazyload">
+        <img data-src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509171225629.png" data-sizes="auto" alt="C语言高级" class="lazyload">
       
       <a href="/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/"></a>
       <div class="article-nav-caption">后一篇</div>
@@ -2584,8 +2584,8 @@
           description: "",
           stripContent: "FreeRTOS常考面试题1. FreeRTOS 的调度策略、内部原理核心策略：FreeRTOS 主要采用 抢占式调度（Preemptive），辅以 时间片轮转（Time Slicing）。  抢占式调度：高优先级任务随时可以抢占低优先级任务的 CPU 使用权，无需等待低优先级任务运行结束。  时间片轮转：当多个任务优先级相同时，每个任务分配一个固定的时间片（由 SysTick 中断决定，默认 1ms），时间片用完后触发切换，实现公平运行。  内部原理：  心跳时钟：依赖 SysTick 定时器",
           date: "Fri Sep 05 2025 15:48:39 GMT+0800",
-          updated: "Sun Mar 15 2026 14:22:24 GMT+0800",
-          cover: "https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509071511987.png",
+          updated: "Sat Mar 21 2026 18:07:30 GMT+0800",
+          cover: "https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509071511987.png",
         };
       </script>
        
