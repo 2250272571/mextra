@@ -17,7 +17,7 @@
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://mextra.netlify.app';</script>
   
   <title>
-    linux |
+    Linux |
     
     Mextraのblog
   </title>
@@ -35,15 +35,26 @@
 
   
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="linux">
+    <meta name="description" content="Linux 基础Linux Shell 简介 Shell的意思是“外壳”，在Linux 中它是一个程序，比如&#x2F;bin&#x2F;sh、&#x2F;bin&#x2F;bash等。它负责接收用户的输入，根据用户的输入找到其他程序并运行。比如我们输入“1s”并回车时，shel1程序找到“1s”程序并运行，把结果打印出来。  Linux 命令的提示符在 Ubuntu 中打开终端后，即可看到类似下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux">
 <meta property="og:url" content="https://mextra.netlify.app/2025/09/23/linux/index.html">
 <meta property="og:site_name" content="Mextraのblog">
+<meta property="og:description" content="Linux 基础Linux Shell 简介 Shell的意思是“外壳”，在Linux 中它是一个程序，比如&#x2F;bin&#x2F;sh、&#x2F;bin&#x2F;bash等。它负责接收用户的输入，根据用户的输入找到其他程序并运行。比如我们输入“1s”并回车时，shel1程序找到“1s”程序并运行，把结果打印出来。  Linux 命令的提示符在 Ubuntu 中打开终端后，即可看到类似下">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321170743230.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321173825262.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321173937577.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321172802088.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321173129937.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321173450218.png">
+<meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321174638089.png">
 <meta property="article:published_time" content="2025-09-23T12:17:17.000Z">
-<meta property="article:modified_time" content="2025-09-23T12:17:18.000Z">
+<meta property="article:modified_time" content="2026-03-21T09:48:06.000Z">
 <meta property="article:author" content="Mextra">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321170743230.png">
   
   
     <link rel="alternate" href="/atom.xml" title="Mextraのblog" type="application/atom+xml">
@@ -187,16 +198,8 @@
 </div>
 <header id="header">
   
-    
-      
-        <picture>
-          
-        </picture>
-        
-          <img  fetchpriority="high" src="/images/header.jpg" alt="linux">
-        
-      
-    
+    <picture></picture>
+    <img  fetchpriority="high" src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/linux-logo.png" alt="Linux">
   
   <div id="header-outer">
     <div id="header-title">
@@ -204,7 +207,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">linux</h1>
+            <h1 data-aos="slide-up">Linux</h1>
           </a>
         
       
@@ -233,7 +236,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">Linux 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-Shell-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">Linux Shell 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-%E5%91%BD%E4%BB%A4%E7%9A%84%E6%8F%90%E7%A4%BA%E7%AC%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">Linux 命令的提示符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-%E5%91%BD%E4%BB%A4%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">Linux 命令的格式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%92%8C%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="toc-number">1.2.</span> <span class="toc-text">绝对路径和相对路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">目录&#x2F;文件操作命令</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -254,7 +257,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">17</div>
+    <div class="sidebar-state-number">18</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -339,7 +342,7 @@
       <div class="article-date">
   <span class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-09-23T12:17:17.000Z" itemprop="datePublished">2025-09-23</time>
-    <time style="display: none;" id="post-update-time">2025-09-23</time>
+    <time style="display: none;" id="post-update-time">2026-03-21</time>
   </span>
 </div>
 
@@ -352,7 +355,223 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        
+        <h2 id="Linux-基础"><a href="#Linux-基础" class="headerlink" title="Linux 基础"></a><strong>Linux 基础</strong></h2><h3 id="Linux-Shell-简介"><a href="#Linux-Shell-简介" class="headerlink" title="Linux Shell 简介"></a>Linux Shell 简介</h3><ul>
+<li>Shell的意思是“外壳”，在Linux 中它是一个程序，比如&#x2F;bin&#x2F;sh、&#x2F;bin&#x2F;bash等。它负责接收用户的输入，根据用户的输入找到其他程序并运行。比如我们输入“1s”并回车时，shel1程序找到“1s”程序并运行，把结果打印出来。</li>
+</ul>
+<h4 id="Linux-命令的提示符"><a href="#Linux-命令的提示符" class="headerlink" title="Linux 命令的提示符"></a><strong>Linux</strong> <strong>命令的提示符</strong></h4><p>在 Ubuntu 中打开终端后，即可看到类似下图的提示符：</p>
+<blockquote>
+<p><a href="mailto:&#98;&#x6f;&#111;&#x6b;&#x40;&#49;&#x32;&#56;&#46;&#x31;&#x32;&#x38;&#x39;">&#98;&#x6f;&#111;&#x6b;&#x40;&#49;&#x32;&#56;&#46;&#x31;&#x32;&#x38;&#x39;</a>:~$</p>
+<p>用户名+@主机名字        $普通用户 #root管理员</p>
+</blockquote>
+<h4 id="Linux-命令的格式"><a href="#Linux-命令的格式" class="headerlink" title="Linux 命令的格式"></a><strong>Linux</strong> <strong>命令的格式</strong></h4><p>Linux 命令一般由三部分组成：</p>
+<ol>
+<li><p>command 命令；</p>
+</li>
+<li><p>options 选项；</p>
+</li>
+<li><p>parameter 参数</p>
+</li>
+</ol>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321170743230.png" alt="image-20260321170743230"></p>
+<blockquote>
+<p>说明：</p>
+<ol>
+<li><p>[ ]中括号表示 该部分<span style="color:#FF0000;">可选</span>，可有可无，需要根据命令的实际需要而添加; </p>
+</li>
+<li><p>&lt; &gt;中尖括号表示<span style="color:#CC0000;">必选</span></p>
+</li>
+<li><p>命令、选项、参数都以空格分隔，不管几个空格都算一个空格;</p>
+</li>
+<li><p>命令输入完毕后，按回车“Enter”键启动;</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="绝对路径和相对路径"><a href="#绝对路径和相对路径" class="headerlink" title="绝对路径和相对路径"></a><strong>绝对路径和相对路径</strong></h3><p>Linux 下的根目录为“&#x2F;”，从根目录下出发可以找到任意目录、任意文件。</p>
+<p>从根目录开始表示目录或文件的方法称为“绝对路径”。比如：</p>
+<blockquote>
+<ul>
+<li><strong>&#x2F;home&#x2F;book</strong></li>
+<li><strong>&#x2F;home&#x2F;book&#x2F;1.txt</strong></li>
+<li><strong>&#x2F;bin&#x2F;pwd</strong></li>
+</ul>
+</blockquote>
+<p>有时候使用绝对路径太过麻烦，可以使用相对路径。假设当前正位于&#x2F;home&#x2F;book目录下，那么：</p>
+<blockquote>
+<ul>
+<li><strong>.&#x2F;1.txt</strong> <strong>表示当前目录下的</strong> <strong>1.txt，即</strong> <strong>&#x2F;home&#x2F;book&#x2F;1.txt；“.”表示当前目录</strong></li>
+<li><strong>..&#x2F;book&#x2F;1.txt</strong> <strong>表示当前目录的上一级目录里，book <strong>子目录下的</strong>1.txt</strong></li>
+<li><em><em>“&#x2F;home&#x2F;book&#x2F;..”就是”</em>&#x2F;home”目录，”</em>..**”表示上一级目录</li>
+</ul>
+</blockquote>
+<h3 id="目录-文件操作命令"><a href="#目录-文件操作命令" class="headerlink" title="目录&#x2F;文件操作命令"></a><strong>目录&#x2F;文件操作命令</strong></h3><p><strong>1.</strong> <strong>pwd</strong></p>
+<ul>
+<li>打印当前命令（<span style="color:#CC0000;">p</span>rint <span style="color:#CC0000;">w</span>orking<span style="color:#CC0000;"> d</span>irectory）</li>
+</ul>
+<p><strong>2.</strong> <strong>cd</strong></p>
+<ul>
+<li>改变路径，切换路径（change directory）</li>
+<li>命令格式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd</td>
+<td>\</td>
+<td>[目录]</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>cd 命令有些缩略用法：</p>
+<p><strong>$ cd - &#x2F;&#x2F;</strong> <strong>进入上次目录</strong><strong>,</strong> <strong>比如先进入</strong> <strong>a</strong> <strong>目录再进入</strong> <strong>b</strong> <strong>目录，执行此命令后即回到</strong> <strong>a</strong> <strong>目录</strong></p>
+<p><strong>$ cd ~ &#x2F;&#x2F;</strong> <strong>进入家目录</strong></p>
+</blockquote>
+<p><strong>3.</strong> <strong>mkdir</strong></p>
+<ul>
+<li>创建目录（make directory）</li>
+<li>命令格式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mkdir</td>
+<td>-p</td>
+<td>[目录]</td>
+</tr>
+</tbody></table>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321173825262.png" alt="image-20260321173825262"></p>
+<p><strong>4.</strong> <strong>rmdir</strong></p>
+<ul>
+<li>删除目录（remove directory）</li>
+<li>命令格式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rmdir</td>
+<td>\</td>
+<td>[目录]</td>
+</tr>
+</tbody></table>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321173937577.png" alt="image-20260321173937577"></p>
+<p><strong>5.</strong> <strong>ls</strong></p>
+<ul>
+<li>列出目录内容（list）</li>
+<li>命令格式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ls</td>
+<td>-l   -a   -h</td>
+<td>[目录]</td>
+</tr>
+</tbody></table>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321172802088.png" alt="image-20260321172802088"><strong>6.</strong> <strong>cp</strong></p>
+<ul>
+<li>复制目录（copy）</li>
+<li>复制目录时，常用如下命令：</li>
+</ul>
+<blockquote>
+<p><strong>$ cp -rfd dir_a dir_b</strong></p>
+</blockquote>
+<p>⚫ r：recursive，递归地，即复制所有文件</p>
+<p>⚫ f：force，强制覆盖</p>
+<p>⚫ d：如果源文件为链接文件，也只是把它作为链接文件复制过去，而不是复制实际文件</p>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321173129937.png" alt="image-20260321173129937"></p>
+<p><strong>7.</strong> <strong>rm</strong></p>
+<ul>
+<li><p>删除文件或目录（remove）</p>
+</li>
+<li><p>命令格式：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rm</td>
+<td>-r   -p</td>
+<td>文件 或 文件夹</td>
+</tr>
+</tbody></table>
+<ul>
+<li>删除目录时，常用如下命令：</li>
+</ul>
+<blockquote>
+<p><strong>$ rm -rf dir_a</strong></p>
+</blockquote>
+<p>⚫ r：recursive，递归地，即删除所有文件</p>
+<p>⚫ f：force，强制删除</p>
+<p><strong>8.</strong> <strong>cat</strong></p>
+<ul>
+<li>串联文件的内容并打印出来</li>
+<li>命令格式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cat</td>
+<td>\</td>
+<td>文件</td>
+</tr>
+</tbody></table>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321173450218.png" alt="image-20260321173450218"></p>
+<p><strong>9.</strong> <strong>touch</strong></p>
+<ul>
+<li>修改文件的时间，如果文件不存在则创建空文件</li>
+<li>命令格式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>touch</td>
+<td>\</td>
+<td>文件名</td>
+</tr>
+</tbody></table>
+<p><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/image-20260321174638089.png" alt="image-20260321174638089"></p>
+
       
     </div>
     <footer class="article-footer">
@@ -371,19 +590,19 @@
       
         <div class="share-wrapper">
   
-    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F09%2F23%2Flinux%2F&amp;appkey=&amp;title=linux&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="linux">
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F09%2F23%2Flinux%2F&amp;appkey=&amp;title=Linux&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="Linux">
       <div class="share-icon icon icon-weibo">
         
       </div>
     </a>
   
-    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=linux&amp;desc=linux&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="linux">
+    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=Linux&amp;desc=Linux&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="Linux">
       <div class="share-icon icon icon-qq">
         
       </div>
     </a>
   
-    <a href="javascript:;"  title="linux">
+    <a href="javascript:;"  title="Linux">
       <div class="share-icon icon icon-weixin">
         
           <div id="share-weixin">
@@ -420,6 +639,8 @@
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
 
     </footer>
   </div>
@@ -429,7 +650,7 @@
       
       <div class="article-nav-link-wrap article-nav-link-left">
         
-          <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/ble.jpg" data-sizes="auto" alt="ble基础学习" class="lazyload">
+          <img data-src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/ble.jpg" data-sizes="auto" alt="ble基础学习" class="lazyload">
         
         <a href="/2026/01/11/ble%E5%9F%BA%E7%A1%80/"></a>
         <div class="article-nav-caption">前一篇</div>
@@ -522,10 +743,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        48.4k
+        49.2k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        03:10
+        03:12
       </div>
     
     
@@ -558,7 +779,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">Linux 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-Shell-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">Linux Shell 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-%E5%91%BD%E4%BB%A4%E7%9A%84%E6%8F%90%E7%A4%BA%E7%AC%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">Linux 命令的提示符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-%E5%91%BD%E4%BB%A4%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">Linux 命令的格式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%92%8C%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="toc-number">1.2.</span> <span class="toc-text">绝对路径和相对路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">目录&#x2F;文件操作命令</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -579,7 +800,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">17</div>
+    <div class="sidebar-state-number">18</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -896,14 +1117,14 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "Mextra",
-          title: "linux",
+          title: "Linux",
           url: "https://mextra.netlify.app/2025/09/23/linux/",
           excerpt: "",
           description: "",
-          stripContent: "",
+          stripContent: "Linux 基础Linux Shell 简介 Shell的意思是“外壳”，在Linux 中它是一个程序，比如&amp;#x2F;bin&amp;#x2F;sh、&amp;#x2F;bin&amp;#x2F;bash等。它负责接收用户的输入，根据用户的输入找到其他程序并运行。比如我们输入“1s”并回车时，shel1程序找到“1s”程序并运行，把结果打印出来。  Linux 命令的提示符在 Ubuntu 中打开终端后，即可看到类似下图的提示符：  &amp;#98;&amp;#x6f;&amp;#111;&amp;#x6b;&amp;#x40;&amp;#49;&amp;#x32;&amp;#",
           date: "Tue Sep 23 2025 20:17:17 GMT+0800",
-          updated: "Tue Sep 23 2025 20:17:18 GMT+0800",
-          cover: "/images/header.jpg",
+          updated: "Sat Mar 21 2026 17:48:06 GMT+0800",
+          cover: "https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/linux-logo.png",
         };
       </script>
        
