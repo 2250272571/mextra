@@ -17,7 +17,7 @@
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://mextra.netlify.app';</script>
   
   <title>
-    C语言高级 |
+    嵌入式C语言面试 |
     
     Mextraのblog
   </title>
@@ -37,17 +37,17 @@
   
     <meta name="description" content="关于const的进一步思考 背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容  但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误   分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言高级">
-<meta property="og:url" content="https://mextra.netlify.app/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/index.html">
+<meta property="og:title" content="嵌入式C语言面试">
+<meta property="og:url" content="https://mextra.netlify.app/2025/09/02/%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95/index.html">
 <meta property="og:site_name" content="Mextraのblog">
 <meta property="og:description" content="关于const的进一步思考 背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容  但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误   分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509071511987.png">
 <meta property="article:published_time" content="2025-09-02T03:36:37.000Z">
-<meta property="article:modified_time" content="2026-03-21T10:11:42.000Z">
+<meta property="article:modified_time" content="2026-05-19T13:14:00.000Z">
 <meta property="article:author" content="Mextra">
 <meta property="article:tag" content="嵌入式基础">
-<meta property="article:tag" content="C语言高级">
+<meta property="article:tag" content="C语言面试">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509071511987.png">
   
@@ -194,7 +194,7 @@
 <header id="header">
   
     <picture></picture>
-    <img  fetchpriority="high" src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509171225629.png" alt="C语言高级">
+    <img  fetchpriority="high" src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509171225629.png" alt="嵌入式C语言面试">
   
   <div id="header-outer">
     <div id="header-title">
@@ -202,7 +202,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">C语言高级</h1>
+            <h1 data-aos="slide-up">嵌入式C语言面试</h1>
           </a>
         
       
@@ -231,7 +231,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Econst%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="toc-number">1.</span> <span class="toc-text">关于const的进一步思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二维数组高级应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">函数封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE"><span class="toc-number">2.2.</span> <span class="toc-text">指针访问</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Econst%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="toc-number">1.</span> <span class="toc-text">关于const的进一步思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二维数组高级应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">函数封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE"><span class="toc-number">2.2.</span> <span class="toc-text">指针访问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E8%AE%A1%E7%AE%97"><span class="toc-number">3.</span> <span class="toc-text">结构体内存计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E9%80%90%E4%B8%AA%E5%BE%80%E4%B8%8B%E6%8E%92%E4%BD%8D%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text">第一步：逐个往下排位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%9C%8B%E6%95%B4%E4%BD%93%E5%A4%A7%E5%B0%8F"><span class="toc-number">3.2.</span> <span class="toc-text">第二步：看整体大小</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8D%E5%9F%9F%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">位域的作用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#include-%E5%92%8C-include-%E2%80%9Cfile-h%E2%80%9D%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">#include &lt;file.h&gt;和#include “file.h”的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">指针和数组的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8E%E6%8C%87%E9%92%88%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%EF%BC%9F"><span class="toc-number">7.</span> <span class="toc-text">野指针是什么？如何避免？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="toc-number">8.</span> <span class="toc-text">冒泡与选择排序实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B"><span class="toc-number">9.</span> <span class="toc-text">描述中断处理的完整流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%BD%A2%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">环形缓冲区如何实现？</span></a></li></ol>
       
   </div>
 </div>
@@ -331,17 +331,21 @@
   
 </aside>
 
-          <section id="main"><article id="post-C语言高级" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-嵌入式C语言面试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
   <span class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-09-02T03:36:37.000Z" itemprop="datePublished">2025-09-02</time>
-    <time style="display: none;" id="post-update-time">2026-03-21</time>
+    <time style="display: none;" id="post-update-time">2026-05-19</time>
   </span>
 </div>
 
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%9E%E4%B9%A0%E7%9F%A5%E8%AF%86/" data-aos="zoom-in">实习知识</a>
+  </div>
+
 
     </div>
     <div class="hr-line"></div>
@@ -362,11 +366,11 @@
 
 <div class="post-link-card-wrap">
     <div class="post-link-card">
-      <a href="https://mextra.netlify.app/2025/09/05/freertos/" title="freertos" rel="noopener external nofollow noreferrer" target="_blank"></a>
+      <a href="[freertos | Mextraのblog](https://cloud1-6gbla9jv5f0ef83e-1395178850.tcloudbaseapp.com/2025/09/05/freertos/)" title="freertos" rel="noopener external nofollow noreferrer" target="_blank"></a>
       <div class="post-link-card-cover-wrap"><img src="https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509071511987.png" class="no-lightbox" title="freertos" alt="freertos"/></div>
       <div class="post-link-card-item-wrap">
         <div class="post-link-card-title">freertos</div>
-        <div class="post-link-card-excerpt"><span class="icon-link"></span>https://mextra.netlify.app/2025/09/05/freertos/</div>
+        <div class="post-link-card-excerpt"><span class="icon-link"></span>[freertos | Mextraのblog](https://cloud1-6gbla9jv5f0ef83e-1395178850.tcloudbaseapp.com/2025/09/05/freertos/)</div>
       </div>
     </div>
   </div>
@@ -380,6 +384,81 @@
 
 <h3 id="指针访问"><a href="#指针访问" class="headerlink" title="指针访问"></a>指针访问</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">char</span> mp3Files[<span class="number">100</span>][<span class="number">64</span>]; <span class="comment">// 假设最多有100个MP3文件</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">task</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*（1）指向数组的指针（按行访问） 即指针数组*/</span></span><br><span class="line">    <span class="type">char</span> (*p)[<span class="number">64</span>] = mp3Files;</span><br><span class="line">    <span class="comment">/*（2）指向数组的指针（逐个访问）*/</span></span><br><span class="line">    <span class="type">char</span> *p = &amp;mp3Files[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"> <span class="comment">//或	char *p = mp3Files[0];</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="结构体内存计算"><a href="#结构体内存计算" class="headerlink" title="结构体内存计算"></a>结构体内存计算</h2><blockquote>
+<p>char  &#x3D; 1</p>
+<p>short &#x3D; 2</p>
+<p>int   &#x3D; 4</p>
+<p>float &#x3D; 4</p>
+<p>long &#x3D; 4</p>
+<p>double&#x3D; 8</p>
+<p>long long &#x3D; 8</p>
+</blockquote>
+<ol>
+<li><p><strong>每个变量，存放的起始位置，必须是自己大小的倍数</strong></p>
+</li>
+<li><p><strong>整个结构体最后的总大小，必须是里面最大类型的倍数</strong></p>
+</li>
+</ol>
+<blockquote>
+<p>eg:下面结构体内存占用多大？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> b;</span><br><span class="line">    <span class="type">double</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第一步：逐个往下排位置"><a href="#第一步：逐个往下排位置" class="headerlink" title="第一步：逐个往下排位置"></a>第一步：逐个往下排位置</h3><p>地址从 0 开始算</p>
+<ul>
+<li><p><code>int a</code> 占 <strong>地址 0</strong></p>
+<p>占 4 个字节：地址 0-3</p>
+</li>
+<li><p>下一个是 <code>char</code>，大小是 <strong>1</strong></p>
+<p>要求：<strong>起始地址必须是 1的倍数</strong></p>
+<p>现在下一个空是地址 4，<strong>是 1 的倍数，故保留看下一个</strong></p>
+<p>到此便占用5个字节：地址0-4</p>
+</li>
+<li><p>下一个是 <code>double</code>，大小是 <strong>8</strong></p>
+<p>要求：<strong>起始地址必须是 8的倍数</strong></p>
+<p>现在下一个空是地址 5，<strong>不是 8 的倍数，所以需要空3个</strong></p>
+<p>到此便占用16个字节：地址0-15</p>
+</li>
+<li><p>即最后变为 4 + 4 + 8 &#x3D; 16</p>
+</li>
+</ul>
+<h3 id="第二步：看整体大小"><a href="#第二步：看整体大小" class="headerlink" title="第二步：看整体大小"></a>第二步：看整体大小</h3><p>现在用到地址 0～15，一共 16 字节</p>
+<p>结构体里最大类型是 double(8)</p>
+<p>16是 8 的倍数 → 不用再补</p>
+<p>所以 <code>sizeof(struct D) = 16</code></p>
+</blockquote>
+<h2 id="位域的作用？"><a href="#位域的作用？" class="headerlink" title="位域的作用？"></a>位域的作用？</h2><p>位域用于节省内存，允许按位定义变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Flags</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> flag1 : <span class="number">1</span>;  <span class="comment">// 1位</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> flag2 : <span class="number">2</span>;  <span class="comment">// 2位</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> flag3 : <span class="number">5</span>;  <span class="comment">// 5位</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="include-和-include-“file-h”的区别？"><a href="#include-和-include-“file-h”的区别？" class="headerlink" title="#include &lt;file.h&gt;和#include “file.h”的区别？"></a>#include &lt;file.h&gt;和#include “file.h”的区别？</h2><p><strong>答案：</strong></p>
+<ul>
+<li>&lt;&gt;：从系统标准路径查找</li>
+<li>“”：先从当前目录查找，再从系统路径查找</li>
+</ul>
+<h2 id="指针和数组的区别？"><a href="#指针和数组的区别？" class="headerlink" title="指针和数组的区别？"></a>指针和数组的区别？</h2><p><strong>答案：</strong></p>
+<ul>
+<li>数组是固定大小的内存块</li>
+<li>指针是存储地址的变量</li>
+<li><code>数组名是常量指针</code>，不能修改</li>
+<li>指针可以指向不同的地址</li>
+</ul>
+<h2 id="野指针是什么？如何避免？"><a href="#野指针是什么？如何避免？" class="headerlink" title="野指针是什么？如何避免？"></a>野指针是什么？如何避免？</h2><p><strong>答案：</strong><br>野指针指向未知的内存地址。避免方法：</p>
+<ul>
+<li>指针定义时初始化为NULL</li>
+<li>free后设为NULL</li>
+<li>使用前检查是否为NULL</li>
+</ul>
+<h2 id="冒泡与选择排序实现"><a href="#冒泡与选择排序实现" class="headerlink" title="冒泡与选择排序实现"></a>冒泡与选择排序实现</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">bubble</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n<span class="number">-1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; n<span class="number">-1</span>-i;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[j]&lt;arr[j+<span class="number">1</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> temp = arr[j];</span><br><span class="line">				arr[j] = arr[j+<span class="number">1</span>];</span><br><span class="line">				arr[j+<span class="number">1</span>] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> &#125; </span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">select</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n<span class="number">-1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> min_j = i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = i+<span class="number">1</span>;j &lt; n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[j]&gt;arr[min_j])</span><br><span class="line">			&#123;</span><br><span class="line">				min_j = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> temp = arr[i];</span><br><span class="line">		arr[i] = arr[min_j];</span><br><span class="line">		arr[min_j] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="描述中断处理的完整流程"><a href="#描述中断处理的完整流程" class="headerlink" title="描述中断处理的完整流程"></a><strong>描述中断处理的完整流程</strong></h2><ul>
+<li><strong>中断发生</strong>：外设发出中断请求。</li>
+<li><strong>保存现场</strong>：CPU自动将关键寄存器（如PC、PSW）压入堆栈。</li>
+<li><strong>获取向量</strong>：CPU根据中断号查找<strong>中断向量表</strong>，定位中断服务程序(ISR)入口。</li>
+<li><strong>执行ISR</strong>：跳转并执行中断服务程序。</li>
+<li><strong>恢复现场</strong>：从堆栈恢复寄存器。</li>
+<li><strong>中断返回</strong>：返回被中断的程序继续执行。</li>
+</ul>
+<h2 id="环形缓冲区如何实现？"><a href="#环形缓冲区如何实现？" class="headerlink" title="环形缓冲区如何实现？"></a>环形缓冲区如何实现？</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BUFFER_SIZE 10  <span class="comment">// 定义缓冲区大小</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> buffer[BUFFER_SIZE];  <span class="comment">// 缓冲区数组</span></span><br><span class="line">    <span class="type">int</span> head;                  <span class="comment">// 缓冲区头部索引</span></span><br><span class="line">    <span class="type">int</span> tail;                  <span class="comment">// 缓冲区尾部索引</span></span><br><span class="line">&#125; RingBuffer;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 初始化环形缓冲区</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">initBuffer</span><span class="params">(RingBuffer *rb)</span> &#123;</span><br><span class="line">    rb-&gt;head = <span class="number">0</span>;</span><br><span class="line">    rb-&gt;tail = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(rb-&gt;buffer, <span class="number">0</span>, BUFFER_SIZE);  <span class="comment">// 清空缓冲区</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 检查环形缓冲区是否为空</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isEmpty</span><span class="params">(RingBuffer *rb)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> rb-&gt;head == rb-&gt;tail;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 检查环形缓冲区是否已满</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isFull</span><span class="params">(RingBuffer *rb)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (rb-&gt;tail + <span class="number">1</span>) % BUFFER_SIZE == rb-&gt;head;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 向环形缓冲区写入数据</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">writeBuffer</span><span class="params">(RingBuffer *rb, <span class="type">char</span> data)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (isFull(rb)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// 缓冲区满，无法写入</span></span><br><span class="line">    &#125;</span><br><span class="line">    rb-&gt;buffer[rb-&gt;tail] = data;</span><br><span class="line">    rb-&gt;tail = (rb-&gt;tail + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 从环形缓冲区读取数据</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">readBuffer</span><span class="params">(RingBuffer *rb, <span class="type">char</span> *data)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(rb)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  <span class="comment">// 缓冲区空，无法读取</span></span><br><span class="line">    &#125;</span><br><span class="line">    *data = rb-&gt;buffer[rb-&gt;head];</span><br><span class="line">    rb-&gt;head = (rb-&gt;head + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    RingBuffer rb;</span><br><span class="line">    initBuffer(&amp;rb);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 写入数据</span></span><br><span class="line">    <span class="type">char</span> dataToWrite = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">    writeBuffer(&amp;rb, dataToWrite);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;写入: %c\n&quot;</span>, dataToWrite);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 读取数据</span></span><br><span class="line">    <span class="type">char</span> dataRead;</span><br><span class="line">    <span class="keyword">if</span> (readBuffer(&amp;rb, &amp;dataRead)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;读取: %c\n&quot;</span>, dataRead);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;缓冲区为空，无法读取\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -387,7 +466,7 @@
       
         <blockquote class="article-copyright">
     <p><strong><span class="icon-user icon"></span>本文作者：</strong>Mextra @ Mextraのblog</p>
-    <p><strong><span class="icon-link icon"></span>本文链接：</strong><a href="https://mextra.netlify.app/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/">https://mextra.netlify.app/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/</a></p>
+    <p><strong><span class="icon-link icon"></span>本文链接：</strong><a href="https://mextra.netlify.app/2025/09/02/%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95/">https://mextra.netlify.app/2025/09/02/%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95/</a></p>
     
     
     
@@ -399,19 +478,19 @@
       
         <div class="share-wrapper">
   
-    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F09%2F02%2FC%25E8%25AF%25AD%25E8%25A8%2580%25E9%25AB%2598%25E7%25BA%25A7%2F&amp;appkey=&amp;title=C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="C语言高级">
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F09%2F02%2F%25E5%25B5%258C%25E5%2585%25A5%25E5%25BC%258FC%25E8%25AF%25AD%25E8%25A8%2580%25E9%259D%25A2%25E8%25AF%2595%2F&amp;appkey=&amp;title=%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="嵌入式C语言面试">
       <div class="share-icon icon icon-weibo">
         
       </div>
     </a>
   
-    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7&amp;desc=C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="C语言高级">
+    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95&amp;desc=%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="嵌入式C语言面试">
       <div class="share-icon icon icon-qq">
         
       </div>
     </a>
   
-    <a href="javascript:;"  title="C语言高级">
+    <a href="javascript:;"  title="嵌入式C语言面试">
       <div class="share-icon icon icon-weixin">
         
           <div id="share-weixin">
@@ -438,8 +517,8 @@
 </div>
       
       
-        <a data-aos="zoom-in" href="/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/" itemprop="commentCount"></span>
+        <a data-aos="zoom-in" href="/2025/09/02/%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2025/09/02/%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95/" itemprop="commentCount"></span>
           留言
         </a>
       
@@ -448,7 +527,7 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/" rel="tag">C语言高级</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9F%BA%E7%A1%80/" rel="tag">嵌入式基础</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95/" rel="tag">C语言面试</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9F%BA%E7%A1%80/" rel="tag">嵌入式基础</a></li></ul>
 
 
     </footer>
@@ -552,10 +631,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        52.3k
+        53.3k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        03:24
+        03:28
       </div>
     
     
@@ -588,7 +667,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Econst%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="toc-number">1.</span> <span class="toc-text">关于const的进一步思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二维数组高级应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">函数封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE"><span class="toc-number">2.2.</span> <span class="toc-text">指针访问</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Econst%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="toc-number">1.</span> <span class="toc-text">关于const的进一步思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二维数组高级应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">函数封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE"><span class="toc-number">2.2.</span> <span class="toc-text">指针访问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E8%AE%A1%E7%AE%97"><span class="toc-number">3.</span> <span class="toc-text">结构体内存计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E9%80%90%E4%B8%AA%E5%BE%80%E4%B8%8B%E6%8E%92%E4%BD%8D%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text">第一步：逐个往下排位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%9C%8B%E6%95%B4%E4%BD%93%E5%A4%A7%E5%B0%8F"><span class="toc-number">3.2.</span> <span class="toc-text">第二步：看整体大小</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8D%E5%9F%9F%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">位域的作用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#include-%E5%92%8C-include-%E2%80%9Cfile-h%E2%80%9D%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">#include &lt;file.h&gt;和#include “file.h”的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">指针和数组的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8E%E6%8C%87%E9%92%88%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%EF%BC%9F"><span class="toc-number">7.</span> <span class="toc-text">野指针是什么？如何避免？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="toc-number">8.</span> <span class="toc-text">冒泡与选择排序实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B"><span class="toc-number">9.</span> <span class="toc-text">描述中断处理的完整流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%BD%A2%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">环形缓冲区如何实现？</span></a></li></ol>
       
   </div>
 </div>
@@ -926,13 +1005,13 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "Mextra",
-          title: "C语言高级",
-          url: "https://mextra.netlify.app/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/",
+          title: "嵌入式C语言面试",
+          url: "https://mextra.netlify.app/2025/09/02/%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E9%9D%A2%E8%AF%95/",
           excerpt: "",
           description: "",
           stripContent: "关于const的进一步思考 背景：在进行宿舍精灵项目的代码编写时， 我使用了映射表来表现楼栋，我使用了const来修饰 以稳定内容  但是在我尝试将楼栋的内容分离出来时（例如中1C 在oled上需把中文提取出来 然后剩下用oled_print来显示在oled上） 但却出现了指针错误   分析了一下：const是将对应的字符数组存放在只读存储区中 而我因为想要分离 从而修改了指针的内容 故造成指针错误 解决措施：通过malloc来申请内存，然后使用strcpy或者sprintf来存放在新申请的内存",
           date: "Tue Sep 02 2025 11:36:37 GMT+0800",
-          updated: "Sat Mar 21 2026 18:11:42 GMT+0800",
+          updated: "Tue May 19 2026 21:14:00 GMT+0800",
           cover: "https://pub-6d81d08f2d7f43dcbd39acdacf6c938f.r2.dev/PicGo/202509171225629.png",
         };
       </script>
