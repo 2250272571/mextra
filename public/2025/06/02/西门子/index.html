@@ -1,0 +1,1482 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+    
+      data-theme-mode="true"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://mextra.netlify.app';</script>
+  
+  <title>
+    西门子嵌入式学习 |
+    
+    Mextraのblog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="调度器模板123456789101112131415161718192021222324252627282930313233#include &quot;scheduler.h&quot;&#x2F;&#x2F; clang-format offtypedef struct&#123;	void (*task_func)(void);	uint32_t rate_ms;	uint32_t last_ms;&#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="西门子嵌入式学习">
+<meta property="og:url" content="https://mextra.netlify.app/2025/06/02/%E8%A5%BF%E9%97%A8%E5%AD%90/index.html">
+<meta property="og:site_name" content="Mextraのblog">
+<meta property="og:description" content="调度器模板123456789101112131415161718192021222324252627282930313233#include &quot;scheduler.h&quot;&#x2F;&#x2F; clang-format offtypedef struct&#123;	void (*task_func)(void);	uint32_t rate_ms;	uint32_t last_ms;&#125;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021615783.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021629990.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021818291.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021828146.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506061718736.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509232059309.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509232100265.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509281144270.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509232103277.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509232103527.png">
+<meta property="article:published_time" content="2025-06-02T08:00:53.000Z">
+<meta property="article:modified_time" content="2025-09-28T07:24:22.000Z">
+<meta property="article:author" content="Mextra">
+<meta property="article:tag" content="嵌入式基础">
+<meta property="article:tag" content="GD32学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021615783.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Mextraのblog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" integrity="sha384-4NN3fZ5AokFyHuoihl7A9qWaCt+HsAtOaUsXwJGRb4&#x2F;SMBtFr2vcNSHR5E8dg0Wk" crossorigin="anonymous">
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU&#x2F;voDBY5XE2lVh" crossorigin="anonymous">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">正在加载中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索"></a>
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img  fetchpriority="high" src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021603366.jpg" alt="西门子嵌入式学习">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">西门子嵌入式学习</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="sidebar-left"  >
+          <aside id="sidebar">
+  
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.</span> <span class="toc-text">调度器模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE%E6%A0%8F"><span class="toc-number">2.</span> <span class="toc-text">时钟配置栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">模式设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%80%9F%E6%97%B6%E9%92%9FHSE"><span class="toc-number">2.1.1.</span> <span class="toc-text">高速时钟HSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8E%E9%80%9F%E6%97%B6%E9%92%9FLSE"><span class="toc-number">2.1.2.</span> <span class="toc-text">低速时钟LSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-Clock-Output"><span class="toc-number">2.1.3.</span> <span class="toc-text">Master Clock Output</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Audio-Clock-Input-I2S-CKIN-%EF%BC%9A"><span class="toc-number">2.1.4.</span> <span class="toc-text">**Audio Clock Input (I2S_CKIN)**：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">参数设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%BD%95%E5%A4%84%E9%80%89%E6%8B%A9%E4%BA%86HSI%E4%BB%A5%E5%8F%8AHSE"><span class="toc-number">2.3.</span> <span class="toc-text">在何处选择了HSI以及HSE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SYS%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3%E9%80%89%E6%8B%A9"><span class="toc-number">3.</span> <span class="toc-text">SYS调试接口选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial-Wire-SW-DP"><span class="toc-number">3.1.</span> <span class="toc-text">Serial Wire (SW-DP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JTAG-JTAG-DP"><span class="toc-number">3.2.</span> <span class="toc-text">JTAG(JTAG-DP)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">4.</span> <span class="toc-text">LED</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E4%BB%A3%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">驱动代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6PWM%E5%91%BC%E5%90%B8%E7%81%AF"><span class="toc-number">4.2.</span> <span class="toc-text">软件PWM呼吸灯</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E9%94%AE"><span class="toc-number">5.</span> <span class="toc-text">按键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="toc-number">5.1.</span> <span class="toc-text">使用步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%96%B0%E5%BB%BAbutton-app-c%E5%B9%B6%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">5.1.1.</span> <span class="toc-text">第一步：新建button_app.c并包含头文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0%E4%B8%8E%E6%8C%89%E9%94%AE%E5%88%97%E8%A1%A8"><span class="toc-number">5.1.2.</span> <span class="toc-text">第二步：定义参数与按键列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E7%BC%96%E5%86%99%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.3.</span> <span class="toc-text">第三步：编写回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%88%9D%E5%A7%8B%E5%8C%96-ebtn-%E5%BA%93"><span class="toc-number">5.1.4.</span> <span class="toc-text">第四步：初始化 ebtn 库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SD-FATFS"><span class="toc-number">6.</span> <span class="toc-text">SD+FATFS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE"><span class="toc-number">6.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4-1"><span class="toc-number">6.2.</span> <span class="toc-text">使用步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">6.2.1.</span> <span class="toc-text">初始化</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">13</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-西门子" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-06-02T08:00:53.000Z" itemprop="datePublished">2025-06-02</time>
+    <time style="display: none;" id="post-update-time">2025-09-28</time>
+  </span>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MCU/" data-aos="zoom-in">MCU</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="调度器模板"><a href="#调度器模板" class="headerlink" title="调度器模板"></a>调度器模板</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;scheduler.h&quot;</span></span></span><br><span class="line"><span class="comment">// clang-format off</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">void</span> (*task_func)(<span class="type">void</span>);</span><br><span class="line">	<span class="type">uint32_t</span> rate_ms;</span><br><span class="line">	<span class="type">uint32_t</span> last_ms;</span><br><span class="line">&#125; <span class="type">task_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">task_t</span> tasks[] = &#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">uint8_t</span> task_count;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">scheduler_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	task_count = <span class="keyword">sizeof</span>(tasks) / <span class="keyword">sizeof</span>(<span class="type">task_t</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">scheduler_run</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint8_t</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; task_count; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">uint32_t</span> now_time = HAL_GetTick();</span><br><span class="line">		<span class="keyword">if</span> ((<span class="type">uint32_t</span>)(now_time - tasks[i].last_ms) &gt;= tasks[i].rate_ms)</span><br><span class="line">		&#123;</span><br><span class="line">			tasks[i].last_ms = now_time;</span><br><span class="line">			tasks[i].task_func();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="时钟配置栏"><a href="#时钟配置栏" class="headerlink" title="时钟配置栏"></a>时钟配置栏</h2><h3 id="模式设置"><a href="#模式设置" class="headerlink" title="模式设置"></a>模式设置</h3><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021615783.png" alt="image-20250602161506934"></p>
+<h4 id="高速时钟HSE"><a href="#高速时钟HSE" class="headerlink" title="高速时钟HSE"></a>高速时钟HSE</h4><ul>
+<li><p><code>Disable</code>：不启用外部时钟（默认使用内部时钟） <span style="color:#00FFFF;">内部时钟（内部RC（电阻-电容）振荡器）提供了此便捷性 但精度不如外部时钟（外部低速晶振或陶瓷振荡器）</span></p>
+</li>
+<li><p><code>BYPASS Clock Source</code>：旁路模式，允许直接<span style="color:#00FFFF;">从外部导入时钟信号，而不使用外部晶体</span>。这种模式适用于需要从外部系统或其他设备接收时钟信号的情况。</p>
+</li>
+<li><p><code>Crystal/Ceramic Resonator</code>：将外部低速晶振或陶瓷谐振器作为时钟源，一般则是板载上的外部晶振</p>
+</li>
+</ul>
+<h4 id="低速时钟LSE"><a href="#低速时钟LSE" class="headerlink" title="低速时钟LSE"></a>低速时钟LSE</h4><blockquote>
+<p>参数同上 通常用于<span style="color:#33FFFF;">实时时钟（RTC</span>）等需要低频稳定时钟的应用。LSE的典型频率为32.768kHz</p>
+</blockquote>
+<h4 id="Master-Clock-Output"><a href="#Master-Clock-Output" class="headerlink" title="Master Clock Output"></a><strong>Master Clock Output</strong></h4><ul>
+<li>配置是否使能主时钟<span style="color:#33FFFF;">输出到MCO引脚</span>，<code>即可以通过MCO引脚将时钟信号输出到外部，供其他设备使用</code></li>
+</ul>
+<h4 id="Audio-Clock-Input-I2S-CKIN-："><a href="#Audio-Clock-Input-I2S-CKIN-：" class="headerlink" title="**Audio Clock Input (I2S_CKIN)**："></a>**Audio Clock Input (I2S_CKIN)**：</h4><ul>
+<li>此选项用于配置是否从<span style="color:#33FFFF;">特定的引脚（如I2S_CKIN）输入音频时钟</span>。这对于需要精确音频时钟的音频应用非常重要，<code>例如I2S音频接口</code>。</li>
+</ul>
+<h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021629990.png" alt="image-20250602162859501"></p>
+<ul>
+<li><p><code>TIM Prescaler Selection</code>：定时器预分频选择，<code>禁用时使用最大分频值。</code></p>
+</li>
+<li><p><code>HSE Startup Timeout Value (ms)</code>：HSE（高速外部时钟）启动超时时间，设置为100ms。这是外部晶振启动的最长等待时间，如果超出这个时间晶振还未启动，微控制器会认为启动失败。</p>
+</li>
+<li><p><code>LSE Startup Timeout Value (ms)</code>：LSE（低速外部时钟）启动超时时间，设置为5000ms。这通常用于RTC的时钟源，如果超出这个时间晶振还未启动，微控制器会认为启动失败。</p>
+</li>
+<li><p><code>Power Regulator Voltage Scale</code>：电源调节器电压等级，设置为<code>Power Regulator Voltage Scale 3</code>。这通常与微控制器的性能和功耗有关，不同的电压等级可以提供不同的性能和功耗平衡。</p>
+</li>
+<li><p><code>Power Over Drive</code>：电源过驱，禁用。这通常用于在需要更高性能时<span style="color:#33FFFF;">临时提高微控制器的电压</span>，以支持更高的时钟频率。</p>
+</li>
+</ul>
+<h3 id="在何处选择了HSI以及HSE"><a href="#在何处选择了HSI以及HSE" class="headerlink" title="在何处选择了HSI以及HSE"></a>在何处选择了HSI以及HSE</h3><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021818291.png" alt="image-20250602181824740"></p>
+<ul>
+<li><p>第一个框一定一定要看硬件上的晶振是多少频率，<span style="color:#00FFFF;">一定要严格按照硬件资源给的 （不要无脑用默认的）</span></p>
+<blockquote>
+<p>否则可能会出现串口数据接收乱码</p>
+</blockquote>
+</li>
+<li><p>第二个框选择了用&#96;相位锁定环（PLL） 调整外部高速时钟（HSE）还是内部高速时钟（HSI）</p>
+</li>
+<li><p>第三个框框则直接选择是否选择 经过PLL调整后的时钟，也可以选择不经过PLL的原生外部高速时钟（HSE），以及内部高速时钟（HSI）。</p>
+</li>
+</ul>
+<h2 id="SYS调试接口选择"><a href="#SYS调试接口选择" class="headerlink" title="SYS调试接口选择"></a>SYS调试接口选择</h2><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021828146.png" alt="image-20250602182759796"></p>
+<h3 id="Serial-Wire-SW-DP"><a href="#Serial-Wire-SW-DP" class="headerlink" title="Serial Wire (SW-DP)"></a>Serial Wire (SW-DP)</h3><ul>
+<li><p>串口烧录 仅需要两个引脚</p>
+<ul>
+<li><code>SWCLK</code>：主机到从机的时钟信号</li>
+<li><code>SWDIO</code>：双向数据信号</li>
+</ul>
+</li>
+<li><p>这种模式下，ST-Link工作最稳定，占用引脚少，是日常开发的首选。</p>
+</li>
+</ul>
+<h3 id="JTAG-JTAG-DP"><a href="#JTAG-JTAG-DP" class="headerlink" title="JTAG(JTAG-DP)"></a>JTAG(JTAG-DP)</h3><ul>
+<li>J-Link烧录 需要4或5个引脚：<ul>
+<li><strong>TCK：</strong>测试时钟</li>
+<li><strong>TMS：</strong>测试模式选择</li>
+<li><strong>TDI：</strong>测试数据输入</li>
+<li><strong>TDO：</strong>测试数据输出</li>
+<li><strong>TRST：</strong>测试复位（可选，5pin模式才有）</li>
+</ul>
+</li>
+<li>JTAG适合复杂的调试场景，尤其是在使用J-Link调试器时。</li>
+</ul>
+<h2 id="LED"><a href="#LED" class="headerlink" title="LED"></a>LED</h2><h3 id="驱动代码"><a href="#驱动代码" class="headerlink" title="驱动代码"></a>驱动代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;led_app.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">uint8_t</span> ucLed[<span class="number">6</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Led_disp</span><span class="params">(<span class="type">uint8_t</span> *ucLed)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint8_t</span> temp = <span class="number">0x00</span>, i;</span><br><span class="line">	<span class="type">static</span> <span class="type">uint8_t</span> temp_old = <span class="number">0xff</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ucLed[i])</span><br><span class="line">			temp |= (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (temp != temp_old)</span><br><span class="line">	&#123;</span><br><span class="line">		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, (temp &amp; <span class="number">0x01</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, (temp &amp; <span class="number">0x02</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, (temp &amp; <span class="number">0x04</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, (temp &amp; <span class="number">0x08</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED5_GPIO_Port, LED5_Pin, (temp &amp; <span class="number">0x10</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		HAL_GPIO_WritePin(LED6_GPIO_Port, LED6_Pin, (temp &amp; <span class="number">0x20</span>) ? GPIO_PIN_SET : GPIO_PIN_RESET);</span><br><span class="line">		temp_old = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">led_task</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	Led_disp(ucLed);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="软件PWM呼吸灯"><a href="#软件PWM呼吸灯" class="headerlink" title="软件PWM呼吸灯"></a>软件PWM呼吸灯</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">led_task</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">uint32_t</span> breath_counter = <span class="number">0</span>;			<span class="comment">// 呼吸效果内部计时器，模拟时间流逝</span></span><br><span class="line">	<span class="type">static</span> <span class="type">uint8_t</span> pwm_counter = <span class="number">0</span>;				<span class="comment">// PWM内部计时器，用于生成PWM波形</span></span><br><span class="line">	<span class="type">static</span> <span class="type">uint8_t</span> brightness = <span class="number">0</span>;				<span class="comment">// 当前的亮度值</span></span><br><span class="line">	<span class="type">static</span> <span class="type">const</span> <span class="type">uint16_t</span> breath_period = <span class="number">2000</span>; <span class="comment">// 呼吸效果周期，单位ms 调小可增加速度</span></span><br><span class="line">	<span class="type">static</span> <span class="type">const</span> <span class="type">uint16_t</span> pwm_max = <span class="number">10</span>;			<span class="comment">// PWM最大计数值  调大会降低pwm频率</span></span><br><span class="line"></span><br><span class="line">	breath_counter = (++breath_counter) % breath_period;</span><br><span class="line">        <span class="comment">//(2.0f * 3.14159f * breath_counter / breath_period) 将结果映射为0到2π</span></span><br><span class="line">        <span class="comment">//sin(2.0f * 3.14159f * breath_counter / breath_period) 将结果映射为-1到1</span></span><br><span class="line">        <span class="comment">//sin(2.0f * 3.14159f * breath_counter / breath_period) + 1.0f 将结果映射为0到2</span></span><br><span class="line">        <span class="comment">//(sin(2.0f * 3.14159f * breath_counter / breath_period) + 1.0f) * pwm_max / 2.0f 将实际亮度计算出来 通过(uint8_t)强制类型转换</span></span><br><span class="line">	brightness = (<span class="type">uint8_t</span>)((<span class="built_in">sin</span>(<span class="number">2.0f</span> * <span class="number">3.14159f</span> * breath_counter / breath_period) + <span class="number">1.0f</span>) * pwm_max / <span class="number">2.0f</span>);</span><br><span class="line">	pwm_counter = (++pwm_counter) % pwm_max;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">uint8_t</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)</span><br><span class="line">		ucLed[i] = (pwm_counter &lt; brightness) ? <span class="number">1</span> : <span class="number">0</span>; <span class="comment">//将所有LED置为呼吸灯效果</span></span><br><span class="line">	Led_disp(ucLed);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果是要实时调光，则直接赋值<code>brightness</code>即可 （即<span style="color:#FF3333;">不需要</span><code>breath_counter</code>和<code>breath_period</code>）</p>
+</blockquote>
+<h2 id="按键"><a href="#按键" class="headerlink" title="按键"></a>按键</h2><blockquote>
+<p>常用工程上所用按键对比</p>
+<p>github仓库地址：<a target="_blank" rel="noopener" href="https://github.com/bobwenstudy/easy_button">bobwenstudy&#x2F;easy_button: 嵌入式按键处理驱动（Button Driver），支持单击、双击、多击、自动消抖、长按、长长按、超长按 | 低功耗支持 | 组合按键支持 | 静态&#x2F;动态注册支持</a></p>
+</blockquote>
+<p><img src="https://fastly.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506061718736.png" alt="image-20250606171853466"></p>
+<blockquote>
+<p>整体框架：<br>easy_button<br> ├── ebtn<br> │   ├── bit_array.h<br> │   ├── ebtn.c<br> │   └── ebtn.h<br> ├── build.mk<br> ├── example_user.c<br> └── example_test.c<br> ├── main.c<br> ├── Makefile<br> └── README.md</p>
+</blockquote>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><h4 id="第一步：新建button-app-c并包含头文件"><a href="#第一步：新建button-app-c并包含头文件" class="headerlink" title="第一步：新建button_app.c并包含头文件"></a>第一步：新建button_app.c并包含头文件</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ebtn.h&quot;</span> <span class="comment">// 包含 ebtn 库头文件</span></span></span><br><span class="line"><span class="comment">// ... 可能还需要包含你的 HAL 库头文件 ...</span></span><br><span class="line"><span class="comment">// #include &quot;stm32xxx_hal.h&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="第二步：定义参数与按键列表"><a href="#第二步：定义参数与按键列表" class="headerlink" title="第二步：定义参数与按键列表"></a>第二步：定义参数与按键列表</h4><ol>
+<li><strong>定义按键参数 (<code>ebtn_btn_param_t</code>):</strong> 使用 <code>EBTN_PARAMS_INIT</code> 宏设定按键的各种时间阈值和行为。这些参数可以被多个按键共用。<code>可用默认参数 即如下default_param_normal</code></li>
+<li><strong>定义按键实例数组 (<code>ebtn_btn_t</code>):</strong> 使用 <code>EBTN_BUTTON_INIT</code> 宏创建每个物理按键的实例，并指定它的唯一 <code>key_id</code> 和使用的参数。</li>
+<li><strong>（可不加）定义组合按键实例数组 (<code>ebtn_btn_combo_t</code>, 可选):</strong> 使用 <code>EBTN_BUTTON_COMBO_INIT</code> 创建组合键实例，同样指定 <code>key_id</code> 和参数。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1. 定义按键参数实例 */</span></span><br><span class="line"><span class="comment">// 参数宏: EBTN_PARAMS_INIT(</span></span><br><span class="line"><span class="comment">//     按下消抖时间ms, 释放消抖时间ms,</span></span><br><span class="line"><span class="comment">//     单击有效最短按下时间ms, 单击有效最长按下时间ms,</span></span><br><span class="line"><span class="comment">//     多次单击最大间隔时间ms,</span></span><br><span class="line"><span class="comment">//     长按(KeepAlive)事件周期ms (0禁用),</span></span><br><span class="line"><span class="comment">//     最大连续有效点击次数 (e.g., 1=单击, 2=双击, ...)</span></span><br><span class="line"><span class="comment">// )</span></span><br><span class="line"><span class="type">const</span> <span class="type">ebtn_btn_param_t</span> default_param_normal = EBTN_PARAMS_INIT(</span><br><span class="line">    <span class="number">20</span>,     <span class="comment">// time_debounce: 按下稳定 20ms(消抖)</span></span><br><span class="line">    <span class="number">20</span>,     <span class="comment">// time_debounce_release: 释放稳定 20ms</span></span><br><span class="line">    <span class="number">50</span>,     <span class="comment">// time_click_pressed_min: 最短单击按下 50ms</span></span><br><span class="line">    <span class="number">500</span>,    <span class="comment">// time_click_pressed_max: 最长单击按下 500ms (超过则不算单击)</span></span><br><span class="line">    <span class="number">300</span>,    <span class="comment">// time_click_multi_max: 多次单击最大间隔 300ms (两次点击间隔超过则重新计数)</span></span><br><span class="line">    <span class="number">500</span>,    <span class="comment">// time_keepalive_period: 长按事件周期 500ms (按下超过 500ms 后，每 500ms 触发一次)</span></span><br><span class="line">    <span class="number">5</span>       <span class="comment">// max_consecutive: 最多支持 5 连击</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2. 定义静态按键列表 */</span></span><br><span class="line"><span class="comment">// 宏: EBTN_BUTTON_INIT(按键ID, 参数指针)</span></span><br><span class="line"><span class="type">ebtn_btn_t</span> static_buttons[] = &#123;</span><br><span class="line">    EBTN_BUTTON_INIT(<span class="number">1</span>, &amp;default_param_normal), <span class="comment">// KEY1, ID=1, 使用 &#x27;default_param_normal&#x27; 参数</span></span><br><span class="line">    EBTN_BUTTON_INIT(<span class="number">2</span>, &amp;default_param_normal), <span class="comment">// KEY2, ID=2, 也使用 &#x27;default_param_normal&#x27; 参数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 3. 定义静态组合按键列表 (可选) */</span></span><br><span class="line"><span class="comment">// 宏: EBTN_BUTTON_COMBO_INIT(按键ID, 参数指针)</span></span><br><span class="line"><span class="type">ebtn_btn_combo_t</span> static_combos[] = &#123;</span><br><span class="line">    <span class="comment">// 假设 KEY1+KEY2 组合键</span></span><br><span class="line">    EBTN_BUTTON_COMBO_INIT(<span class="number">101</span>, &amp;default_param_normal), <span class="comment">// 组合键, ID=101 (必须与普通按键ID不同)</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="第三步：编写回调函数"><a href="#第三步：编写回调函数" class="headerlink" title="第三步：编写回调函数"></a>第三步：编写回调函数</h4><p>你需要提供两个函数给 <code>ebtn</code> 库，告诉它如何与你的硬件交互以及如何通知你事件：</p>
+<ul>
+<li><strong><code>get_state_fn</code> (状态获取):</strong> 这个函数被 <code>ebtn</code> 调用，用于读取指定按键当前的物理电平。</li>
+<li><strong><code>evt_fn</code> (事件处理):</strong> 当 <code>ebtn</code> 检测到一个有效的按键事件（按下、释放、单击、长按）时，会调用这个函数，并传入触发事件的按键信息和事件类型。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1. 实现获取按键状态的回调函数 */</span></span><br><span class="line"><span class="comment">// 函数原型: uint8_t (*ebtn_get_state_fn)(struct ebtn_btn *btn);</span></span><br><span class="line"><span class="type">uint8_t</span> <span class="title function_">my_get_key_state</span><span class="params">(<span class="keyword">struct</span> ebtn_btn *btn)</span> &#123;</span><br><span class="line">    <span class="comment">// 根据传入的按钮实例中的 key_id 判断是哪个物理按键</span></span><br><span class="line">    <span class="keyword">switch</span> (btn-&gt;key_id) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// 请求读取 KEY1 的状态</span></span><br><span class="line">            <span class="comment">// 假设 KEY1 接在 PB0，按下为低电平 (返回 1 代表按下)</span></span><br><span class="line">            <span class="keyword">return</span> (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET);</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>: <span class="comment">// 请求读取 KEY2 的状态</span></span><br><span class="line">            <span class="comment">// 假设 KEY2 接在 PB1，按下为低电平</span></span><br><span class="line">            <span class="keyword">return</span> (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == GPIO_PIN_RESET);</span><br><span class="line">        <span class="comment">// ... 可以添加更多按键的读取逻辑 ...</span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="comment">// 对于库内部处理组合键等情况，或者未知的 key_id，安全起见返回 0 (未按下)</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 注意：返回值 1 表示 &quot;活动/按下&quot;，0 表示 &quot;非活动/释放&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2. 实现处理按键事件的回调函数 */</span></span><br><span class="line"><span class="comment">// 函数原型: void (*ebtn_evt_fn)(struct ebtn_btn *btn, ebtn_evt_t evt);</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">my_handle_key_event</span><span class="params">(<span class="keyword">struct</span> ebtn_btn *btn, <span class="type">ebtn_evt_t</span> evt)</span> &#123;</span><br><span class="line">    <span class="type">uint16_t</span> key_id = btn-&gt;key_id;                 <span class="comment">// 获取触发事件的按键 ID</span></span><br><span class="line">    <span class="type">uint16_t</span> click_cnt = ebtn_click_get_count(btn); <span class="comment">// 获取连击次数 (仅在 ONCLICK 事件时有意义)</span></span><br><span class="line">    <span class="comment">// uint16_t kalive_cnt = ebtn_keepalive_get_count(btn); // 获取长按计数 (仅在 KEEPALIVE 事件时有意义)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调试打印 (可选)</span></span><br><span class="line">    <span class="comment">// printf(&quot;Key ID: %d, Event: %d&quot;, key_id, evt);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据事件类型进行处理</span></span><br><span class="line">    <span class="keyword">switch</span> (evt) &#123;</span><br><span class="line">        <span class="keyword">case</span> EBTN_EVT_ONPRESS: <span class="comment">// 按下事件 (消抖成功后触发一次)</span></span><br><span class="line">            <span class="comment">// printf(&quot; - Pressed\n&quot;);</span></span><br><span class="line">            <span class="comment">// 可以在这里处理按下即触发的操作，比如点亮提示灯</span></span><br><span class="line">            <span class="keyword">if</span> (key_id == <span class="number">1</span>) &#123; <span class="comment">/* Do something for KEY1 press */</span> &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> EBTN_EVT_ONRELEASE: <span class="comment">// 释放事件 (消抖成功后触发一次)</span></span><br><span class="line">            <span class="comment">// printf(&quot; - Released\n&quot;);</span></span><br><span class="line">            <span class="comment">// 可以在这里处理释放时触发的操作</span></span><br><span class="line">             <span class="keyword">if</span> (key_id == <span class="number">1</span>) &#123; <span class="comment">/* Do something for KEY1 release */</span> &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> EBTN_EVT_ONCLICK: <span class="comment">// 单击/连击事件 (在释放后，或达到最大连击数，或超时后触发)</span></span><br><span class="line">            <span class="comment">// printf(&quot; - Clicked (%d times)\n&quot;, click_cnt);</span></span><br><span class="line">            <span class="comment">// --- 根据 key_id 和 click_cnt 执行不同操作 ---</span></span><br><span class="line">            <span class="keyword">if</span> (key_id == <span class="number">1</span>) &#123; <span class="comment">// 如果是 KEY1 触发的 CLICK</span></span><br><span class="line">                <span class="keyword">if</span> (click_cnt == <span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="comment">// KEY1 单击</span></span><br><span class="line">                    <span class="comment">// printf(&quot;  Action: KEY1 Single Click - Toggle LED1\n&quot;);</span></span><br><span class="line">                    <span class="comment">// HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);</span></span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (click_cnt == <span class="number">2</span>) &#123;</span><br><span class="line">                    <span class="comment">// KEY1 双击</span></span><br><span class="line">                    <span class="comment">// printf(&quot;  Action: KEY1 Double Click - Switch Mode\n&quot;);</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// ... 可以继续判断 3击, 4击 ...</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key_id == <span class="number">2</span>) &#123; <span class="comment">// 如果是 KEY2 触发的 CLICK</span></span><br><span class="line">                 <span class="keyword">if</span> (click_cnt == <span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="comment">// KEY2 单击</span></span><br><span class="line">                    <span class="comment">// printf(&quot;  Action: KEY2 Single Click - Toggle LED2\n&quot;);</span></span><br><span class="line">                 &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key_id == <span class="number">101</span>) &#123; <span class="comment">// 如果是组合键 (KEY1+KEY2) 触发的 CLICK</span></span><br><span class="line">                <span class="keyword">if</span> (click_cnt == <span class="number">1</span>) &#123;</span><br><span class="line">                     <span class="comment">// 组合键单击</span></span><br><span class="line">                     <span class="comment">// printf(&quot;  Action: Combo Key 101 Single Click - Reset System\n&quot;);</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> EBTN_EVT_KEEPALIVE: <span class="comment">// 保持活动/长按事件 (按下持续时间超过阈值后，按周期触发)</span></span><br><span class="line">            <span class="comment">// printf(&quot; - Keep Alive (Long Press, Count: %d)\n&quot;, kalive_cnt);</span></span><br><span class="line">            <span class="keyword">if</span> (key_id == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// KEY1 长按</span></span><br><span class="line">                <span class="comment">// printf(&quot;  Action: KEY1 Long Press - Increase Volume\n&quot;);</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>: <span class="comment">// 未知事件 (理论上不应发生)</span></span><br><span class="line">            <span class="comment">// printf(&quot; - Unknown Event\n&quot;);</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第四步：初始化-ebtn-库"><a href="#第四步：初始化-ebtn-库" class="headerlink" title="第四步：初始化 ebtn 库"></a>第四步：初始化 ebtn 库</h4><p>在系统启动的初始化阶段（例如 <code>main</code> 函数开始处，或专门的初始化函数中），调用 <code>ebtn_init</code> 函数，将之前准备好的按键列表和回调函数”注册”给 <code>ebtn</code> 库。</p>
+<p>如果使用了组合按键，还需要在 <code>ebtn_init</code> <strong>之后</strong>，调用相关函数将普通按键绑定到组合键上。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">button_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ebtn_init(</span><br><span class="line">        static_buttons,                 <span class="comment">// 静态按键数组的指针</span></span><br><span class="line">        EBTN_ARRAY_SIZE(static_buttons), <span class="comment">// 静态按键数量 (用宏计算)</span></span><br><span class="line">        static_combos,                  <span class="comment">// 静态组合按键数组的指针 (如果没有，传 NULL, 0)</span></span><br><span class="line">        EBTN_ARRAY_SIZE(static_combos), <span class="comment">// 静态组合按键数量 (如果没有，传 0)</span></span><br><span class="line">        my_get_key_state,               <span class="comment">// 你的状态获取回调函数</span></span><br><span class="line">        my_handle_key_event             <span class="comment">// 你的事件处理回调函数</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下面这个函数可以在调度器中每5秒调用</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">button_task</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ebtn_process(uwTick);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SD-FATFS"><a href="#SD-FATFS" class="headerlink" title="SD+FATFS"></a>SD+FATFS</h2><h3 id="CubeMX配置"><a href="#CubeMX配置" class="headerlink" title="CubeMX配置"></a>CubeMX配置</h3><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509232059309.png" alt="image-20250923205942773"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509232100265.png" alt="image-20250923210029131"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509281144270.png" alt="image-20250928114434875"></p>
+<blockquote>
+<p>注意：如果TF-CARD上的CD引脚有接入gpio的话 可以将platform设置为该引脚 即检测SD卡引脚</p>
+<ul>
+<li><p>当该引脚为低电平时，则检测到sd卡</p>
+</li>
+<li><p>没有接gpio的话，platform不要设置 不然会读取不到卡</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509232103277.png" alt="image-20250923210313143"></p>
+<p>正点原子探索者v3没有设计该引脚 所以留空即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509232103527.png" alt="image-20250923210355410"></p>
+</li>
+</ul>
+</blockquote>
+<h3 id="使用步骤-1"><a href="#使用步骤-1" class="headerlink" title="使用步骤"></a>使用步骤</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SD_Driver.disk_initialize(<span class="number">0</span>); <span class="comment">// SD_Driver已经被声明在FATFS/Target/sd_diskio.c</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong><span class="icon-user icon"></span>本文作者：</strong>Mextra @ Mextraのblog</p>
+    <p><strong><span class="icon-link icon"></span>本文链接：</strong><a href="https://mextra.netlify.app/2025/06/02/%E8%A5%BF%E9%97%A8%E5%AD%90/">https://mextra.netlify.app/2025/06/02/%E8%A5%BF%E9%97%A8%E5%AD%90/</a></p>
+    
+    
+    
+    <p><strong><span class="icon-copyright icon"></span>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <div class="share-wrapper">
+  
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F06%2F02%2F%25E8%25A5%25BF%25E9%2597%25A8%25E5%25AD%2590%2F&amp;appkey=&amp;title=%E8%A5%BF%E9%97%A8%E5%AD%90%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="西门子嵌入式学习">
+      <div class="share-icon icon icon-weibo">
+        
+      </div>
+    </a>
+  
+    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=%E8%A5%BF%E9%97%A8%E5%AD%90%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0&amp;desc=%E8%A5%BF%E9%97%A8%E5%AD%90%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="西门子嵌入式学习">
+      <div class="share-icon icon icon-qq">
+        
+      </div>
+    </a>
+  
+    <a href="javascript:;"  title="西门子嵌入式学习">
+      <div class="share-icon icon icon-weixin">
+        
+          <div id="share-weixin">
+            <div class="share-weixin-dom">
+              <div class="share-weixin-content">
+                <img id="share-weixin-banner"> 
+                <div id="share-weixin-title"></div>
+                <div id="share-weixin-desc"></div>
+              </div>
+              <div class="share-weixin-qrcode">
+                <div class="share-weixin-info">
+                  <div id="share-weixin-author"></div>
+                  <div id="share-weixin-theme">Powered By hexo-theme-reimu</div>
+                </div>
+                <img id="share-weixin-qr" >
+              </div>
+            </div>
+            <div class="share-weixin-canvas"></div>
+          </div>
+        
+      </div>
+    </a>
+  
+</div>
+      
+      
+        <a data-aos="zoom-in" href="/2025/06/02/%E8%A5%BF%E9%97%A8%E5%AD%90/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2025/06/02/%E8%A5%BF%E9%97%A8%E5%AD%90/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/GD32%E5%AD%A6%E4%B9%A0/" rel="tag">GD32学习</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%9F%BA%E7%A1%80/" rel="tag">嵌入式基础</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="https://fastly.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506081324376.png" data-sizes="auto" alt="电赛" class="lazyload">
+        
+        <a href="/2025/06/08/%E7%94%B5%E8%B5%9B/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            电赛
+          
+        </h3>
+      </div>
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202505282044781.jpg" data-sizes="auto" alt="TI" class="lazyload">
+      
+      <a href="/2025/05/28/TI/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          TI
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+      
+      
+        
+      
+      <h2 class="comment-title">说些什么吧！</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            
+            <div class="selector-item" data-selector="valine">
+              <span>valine</span>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+      
+        <div class="comment valine-comment" data-aos="fade-up"
+          id="valine-comment">
+        </div>
+      
+    </div>
+  </section>
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2024-2026
+      
+      <span class="footer-info-sep rotate"></span>
+      Mextra
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        41.4k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:42
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.</span> <span class="toc-text">调度器模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE%E6%A0%8F"><span class="toc-number">2.</span> <span class="toc-text">时钟配置栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">模式设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%80%9F%E6%97%B6%E9%92%9FHSE"><span class="toc-number">2.1.1.</span> <span class="toc-text">高速时钟HSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8E%E9%80%9F%E6%97%B6%E9%92%9FLSE"><span class="toc-number">2.1.2.</span> <span class="toc-text">低速时钟LSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-Clock-Output"><span class="toc-number">2.1.3.</span> <span class="toc-text">Master Clock Output</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Audio-Clock-Input-I2S-CKIN-%EF%BC%9A"><span class="toc-number">2.1.4.</span> <span class="toc-text">**Audio Clock Input (I2S_CKIN)**：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">参数设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%BD%95%E5%A4%84%E9%80%89%E6%8B%A9%E4%BA%86HSI%E4%BB%A5%E5%8F%8AHSE"><span class="toc-number">2.3.</span> <span class="toc-text">在何处选择了HSI以及HSE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SYS%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3%E9%80%89%E6%8B%A9"><span class="toc-number">3.</span> <span class="toc-text">SYS调试接口选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial-Wire-SW-DP"><span class="toc-number">3.1.</span> <span class="toc-text">Serial Wire (SW-DP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JTAG-JTAG-DP"><span class="toc-number">3.2.</span> <span class="toc-text">JTAG(JTAG-DP)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LED"><span class="toc-number">4.</span> <span class="toc-text">LED</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E4%BB%A3%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">驱动代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6PWM%E5%91%BC%E5%90%B8%E7%81%AF"><span class="toc-number">4.2.</span> <span class="toc-text">软件PWM呼吸灯</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E9%94%AE"><span class="toc-number">5.</span> <span class="toc-text">按键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="toc-number">5.1.</span> <span class="toc-text">使用步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%96%B0%E5%BB%BAbutton-app-c%E5%B9%B6%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">5.1.1.</span> <span class="toc-text">第一步：新建button_app.c并包含头文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0%E4%B8%8E%E6%8C%89%E9%94%AE%E5%88%97%E8%A1%A8"><span class="toc-number">5.1.2.</span> <span class="toc-text">第二步：定义参数与按键列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E7%BC%96%E5%86%99%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.3.</span> <span class="toc-text">第三步：编写回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%88%9D%E5%A7%8B%E5%8C%96-ebtn-%E5%BA%93"><span class="toc-number">5.1.4.</span> <span class="toc-text">第四步：初始化 ebtn 库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SD-FATFS"><span class="toc-number">6.</span> <span class="toc-text">SD+FATFS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE"><span class="toc-number">6.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4-1"><span class="toc-number">6.2.</span> <span class="toc-text">使用步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">6.2.1.</span> <span class="toc-text">初始化</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">13</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              if (script.integrity) {
+                scriptElement.integrity = script.integrity;
+              }
+              if (script.crossOrigin) {
+                scriptElement.crossOrigin = script.crossOrigin;
+              }
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    if (window.Pjax) {
+      Pjax.prototype.getElements = function() {
+        const i18nLanguages = window.REIMU_CONFIG.i18n_languages;
+        const baseUrl = window.REIMU_CONFIG.base;
+        let basePathname = new URL(baseUrl).pathname;
+        if (!basePathname.endsWith('/')) {
+          basePathname += '/';  
+        }
+        const currentUrl = window.location.href;
+        const currentPathname = new URL(currentUrl).pathname.replace(basePathname, '');
+        const aLinks = document.querySelectorAll('a[href]');
+        const pjaxLinks = [];
+        for(let i = 0; i < aLinks.length; i++) {
+          const aLink = aLinks[i];
+          const aLinkHref = aLink.getAttribute('href');
+          const isExternal = aLink.getAttribute('target') === '_blank' || aLink.getAttribute('rel')?.includes('noopener');
+          if (isExternal || aLinkHref.startsWith('mailto:') || aLinkHref.startsWith('tel:') || aLinkHref.startsWith('javascript:') || aLinkHref.startsWith("data:") || aLinkHref.startsWith("vbscript:")) {
+            continue;
+          }
+          if (!i18nLanguages) {
+            // 多语言功能未打开
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const absoluteUrl = new URL(aLinkHref, currentUrl).href;
+          const absolutePathname = new URL(absoluteUrl).pathname.replace(basePathname, '');
+
+          if (!absolutePathname || !currentPathname) {
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const currentLangIndex = i18nLanguages.findIndex(lang => currentPathname.startsWith(lang));
+          if (currentLangIndex > -1) {
+            // 当前属于多语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === currentLangIndex) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          } else {
+            // 当前属于默认语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === -1) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          }
+        }
+        return pjaxLinks;
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header>img",
+        "#header>picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#main",
+        "#content",
+        ".sidebar-widget",
+        ".sidebar-wrapper",
+        '#mobile-nav',
+        '#lazy-script',
+        '#i18n-nav'
+      ],
+      switches: {
+        "#content": function(oldEl, newEl) {
+          // for sidebar change
+          oldEl.className = newEl.className;
+          this.onSwitch();
+        },
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#main": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js" integrity="sha384-aD7FsuQkS1ohgFKY41fJfeA+Wd&#x2F;QRNnrOd9Bs58K3FzKdJJv8yPnYU8Tnp5z1agS" crossorigin="anonymous"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Mextra",
+          title: "西门子嵌入式学习",
+          url: "https://mextra.netlify.app/2025/06/02/%E8%A5%BF%E9%97%A8%E5%AD%90/",
+          excerpt: "",
+          description: "",
+          stripContent: "调度器模板123456789101112131415161718192021222324252627282930313233#include &amp;quot;scheduler.h&amp;quot;// clang-format offtypedef struct&amp;#123; void (*task_func)(void); uint32_t rate_ms; uint32_t last_ms;&amp;#125; task_t;task_t tasks[] = &amp;#123;&amp;#125;;uint8_t task",
+          date: "Mon Jun 02 2025 16:00:53 GMT+0800",
+          updated: "Sun Sep 28 2025 15:24:22 GMT+0800",
+          cover: "https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021603366.jpg",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+          
+<script src="https://npm.webcache.cn/html-to-image@1.11.11/dist/html-to-image.js" integrity="sha384-UbfRVKN3&#x2F;elS1r7JcK2FhmPP+KlJ4CvYwbyYD7tH+uTkbT9bNJr9eJeQ0FoFbAgz" crossorigin="anonymous" defer data-pjax></script>
+
+          
+<script src="https://npm.webcache.cn/qrcode@1.4.4/build/qrcode.min.js" integrity="sha384-0RsG1yo&#x2F;crf&#x2F;1Qc14sho26SXXOTngNCjgJw7fuvXBt9W&#x2F;OChF&#x2F;Ijx+aUuBDqQwEk" crossorigin="anonymous" defer data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {
+    valine: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.valine-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js',
+          'sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn'
+        );
+        script.onload = () => {
+          var GUEST_INFO = ['nick', 'mail', 'link'];
+          var guest_info = 'nick,mail,link'.split(',').filter((item) => {
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var recordIP = JSON.parse('true');
+          var highlight = JSON.parse('true');
+          var visitor = JSON.parse('false');
+          var serverURLs = undefined;
+
+          if (window.Valine) {
+            new Valine({
+              el: '.valine-comment',
+              appId: "1clce93uV6y9tH8Xw9f9vWU9-gzGzoHsz",
+              appKey: "vKOcI0kksA3iKZd16M4hYyr1",
+              placeholder: "说些什么吧！",
+              pageSize: '10',
+              avatar: 'mp',
+              lang: document.documentElement.lang || 'en',
+              recordIP: recordIP,
+              highlight: highlight,
+              visitor: visitor,
+              requiredFields: guest_info,
+              path: window.location.pathname,
+              serverURLs
+            });
+          }
+        };
+        document.head.appendChild(script);
+      }
+    },
+    waline: {
+      enable: false,
+      load: async () => {
+        const container = document.querySelector('.waline-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        let walineInit;
+        const walineCdn = 'https://npm.webcache.cn/@waline/client@2.15.8/dist/waline.mjs';
+        const walineIntegrity = 'sha384-9sbqJjrfGjbkI6/PI4nU/MvBfEmkkPC4YK9I4zBeMIf1CVCZdCMH/KinBEAZII/5';
+
+        const module = await safeImport(walineCdn, walineIntegrity);
+        walineInit = module.init;
+
+        window.walineInstance = walineInit({
+          el: '.waline-comment',
+          serverURL: '',
+          lang: document.documentElement.lang || 'en',
+          locale: {},
+          emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus","https://unpkg.com/@waline/emojis@1.2.0/bilibili","https://unpkg.com/@waline/emojis@1.2.0/qq","https://unpkg.com/@waline/emojis@1.2.0/tieba","https://unpkg.com/@waline/emojis@1.2.0/tw-emoji"],
+          meta: ["nick","mail","link"],
+          requiredMeta: ["nick","mail"],
+          wordLimit: JSON.parse('0'),
+          comment: true,
+          pageSize: JSON.parse('10'),
+          dark: 'html[data-theme="dark"]',
+          pageview: JSON.parse('true'),
+        });
+      }
+    },
+    twikoo: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.twikoo-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/twikoo@1.6.16/dist/twikoo.all.min.js',
+          'sha384-lDHsr5aZmkMS0eKnsUu6e9RWP+dRmn7sgjRAKGOAoXfMyzbUK6Qi86zZK7R+KvRV'
+        );
+
+        script.onload = () => {
+          if (window.twikoo) {
+            twikoo.init({
+              envId: '',
+              el: '.tcomment',
+              region: '',
+              lang: document.documentElement.lang || 'en',
+            })
+          }
+        } 
+        document.head.appendChild(script);
+      }
+    },
+    gitalk: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.min.js',
+          'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU/lcEH5O8eVbSDhbPwsiVUTp/aGX/z/5EuMA'
+        );
+
+        script.onload = () => {
+          if (false) {
+            const md5Script = loadScript(
+              'https://npm.webcache.cn/blueimp-md5@2.19.0/js/md5.min.js',
+              'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr/gZlbkHkL6vTthxH'
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            initGitalk();
+          }
+        }
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          var gitalkId = location.pathname;
+          var gitalk = new Gitalk({
+            clientID: '',
+            clientSecret: '',
+            repo: '',
+            owner: '',
+            admin: null,
+            id: gitalkId,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          })
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },
+    giscus: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.giscus-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        // 删除可能已存在的 giscus 脚本和 iframe
+        const existingScript = container.querySelector('script[src*="giscus.app/client.js"]');
+        if (existingScript) existingScript.remove();
+        const existingFrame = document.querySelector('iframe.giscus-frame');
+        if (existingFrame) existingFrame.remove();
+
+        const giscusScript = document.createElement('script');
+        const domMode = document.documentElement.getAttribute("data-theme");
+        giscusScript.src = 'https://giscus.app/client.js';
+        giscusScript.setAttribute('data-repo', '');
+        giscusScript.setAttribute('data-repo-id', '');
+        giscusScript.setAttribute('data-category', ''); 
+        giscusScript.setAttribute('data-category-id', '');
+        giscusScript.setAttribute('data-mapping', '0');
+        giscusScript.setAttribute('data-strict', '0');
+        giscusScript.setAttribute('data-reactions-enabled', '1');
+        giscusScript.setAttribute('data-emit-metadata', '0');
+        giscusScript.setAttribute('data-input-position', 'bottom');
+        giscusScript.setAttribute('data-theme', domMode === 'dark' ? 'dark' : 'light');
+        giscusScript.setAttribute('data-lang', document.documentElement.lang || 'en');
+        giscusScript.setAttribute('crossorigin', 'anonymous');
+        giscusScript.async = true;
+        container.appendChild(giscusScript);
+        document.body.addEventListener('light-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'light' } } }, 'https://giscus.app');
+        });
+        document.body.addEventListener('dark-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'dark' } } }, 'https://giscus.app');
+        });
+      }
+    }
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    // 评论组件加载状态跟踪
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.8.4' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous"></script>
+
+  
+    <script>
+      var isMobile = window.matchMedia('(max-width: 959px)').matches;
+      if (isMobile) {
+      const aplayer = _$('#aplayer');
+        if (aplayer) {
+          const aside = aplayer.parentNode;
+          if (aside?.tagName === 'ASIDE') {
+            aplayer.removeAttribute('data-aos');
+            aside.removeChild(aplayer);
+            document.body.appendChild(aplayer);
+          }
+        }
+      }
+      const ap = new APlayer({
+        theme: "var(--color-link)",
+        container: document.getElementById('aplayer'),
+        audio: [{"name":"有些","artist":"颜人中","url":"https://mextra.netlify.app/music/有些.mp3","cover":"/music_cover/有些.jpg","lrc":"/lrc/有些-颜人中.lrc"},{"name":"我只能离开","artist":"颜人中","url":"https://mextra.netlify.app/music/我只能离开.mp3","cover":"/music_cover/我只能离开.jpg","lrc":"/lrc/我只能离开-颜人中.lrc"},{"name":"慢慢","artist":"颜人中","url":"https://mextra.netlify.app/music/慢慢.mp3","cover":"/music_cover/慢慢.jpg","lrc":"/lrc/慢慢-颜人中.lrc"},{"name":"借口","artist":"周杰伦","url":"https://mextra.netlify.app/music/借口.mp3","cover":"/music_cover/借口.jpg","lrc":"/lrc/借口-周杰伦.lrc"},{"name":"等你下课(with 杨瑞代)","artist":"周杰伦","url":"https://mextra.netlify.app/music/等你下课.mp3","cover":"/music_cover/等你下课.jpg","lrc":"/lrc/等你下课(with 杨瑞代)-周杰伦.lrc"},{"name":"倒带(Live)","artist":"周杰伦","url":"https://mextra.netlify.app/music/倒带.mp3","cover":"/music_cover/倒带.jpg","lrc":"/lrc/倒带(Live)-周杰伦.lrc"},{"name":"枫","artist":"周杰伦","url":"https://mextra.netlify.app/music/枫.mp3","cover":"/music_cover/枫.png","lrc":"/lrc/枫-周杰伦.lrc"},{"name":"空白格","artist":"蔡健雅","url":"https://mextra.netlify.app/music/空白格.mp3","cover":"/music_cover/空白格.jpg","lrc":"/lrc/空白格-蔡健雅.lrc"},{"name":"绊","artist":"miu-clips","url":"https://mextra.netlify.app/music/绊.mp3","cover":"/music_cover/绊.jpg","lrc":"/lrc/絆-miu-clips.lrc"},{"name":"世界が終るまでは… (直到世界尽头) (《灌篮高手》TV动画第２５-４９集片尾曲)","artist":"WANDS","url":"https://mextra.netlify.app/music/直到世界尽头.mp3","cover":"/music_cover/直到世界尽头.jpg","lrc":"/lrc/世界が終るまでは…-WANDS.lrc"},{"name":"君が好きだと叫びたい","artist":"BAAD (バード)","url":"https://mextra.netlify.app/music/好想大声说爱你.mp3","cover":"/music_cover/好想大声说爱你.jpg","lrc":"/lrc/君が好きだと叫びたい-Baad.lrc"},{"name":"Cry For Me","artist":"不冷","url":"https://mextra.netlify.app/music/Cry.mp3","cover":"/music_cover/Cry.jpg","lrc":"/lrc/Cry.lrc"},{"name":"スパークル(movie ver.)","artist":"RADWIMPS","url":"https://mextra.netlify.app/music/火花.mp3","cover":"/music_cover/火花.jpg","lrc":"/lrc/スパークル (movie ver.) - RADWIMPS.lrc"},{"name":"千年泪","artist":"TK","url":"https://mextra.netlify.app/music/千年泪.mp3","cover":"/music_cover/千年泪.jpg","lrc":"/lrc/千年泪 - 曹雨航.lrc"},{"name":"几分之几 (You Complete Me)","artist":"卢广仲","url":"https://mextra.netlify.app/music/几分之几.mp3","cover":"/music_cover/几分之几.jpg","lrc":"/lrc/几分之几 (You Complete Me) - 卢广仲.lrc"},{"name":"匿名的好友","artist":"杨丞琳","url":"https://mextra.netlify.app/music/匿名的好友.mp3","cover":"/music_cover/匿名的好友.jpg","lrc":"/lrc/匿名的好友 - 杨丞琳.lrc"},{"name":"囍帖街","artist":"谢安琪","url":"https://mextra.netlify.app/music/囍帖街.mp3","cover":"/music_cover/囍帖街.jpg","lrc":"/lrc/喜帖街 - 谢安琪.lrc"},{"name":"借过","artist":"印子月","url":"https://mextra.netlify.app/music/借过.mp3","cover":"/music_cover/借过.jpg","lrc":"/lrc/借过.lrc"},{"name":"赛勒斯的爱","artist":"张敬轩","url":"https://mextra.netlify.app/music/赛勒斯的爱.mp3","cover":"/music_cover/赛勒斯的爱.jpg","lrc":"/lrc/赛勒斯的爱-张敬轩.lrc"}] || [],
+        fixed: isMobile ? true : (false || false),
+        autoplay: false || false,
+        loop: 'all' || 'all',
+        order: 'random' || 'list',
+        preload: 'auto' || 'auto',
+        volume: 0.7 || 0.7,
+        mutex: true || true,
+        listFolded: false || false,
+        lrcType: 3 || 0,
+      });
+    </script>
+  
+
+
+
+
+
+    
+  </body>
+  </html>
+

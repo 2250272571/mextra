@@ -1,0 +1,1457 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+    
+      data-theme-mode="true"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'https://mextra.netlify.app';</script>
+  
+  <title>
+    电赛 |
+    
+    Mextraのblog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="PID  其中 e 为误差 P：正比  即控制摆动 I：积分 积累误差，可用来消除稳定误差 （比如无人机中，向下吹的风刚好是1米，但p中最后上升也是1米 即形成一种稳态） D：微分 速度控制 可用来让系统快速停下来  编码器CubeMX配置 参数解析 Encoder Mode   Encoder Mode TI1 ：只保留A相，滤除B相数据  Encoder Mode TI2 ：只保留B相，滤除A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电赛">
+<meta property="og:url" content="https://mextra.netlify.app/2025/06/08/%E7%94%B5%E8%B5%9B/index.html">
+<meta property="og:site_name" content="Mextraのblog">
+<meta property="og:description" content="PID  其中 e 为误差 P：正比  即控制摆动 I：积分 积累误差，可用来消除稳定误差 （比如无人机中，向下吹的风刚好是1米，但p中最后上升也是1米 即形成一种稳态） D：微分 速度控制 可用来让系统快速停下来  编码器CubeMX配置 参数解析 Encoder Mode   Encoder Mode TI1 ：只保留A相，滤除B相数据  Encoder Mode TI2 ：只保留B相，滤除A">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506081334606.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122126276.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122134910.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122148018.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122159648.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122200718.png">
+<meta property="article:published_time" content="2025-06-08T05:22:05.000Z">
+<meta property="article:modified_time" content="2025-06-12T14:17:36.000Z">
+<meta property="article:author" content="Mextra">
+<meta property="article:tag" content="电赛准备">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506081334606.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Mextraのblog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.0/dist/aos.css" integrity="sha384-4NN3fZ5AokFyHuoihl7A9qWaCt+HsAtOaUsXwJGRb4&#x2F;SMBtFr2vcNSHR5E8dg0Wk" crossorigin="anonymous">
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU&#x2F;voDBY5XE2lVh" crossorigin="anonymous">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">正在加载中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/">首页</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/archives">归档</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/about">关于</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/friend">友链</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索"></a>
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    <picture></picture>
+    <img  fetchpriority="high" src="https://fastly.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506081324376.png" alt="电赛">
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">电赛</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="sidebar-left"  >
+          <aside id="sidebar">
+  
+  
+    <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PID"><span class="toc-number">1.</span> <span class="toc-text">PID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">编码器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">CubeMX配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90"><span class="toc-number">2.1.1.</span> <span class="toc-text">参数解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99"><span class="toc-number">2.2.</span> <span class="toc-text">代码编写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.2.1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%BC%96%E7%A0%81%E5%99%A8%E5%80%BC"><span class="toc-number">2.2.2.</span> <span class="toc-text">获取编码器值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E5%A3%B0%E6%B3%A2"><span class="toc-number">3.</span> <span class="toc-text">超声波</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-1"><span class="toc-number">3.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-1"><span class="toc-number">3.2.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E4%B8%8E%E7%BB%91%E5%AE%9A%E5%AE%9A%E6%97%B6%E5%99%A8%E6%BA%A2%E5%87%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">3.3.</span> <span class="toc-text">注册回调函数与绑定定时器溢出回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%B7%9D%E7%A6%BB%E5%80%BC"><span class="toc-number">3.4.</span> <span class="toc-text">获取距离值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JY60%E9%99%80%E8%9E%BA%E4%BB%AA"><span class="toc-number">4.</span> <span class="toc-text">JY60陀螺仪</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-2"><span class="toc-number">4.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-2"><span class="toc-number">4.2.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%8A%A0%E9%80%9F%E5%BA%A6%E3%80%81%E8%A7%92%E9%80%9F%E5%BA%A6%E3%80%81%E5%A7%BF%E6%80%81%E8%A7%92"><span class="toc-number">4.3.</span> <span class="toc-text">获取加速度、角速度、姿态角</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-number">4.4.</span> <span class="toc-text">数据分析</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">13</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-电赛" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-06-08T05:22:05.000Z" itemprop="datePublished">2025-06-08</time>
+    <time style="display: none;" id="post-update-time">2025-06-12</time>
+  </span>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h2 id="PID"><a href="#PID" class="headerlink" title="PID"></a>PID</h2><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506081334606.png" alt="image-20250608132624784"></p>
+<ul>
+<li>其中 e 为误差</li>
+<li>P：正比  即控制摆动</li>
+<li>I：积分 积累误差，可用来消除稳定误差 （比如无人机中，向下吹的风刚好是1米，但p中最后上升也是1米 即形成一种稳态）</li>
+<li>D：微分 速度控制 可用来让系统快速停下来</li>
+</ul>
+<h2 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h2><h3 id="CubeMX配置"><a href="#CubeMX配置" class="headerlink" title="CubeMX配置"></a>CubeMX配置</h3><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122126276.png" alt="image-20250612212624882"></p>
+<h4 id="参数解析"><a href="#参数解析" class="headerlink" title="参数解析"></a>参数解析</h4><ol>
+<li>Encoder Mode</li>
+</ol>
+<ul>
+<li><p><code>Encoder Mode TI1</code> ：只保留A相，滤除B相数据</p>
+</li>
+<li><p><code>Encoder Mode TI2</code> ：只保留B相，滤除A相数据</p>
+</li>
+<li><p><code>Encoder Mode TI1 and TI2</code>：A、B相都保留，数据波长会是第一、二模式的两倍</p>
+<blockquote>
+<p>一般用于高精度场合 如小车</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HAL_TIM_Encoder_Start(&amp;htim3, TIM_CHANNEL_1); <span class="comment">// 开启编码器A</span></span><br><span class="line">HAL_TIM_Encoder_Start(&amp;htim3, TIM_CHANNEL_2); <span class="comment">// 开启编码器A</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="获取编码器值"><a href="#获取编码器值" class="headerlink" title="获取编码器值"></a>获取编码器值</h4><blockquote>
+<p>记得先接上编码器的电源 他与电机是分开的电源  工作电压为3.3V~5V</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g_nMotor_Lef_Pulse = (<span class="type">short</span>)(__HAL_TIM_GET_COUNTER(&amp;htim3)); <span class="comment">// 获取计数器值</span></span><br><span class="line">__HAL_TIM_SET_COUNTER(&amp;htim3, <span class="number">0</span>);							 <span class="comment">// 左编码器TIM3计数器清零</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="超声波"><a href="#超声波" class="headerlink" title="超声波"></a>超声波</h2><h3 id="CubeMX配置-1"><a href="#CubeMX配置-1" class="headerlink" title="CubeMX配置"></a>CubeMX配置</h3><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122134910.png" alt="image-20250612213408605"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122148018.png" alt="image-20250612214851115"></p>
+<h3 id="初始化-1"><a href="#初始化-1" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hcsr04Init(&amp;htim11, TIM_CHANNEL_1); <span class="comment">//  超声波模块初始化</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="注册回调函数与绑定定时器溢出回调函数"><a href="#注册回调函数与绑定定时器溢出回调函数" class="headerlink" title="注册回调函数与绑定定时器溢出回调函数"></a>注册回调函数与绑定定时器溢出回调函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">HAL_TIM_IC_CaptureCallback</span><span class="params">(TIM_HandleTypeDef *htim)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (htim-&gt;Instance == TIM11)</span><br><span class="line">		Hcsr04TimIcIsr(&amp;htim11);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_TIM_PeriodElapsedCallback</span><span class="params">(TIM_HandleTypeDef *htim)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (htim-&gt;Instance == TIM11)</span><br><span class="line">  &#123;</span><br><span class="line">    Hcsr04TimOverflowIsr(&amp;htim11);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取距离值"><a href="#获取距离值" class="headerlink" title="获取距离值"></a>获取距离值</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hcsr04Start();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;distance:%.1f cm\r\n&quot;</span>, Hcsr04Read());</span><br><span class="line">HAL_Delay(<span class="number">300</span>); <span class="comment">// 可适当加些延时</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="JY60陀螺仪"><a href="#JY60陀螺仪" class="headerlink" title="JY60陀螺仪"></a>JY60陀螺仪</h2><h3 id="CubeMX配置-2"><a href="#CubeMX配置-2" class="headerlink" title="CubeMX配置"></a>CubeMX配置</h3><p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122159648.png" alt="image-20250612215946547"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506122200718.png" alt="image-20250612220017334"></p>
+<h3 id="初始化-2"><a href="#初始化-2" class="headerlink" title="初始化"></a>初始化</h3><ul>
+<li>引入官方sdk <code>wit_c_sdk.h与wit_c_sdk.c</code></li>
+<li>新建驱动文件 <code>jy60.c</code>与 <code>jy60.h</code></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">jy60_init();</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">void jy60_init(void)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">		WitInit(WIT_PROTOCOL_NORMAL, 0x50);</span></span><br><span class="line"><span class="comment">		WitSerialWriteRegister(SensorUartSend);</span></span><br><span class="line"><span class="comment">		WitRegisterCallBack(SensorDataUpdata);</span></span><br><span class="line"><span class="comment">		WitDelayMsRegister(Delayms);</span></span><br><span class="line"><span class="comment">		HAL_Delay(100);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取加速度、角速度、姿态角"><a href="#获取加速度、角速度、姿态角" class="headerlink" title="获取加速度、角速度、姿态角"></a>获取加速度、角速度、姿态角</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">jy60_read();</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">void jy60_read(void)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">		if(s_cDataUpdate)</span></span><br><span class="line"><span class="comment">		&#123;</span></span><br><span class="line"><span class="comment">			for(uint8_t i = 0; i &lt; 3; i++)</span></span><br><span class="line"><span class="comment">			&#123;</span></span><br><span class="line"><span class="comment">				fAcc[i] = sReg[AX+i] / 32768.0f * 16.0f;</span></span><br><span class="line"><span class="comment">				fGyro[i] = sReg[GX+i] / 32768.0f * 2000.0f;</span></span><br><span class="line"><span class="comment">				fAngle[i] = sReg[Roll+i] / 32768.0f * 180.0f;</span></span><br><span class="line"><span class="comment">			&#125;</span></span><br><span class="line"><span class="comment">//			uint8_t strff[21];</span></span><br><span class="line"><span class="comment">//			</span></span><br><span class="line"><span class="comment">//			sprintf(strff,&quot;%.2f&quot;,fAngle[2]);</span></span><br><span class="line"><span class="comment">//			</span></span><br><span class="line"><span class="comment">//			OLED_ShowStr(0,3,strff,1);</span></span><br><span class="line"><span class="comment">			if(s_cDataUpdate &amp; ACC_UPDATE)</span></span><br><span class="line"><span class="comment">			&#123;</span></span><br><span class="line"><span class="comment">//				printf(&quot;acc:%.3f %.3f %.3f\r\n&quot;, fAcc[0], fAcc[1], fAcc[2]);</span></span><br><span class="line"><span class="comment">				s_cDataUpdate &amp;= ~ACC_UPDATE;</span></span><br><span class="line"><span class="comment">			&#125;</span></span><br><span class="line"><span class="comment">			if(s_cDataUpdate &amp; GYRO_UPDATE)</span></span><br><span class="line"><span class="comment">			&#123;</span></span><br><span class="line"><span class="comment">//				printf(&quot;gyro:%.3f %.3f %.3f\r\n&quot;, fGyro[0], fGyro[1], fGyro[2]);</span></span><br><span class="line"><span class="comment">				s_cDataUpdate &amp;= ~GYRO_UPDATE;</span></span><br><span class="line"><span class="comment">			&#125;</span></span><br><span class="line"><span class="comment">			if(s_cDataUpdate &amp; ANGLE_UPDATE)</span></span><br><span class="line"><span class="comment">			&#123;</span></span><br><span class="line"><span class="comment">				printf(&quot;angle:%.3f %.3f %.3f\r\n&quot;, fAngle[0], fAngle[1], fAngle[2]);</span></span><br><span class="line"><span class="comment">				s_cDataUpdate &amp;= ~ANGLE_UPDATE;</span></span><br><span class="line"><span class="comment">			&#125;</span></span><br><span class="line"><span class="comment">			if(s_cDataUpdate &amp; MAG_UPDATE)</span></span><br><span class="line"><span class="comment">			&#123;</span></span><br><span class="line"><span class="comment">				//printf(&quot;mag:%d %d %d\r\n&quot;, sReg[HX], sReg[HY], sReg[HZ]);</span></span><br><span class="line"><span class="comment">				s_cDataUpdate &amp;= ~MAG_UPDATE;</span></span><br><span class="line"><span class="comment">			&#125;</span></span><br><span class="line"><span class="comment">		&#125;</span></span><br><span class="line"><span class="comment">		</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>含义</th>
+<th>单位</th>
+<th>来源寄存器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>fAcc</code></td>
+<td>加速度（Accelerometer）</td>
+<td>M&#x2F;s²</td>
+<td><code>AX</code>、<code>AY</code>、<code>AZ</code></td>
+</tr>
+<tr>
+<td><code>fGyro</code></td>
+<td>角速度（Gyroscope）</td>
+<td>°&#x2F;s（角度每秒）</td>
+<td><code>GX</code>、<code>GY</code>、<code>GZ</code></td>
+</tr>
+<tr>
+<td><code>fAngle</code></td>
+<td>姿态角（Angle）</td>
+<td>°（角度）</td>
+<td><code>Roll</code>、<code>Pitch</code>、<code>Yaw</code></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>下标</th>
+<th>fAcc</th>
+<th>fGyro</th>
+<th>fAngle</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[0]</td>
+<td>X 轴加速度</td>
+<td>X 轴角速度</td>
+<td>横滚角（Roll）</td>
+</tr>
+<tr>
+<td>[1]</td>
+<td>Y 轴加速度</td>
+<td>Y 轴角速度</td>
+<td>俯仰角（Pitch）</td>
+</tr>
+<tr>
+<td>[2]</td>
+<td>Z 轴加速度</td>
+<td>Z 轴角速度</td>
+<td>偏航角（Yaw）</td>
+</tr>
+</tbody></table>
+<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fAcc[i] = sReg[AX+i] / <span class="number">32768.0f</span> * <span class="number">16.0f</span>;</span><br><span class="line">fGyro[i] = sReg[GX+i] / <span class="number">32768.0f</span> * <span class="number">2000.0f</span>;</span><br><span class="line">fAngle[i] = sReg[Roll+i] / <span class="number">32768.0f</span> * <span class="number">180.0f</span>;</span><br><span class="line"><span class="comment">/*以上数据均来源于这里*/</span></span><br><span class="line"><span class="comment">//后面的 * 16.0f 表示限幅 即 加速度范围为 ± 16M/s²</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <blockquote class="article-copyright">
+    <p><strong><span class="icon-user icon"></span>本文作者：</strong>Mextra @ Mextraのblog</p>
+    <p><strong><span class="icon-link icon"></span>本文链接：</strong><a href="https://mextra.netlify.app/2025/06/08/%E7%94%B5%E8%B5%9B/">https://mextra.netlify.app/2025/06/08/%E7%94%B5%E8%B5%9B/</a></p>
+    
+    
+    
+    <p><strong><span class="icon-copyright icon"></span>本文版权：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener external nofollow noreferrer" target="_blank"><span class="icon-creative-commons"></span>BY-NC-SA</a> 许可协议。转载请注明出处！</p>
+    <span class="icon-creative-commons article-copyright-bg"></span>
+  </blockquote>
+      
+      
+      
+        <div class="share-wrapper">
+  
+    <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fmextra.netlify.app%2F2025%2F06%2F08%2F%25E7%2594%25B5%25E8%25B5%259B%2F&amp;appkey=&amp;title=%E7%94%B5%E8%B5%9B&amp;pic=&amp;ralateUid=" target="_blank" rel="noopener noreferrer" title="电赛">
+      <div class="share-icon icon icon-weibo">
+        
+      </div>
+    </a>
+  
+    <a href="https://connect.qq.com/widget/shareqq/index.html?url=www.baidu.com&amp;title=%E7%94%B5%E8%B5%9B&amp;desc=%E7%94%B5%E8%B5%9B&amp;source=https%3A%2F%2Fmextra.netlify.app" target="_blank" rel="noopener noreferrer" title="电赛">
+      <div class="share-icon icon icon-qq">
+        
+      </div>
+    </a>
+  
+    <a href="javascript:;"  title="电赛">
+      <div class="share-icon icon icon-weixin">
+        
+          <div id="share-weixin">
+            <div class="share-weixin-dom">
+              <div class="share-weixin-content">
+                <img id="share-weixin-banner"> 
+                <div id="share-weixin-title"></div>
+                <div id="share-weixin-desc"></div>
+              </div>
+              <div class="share-weixin-qrcode">
+                <div class="share-weixin-info">
+                  <div id="share-weixin-author"></div>
+                  <div id="share-weixin-theme">Powered By hexo-theme-reimu</div>
+                </div>
+                <img id="share-weixin-qr" >
+              </div>
+            </div>
+            <div class="share-weixin-canvas"></div>
+          </div>
+        
+      </div>
+    </a>
+  
+</div>
+      
+      
+        <a data-aos="zoom-in" href="/2025/06/08/%E7%94%B5%E8%B5%9B/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2025/06/08/%E7%94%B5%E8%B5%9B/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E7%94%B5%E8%B5%9B%E5%87%86%E5%A4%87/" rel="tag">电赛准备</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202509171225629.png" data-sizes="auto" alt="C语言高级" class="lazyload">
+        
+        <a href="/2025/09/02/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            C语言高级
+          
+        </h3>
+      </div>
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        <img data-src="https://cdn.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506021603366.jpg" data-sizes="auto" alt="西门子嵌入式学习" class="lazyload">
+      
+      <a href="/2025/06/02/%E8%A5%BF%E9%97%A8%E5%AD%90/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          西门子嵌入式学习
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+      
+      
+        
+      
+      <h2 class="comment-title">说些什么吧！</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            
+            <div class="selector-item" data-selector="valine">
+              <span>valine</span>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+      
+        <div class="comment valine-comment" data-aos="fade-up"
+          id="valine-comment">
+        </div>
+      
+    </div>
+  </section>
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2024-2026
+      
+      <span class="footer-info-sep rotate"></span>
+      Mextra
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        41.4k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:42
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PID"><span class="toc-number">1.</span> <span class="toc-text">PID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">编码器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">CubeMX配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90"><span class="toc-number">2.1.1.</span> <span class="toc-text">参数解析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99"><span class="toc-number">2.2.</span> <span class="toc-text">代码编写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.2.1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%BC%96%E7%A0%81%E5%99%A8%E5%80%BC"><span class="toc-number">2.2.2.</span> <span class="toc-text">获取编码器值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E5%A3%B0%E6%B3%A2"><span class="toc-number">3.</span> <span class="toc-text">超声波</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-1"><span class="toc-number">3.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-1"><span class="toc-number">3.2.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E4%B8%8E%E7%BB%91%E5%AE%9A%E5%AE%9A%E6%97%B6%E5%99%A8%E6%BA%A2%E5%87%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">3.3.</span> <span class="toc-text">注册回调函数与绑定定时器溢出回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%B7%9D%E7%A6%BB%E5%80%BC"><span class="toc-number">3.4.</span> <span class="toc-text">获取距离值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JY60%E9%99%80%E8%9E%BA%E4%BB%AA"><span class="toc-number">4.</span> <span class="toc-text">JY60陀螺仪</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CubeMX%E9%85%8D%E7%BD%AE-2"><span class="toc-number">4.1.</span> <span class="toc-text">CubeMX配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-2"><span class="toc-number">4.2.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%8A%A0%E9%80%9F%E5%BA%A6%E3%80%81%E8%A7%92%E9%80%9F%E5%BA%A6%E3%80%81%E5%A7%BF%E6%80%81%E8%A7%92"><span class="toc-number">4.3.</span> <span class="toc-text">获取加速度、角速度、姿态角</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-number">4.4.</span> <span class="toc-text">数据分析</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/writer.jpg" data-sizes="auto" alt="Mextra" class="lazyload">
+  <div class="sidebar-author-name">Mextra</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">13</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">2</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">17</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class="icon-github sidebar-social-icon">
+      <a href=https://github.com/2250272571 itemprop="url" target="_blank" aria-label="github" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+    <div class="icon-bilibili sidebar-social-icon">
+      <a href=https://space.bilibili.com/64134503 itemprop="url" target="_blank" aria-label="bilibili" rel="noopener external nofollow noreferrer"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  <script>
+    function loadScripts(scripts, index) {
+      if (index < scripts.length) {
+        const script = scripts[index];
+        const src = script.getAttribute('src');
+
+        const loadScript = (scriptContent) => {
+          return new Promise((resolve, reject) => {
+            const scriptElement = document.createElement('script');
+            if (script.type) {
+              scriptElement.type = script.type;
+            }
+            if (script.src) {
+              scriptElement.src = script.src;
+              if (script.integrity) {
+                scriptElement.integrity = script.integrity;
+              }
+              if (script.crossOrigin) {
+                scriptElement.crossOrigin = script.crossOrigin;
+              }
+              scriptElement.onload = resolve;
+              scriptElement.onerror = reject;
+            }
+            if (scriptContent) {
+              scriptElement.text = scriptContent;
+            }
+            document.head.appendChild(scriptElement);
+            if (!script.src) {
+              resolve();
+            }
+          })
+          
+        }
+
+        ;(src ? loadScript() : loadScript(script.text))
+          .then(() => loadScripts(scripts, index + 1))
+          .catch(error => {
+            console.error(`Failed to load script: ${src || 'inline script'}`, error);
+            loadScripts(scripts, index + 1);
+          });
+      }
+    }
+    if (window.Pjax) {
+      Pjax.prototype.getElements = function() {
+        const i18nLanguages = window.REIMU_CONFIG.i18n_languages;
+        const baseUrl = window.REIMU_CONFIG.base;
+        let basePathname = new URL(baseUrl).pathname;
+        if (!basePathname.endsWith('/')) {
+          basePathname += '/';  
+        }
+        const currentUrl = window.location.href;
+        const currentPathname = new URL(currentUrl).pathname.replace(basePathname, '');
+        const aLinks = document.querySelectorAll('a[href]');
+        const pjaxLinks = [];
+        for(let i = 0; i < aLinks.length; i++) {
+          const aLink = aLinks[i];
+          const aLinkHref = aLink.getAttribute('href');
+          const isExternal = aLink.getAttribute('target') === '_blank' || aLink.getAttribute('rel')?.includes('noopener');
+          if (isExternal || aLinkHref.startsWith('mailto:') || aLinkHref.startsWith('tel:') || aLinkHref.startsWith('javascript:') || aLinkHref.startsWith("data:") || aLinkHref.startsWith("vbscript:")) {
+            continue;
+          }
+          if (!i18nLanguages) {
+            // 多语言功能未打开
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const absoluteUrl = new URL(aLinkHref, currentUrl).href;
+          const absolutePathname = new URL(absoluteUrl).pathname.replace(basePathname, '');
+
+          if (!absolutePathname || !currentPathname) {
+            pjaxLinks.push(aLink);
+            continue;
+          }
+
+          const currentLangIndex = i18nLanguages.findIndex(lang => currentPathname.startsWith(lang));
+          if (currentLangIndex > -1) {
+            // 当前属于多语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === currentLangIndex) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          } else {
+            // 当前属于默认语言站点
+            const absoluteLangIndex = i18nLanguages.findIndex(lang => absolutePathname.startsWith(lang));
+            if (absoluteLangIndex === -1) {
+              // 同一语言站点，可以使用 pjax
+              pjaxLinks.push(aLink);
+            }
+          }
+        }
+        return pjaxLinks;
+      }
+    }
+    window.Pjax && new window.Pjax({
+      selectors: [
+        "#header>img",
+        "#header>picture",
+        "head title",
+        "#header-title",
+        "#subtitle-wrap",
+        "#main",
+        "#content",
+        ".sidebar-widget",
+        ".sidebar-wrapper",
+        '#mobile-nav',
+        '#lazy-script',
+        '#i18n-nav'
+      ],
+      switches: {
+        "#content": function(oldEl, newEl) {
+          // for sidebar change
+          oldEl.className = newEl.className;
+          this.onSwitch();
+        },
+        "#header-title": Pjax.switches.outerHTML,
+        "#subtitle-wrap": Pjax.switches.outerHTML,
+        "#main": function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.outerHTML = newEl.outerHTML
+          this.onSwitch()
+        },
+        "#mobile-nav": Pjax.switches.outerHTML,
+        '#lazy-script': function(oldEl, newEl) {
+          const scripts = [...newEl.querySelectorAll('script')];
+          loadScripts(scripts, 0);
+          oldEl.innerHTML = newEl.innerHTML
+          this.onSwitch()
+        },
+      },
+      cacheBust: false
+    })
+  </script>
+  
+<script src="/js/pjax.js"></script>
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js" integrity="sha384-aD7FsuQkS1ohgFKY41fJfeA+Wd&#x2F;QRNnrOd9Bs58K3FzKdJJv8yPnYU8Tnp5z1agS" crossorigin="anonymous"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Mextra",
+          title: "电赛",
+          url: "https://mextra.netlify.app/2025/06/08/%E7%94%B5%E8%B5%9B/",
+          excerpt: "",
+          description: "",
+          stripContent: "PID  其中 e 为误差 P：正比  即控制摆动 I：积分 积累误差，可用来消除稳定误差 （比如无人机中，向下吹的风刚好是1米，但p中最后上升也是1米 即形成一种稳态） D：微分 速度控制 可用来让系统快速停下来  编码器CubeMX配置 参数解析 Encoder Mode   Encoder Mode TI1 ：只保留A相，滤除B相数据  Encoder Mode TI2 ：只保留B相，滤除A相数据  Encoder Mode TI1 and TI2：A、B相都保留，数据波长会是第一、二模式",
+          date: "Sun Jun 08 2025 13:22:05 GMT+0800",
+          updated: "Thu Jun 12 2025 22:17:36 GMT+0800",
+          cover: "https://fastly.jsdelivr.net/gh/2250272571/tuchuang@main/img/202506081324376.png",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+          
+<script src="https://npm.webcache.cn/html-to-image@1.11.11/dist/html-to-image.js" integrity="sha384-UbfRVKN3&#x2F;elS1r7JcK2FhmPP+KlJ4CvYwbyYD7tH+uTkbT9bNJr9eJeQ0FoFbAgz" crossorigin="anonymous" defer data-pjax></script>
+
+          
+<script src="https://npm.webcache.cn/qrcode@1.4.4/build/qrcode.min.js" integrity="sha384-0RsG1yo&#x2F;crf&#x2F;1Qc14sho26SXXOTngNCjgJw7fuvXBt9W&#x2F;OChF&#x2F;Ijx+aUuBDqQwEk" crossorigin="anonymous" defer data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {
+    valine: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.valine-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js',
+          'sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn'
+        );
+        script.onload = () => {
+          var GUEST_INFO = ['nick', 'mail', 'link'];
+          var guest_info = 'nick,mail,link'.split(',').filter((item) => {
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var recordIP = JSON.parse('true');
+          var highlight = JSON.parse('true');
+          var visitor = JSON.parse('false');
+          var serverURLs = undefined;
+
+          if (window.Valine) {
+            new Valine({
+              el: '.valine-comment',
+              appId: "1clce93uV6y9tH8Xw9f9vWU9-gzGzoHsz",
+              appKey: "vKOcI0kksA3iKZd16M4hYyr1",
+              placeholder: "说些什么吧！",
+              pageSize: '10',
+              avatar: 'mp',
+              lang: document.documentElement.lang || 'en',
+              recordIP: recordIP,
+              highlight: highlight,
+              visitor: visitor,
+              requiredFields: guest_info,
+              path: window.location.pathname,
+              serverURLs
+            });
+          }
+        };
+        document.head.appendChild(script);
+      }
+    },
+    waline: {
+      enable: false,
+      load: async () => {
+        const container = document.querySelector('.waline-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        let walineInit;
+        const walineCdn = 'https://npm.webcache.cn/@waline/client@2.15.8/dist/waline.mjs';
+        const walineIntegrity = 'sha384-9sbqJjrfGjbkI6/PI4nU/MvBfEmkkPC4YK9I4zBeMIf1CVCZdCMH/KinBEAZII/5';
+
+        const module = await safeImport(walineCdn, walineIntegrity);
+        walineInit = module.init;
+
+        window.walineInstance = walineInit({
+          el: '.waline-comment',
+          serverURL: '',
+          lang: document.documentElement.lang || 'en',
+          locale: {},
+          emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus","https://unpkg.com/@waline/emojis@1.2.0/bilibili","https://unpkg.com/@waline/emojis@1.2.0/qq","https://unpkg.com/@waline/emojis@1.2.0/tieba","https://unpkg.com/@waline/emojis@1.2.0/tw-emoji"],
+          meta: ["nick","mail","link"],
+          requiredMeta: ["nick","mail"],
+          wordLimit: JSON.parse('0'),
+          comment: true,
+          pageSize: JSON.parse('10'),
+          dark: 'html[data-theme="dark"]',
+          pageview: JSON.parse('true'),
+        });
+      }
+    },
+    twikoo: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.twikoo-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/twikoo@1.6.16/dist/twikoo.all.min.js',
+          'sha384-lDHsr5aZmkMS0eKnsUu6e9RWP+dRmn7sgjRAKGOAoXfMyzbUK6Qi86zZK7R+KvRV'
+        );
+
+        script.onload = () => {
+          if (window.twikoo) {
+            twikoo.init({
+              envId: '',
+              el: '.tcomment',
+              region: '',
+              lang: document.documentElement.lang || 'en',
+            })
+          }
+        } 
+        document.head.appendChild(script);
+      }
+    },
+    gitalk: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.min.js',
+          'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU/lcEH5O8eVbSDhbPwsiVUTp/aGX/z/5EuMA'
+        );
+
+        script.onload = () => {
+          if (false) {
+            const md5Script = loadScript(
+              'https://npm.webcache.cn/blueimp-md5@2.19.0/js/md5.min.js',
+              'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr/gZlbkHkL6vTthxH'
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            initGitalk();
+          }
+        }
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          var gitalkId = location.pathname;
+          var gitalk = new Gitalk({
+            clientID: '',
+            clientSecret: '',
+            repo: '',
+            owner: '',
+            admin: null,
+            id: gitalkId,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          })
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },
+    giscus: {
+      enable: false,
+      load: () => {
+        const container = document.querySelector('.giscus-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        // 删除可能已存在的 giscus 脚本和 iframe
+        const existingScript = container.querySelector('script[src*="giscus.app/client.js"]');
+        if (existingScript) existingScript.remove();
+        const existingFrame = document.querySelector('iframe.giscus-frame');
+        if (existingFrame) existingFrame.remove();
+
+        const giscusScript = document.createElement('script');
+        const domMode = document.documentElement.getAttribute("data-theme");
+        giscusScript.src = 'https://giscus.app/client.js';
+        giscusScript.setAttribute('data-repo', '');
+        giscusScript.setAttribute('data-repo-id', '');
+        giscusScript.setAttribute('data-category', ''); 
+        giscusScript.setAttribute('data-category-id', '');
+        giscusScript.setAttribute('data-mapping', '0');
+        giscusScript.setAttribute('data-strict', '0');
+        giscusScript.setAttribute('data-reactions-enabled', '1');
+        giscusScript.setAttribute('data-emit-metadata', '0');
+        giscusScript.setAttribute('data-input-position', 'bottom');
+        giscusScript.setAttribute('data-theme', domMode === 'dark' ? 'dark' : 'light');
+        giscusScript.setAttribute('data-lang', document.documentElement.lang || 'en');
+        giscusScript.setAttribute('crossorigin', 'anonymous');
+        giscusScript.async = true;
+        container.appendChild(giscusScript);
+        document.body.addEventListener('light-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'light' } } }, 'https://giscus.app');
+        });
+        document.body.addEventListener('dark-theme-set', () => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: 'dark' } } }, 'https://giscus.app');
+        });
+      }
+    }
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    // 评论组件加载状态跟踪
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.8.4' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous"></script>
+
+  
+    <script>
+      var isMobile = window.matchMedia('(max-width: 959px)').matches;
+      if (isMobile) {
+      const aplayer = _$('#aplayer');
+        if (aplayer) {
+          const aside = aplayer.parentNode;
+          if (aside?.tagName === 'ASIDE') {
+            aplayer.removeAttribute('data-aos');
+            aside.removeChild(aplayer);
+            document.body.appendChild(aplayer);
+          }
+        }
+      }
+      const ap = new APlayer({
+        theme: "var(--color-link)",
+        container: document.getElementById('aplayer'),
+        audio: [{"name":"有些","artist":"颜人中","url":"https://mextra.netlify.app/music/有些.mp3","cover":"/music_cover/有些.jpg","lrc":"/lrc/有些-颜人中.lrc"},{"name":"我只能离开","artist":"颜人中","url":"https://mextra.netlify.app/music/我只能离开.mp3","cover":"/music_cover/我只能离开.jpg","lrc":"/lrc/我只能离开-颜人中.lrc"},{"name":"慢慢","artist":"颜人中","url":"https://mextra.netlify.app/music/慢慢.mp3","cover":"/music_cover/慢慢.jpg","lrc":"/lrc/慢慢-颜人中.lrc"},{"name":"借口","artist":"周杰伦","url":"https://mextra.netlify.app/music/借口.mp3","cover":"/music_cover/借口.jpg","lrc":"/lrc/借口-周杰伦.lrc"},{"name":"等你下课(with 杨瑞代)","artist":"周杰伦","url":"https://mextra.netlify.app/music/等你下课.mp3","cover":"/music_cover/等你下课.jpg","lrc":"/lrc/等你下课(with 杨瑞代)-周杰伦.lrc"},{"name":"倒带(Live)","artist":"周杰伦","url":"https://mextra.netlify.app/music/倒带.mp3","cover":"/music_cover/倒带.jpg","lrc":"/lrc/倒带(Live)-周杰伦.lrc"},{"name":"枫","artist":"周杰伦","url":"https://mextra.netlify.app/music/枫.mp3","cover":"/music_cover/枫.png","lrc":"/lrc/枫-周杰伦.lrc"},{"name":"空白格","artist":"蔡健雅","url":"https://mextra.netlify.app/music/空白格.mp3","cover":"/music_cover/空白格.jpg","lrc":"/lrc/空白格-蔡健雅.lrc"},{"name":"绊","artist":"miu-clips","url":"https://mextra.netlify.app/music/绊.mp3","cover":"/music_cover/绊.jpg","lrc":"/lrc/絆-miu-clips.lrc"},{"name":"世界が終るまでは… (直到世界尽头) (《灌篮高手》TV动画第２５-４９集片尾曲)","artist":"WANDS","url":"https://mextra.netlify.app/music/直到世界尽头.mp3","cover":"/music_cover/直到世界尽头.jpg","lrc":"/lrc/世界が終るまでは…-WANDS.lrc"},{"name":"君が好きだと叫びたい","artist":"BAAD (バード)","url":"https://mextra.netlify.app/music/好想大声说爱你.mp3","cover":"/music_cover/好想大声说爱你.jpg","lrc":"/lrc/君が好きだと叫びたい-Baad.lrc"},{"name":"Cry For Me","artist":"不冷","url":"https://mextra.netlify.app/music/Cry.mp3","cover":"/music_cover/Cry.jpg","lrc":"/lrc/Cry.lrc"},{"name":"スパークル(movie ver.)","artist":"RADWIMPS","url":"https://mextra.netlify.app/music/火花.mp3","cover":"/music_cover/火花.jpg","lrc":"/lrc/スパークル (movie ver.) - RADWIMPS.lrc"},{"name":"千年泪","artist":"TK","url":"https://mextra.netlify.app/music/千年泪.mp3","cover":"/music_cover/千年泪.jpg","lrc":"/lrc/千年泪 - 曹雨航.lrc"},{"name":"几分之几 (You Complete Me)","artist":"卢广仲","url":"https://mextra.netlify.app/music/几分之几.mp3","cover":"/music_cover/几分之几.jpg","lrc":"/lrc/几分之几 (You Complete Me) - 卢广仲.lrc"},{"name":"匿名的好友","artist":"杨丞琳","url":"https://mextra.netlify.app/music/匿名的好友.mp3","cover":"/music_cover/匿名的好友.jpg","lrc":"/lrc/匿名的好友 - 杨丞琳.lrc"},{"name":"囍帖街","artist":"谢安琪","url":"https://mextra.netlify.app/music/囍帖街.mp3","cover":"/music_cover/囍帖街.jpg","lrc":"/lrc/喜帖街 - 谢安琪.lrc"},{"name":"借过","artist":"印子月","url":"https://mextra.netlify.app/music/借过.mp3","cover":"/music_cover/借过.jpg","lrc":"/lrc/借过.lrc"},{"name":"赛勒斯的爱","artist":"张敬轩","url":"https://mextra.netlify.app/music/赛勒斯的爱.mp3","cover":"/music_cover/赛勒斯的爱.jpg","lrc":"/lrc/赛勒斯的爱-张敬轩.lrc"}] || [],
+        fixed: isMobile ? true : (false || false),
+        autoplay: false || false,
+        loop: 'all' || 'all',
+        order: 'random' || 'list',
+        preload: 'auto' || 'auto',
+        volume: 0.7 || 0.7,
+        mutex: true || true,
+        listFolded: false || false,
+        lrcType: 3 || 0,
+      });
+    </script>
+  
+
+
+
+
+
+    
+  </body>
+  </html>
+
